@@ -3,8 +3,460 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"van-image": "/wxcomponents/vant/dist/image/index",
+					"van-tabbar": "/wxcomponents/vant/dist/tabbar/index",
+					"van-tabbar-item": "/wxcomponents/vant/dist/tabbar-item/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
 			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"van-image": "/wxcomponents/vant/dist/image/index",
+					"van-tabbar": "/wxcomponents/vant/dist/tabbar/index",
+					"van-tabbar-item": "/wxcomponents/vant/dist/tabbar-item/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+		},
+		{
+			"path": "pages/personal/personal",
+			"style": {
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"van-image": "/wxcomponents/vant/dist/image/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+		},
+		{
+			"path": "pages/attestation/attestation",
+			"style": {
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"van-field": "/wxcomponents/vant/dist/field/index",
+					"van-toast": "/wxcomponents/vant/dist/toast/index"
+				}
+			}
+		},
+		{
+			"path": "pages/convenient/convenient",
+			"style": {
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"van-image": "/wxcomponents/vant/dist/image/index"
+				}
+			}
+		},
+		{
+			"path": "pages/jingkou/jingkou",
+			"style": {
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"van-image": "/wxcomponents/vant/dist/image/index"
+				}
+			}
+		},
+		{
+			"path": "pages/promote/promote",
+			"style": {
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"van-image": "/wxcomponents/vant/dist/image/index"
+				}
+			}
+		},
+		{
+			"path": "pages/village/village",
+			"style": {
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"van-image": "/wxcomponents/vant/dist/image/index"
+				}
+			}
+		},
+		{
+			"path": "pages/healthCenter/healthCenter",
+			"style": {
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"van-image": "/wxcomponents/vant/dist/image/index"
+				}
+			}
+		},
+		{
+			"path": "pages/yinsi/yinsi",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/fuwu/fuwu",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"van-toast": "/wxcomponents/vant/dist/toast/index",
+					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index"
+				}
+			}
+		}
+	],
+	"subPackages": [
+		{
+			"root": "pagesA",
+			"pages": [
+				{
+				    "path" : "map/map",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "record/record",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {}
+				    }
+				    
+				},
+				{
+				    "path" : "command/command",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "command/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {}
+				    }
+				    
+				},
+				{
+				    "path" : "partyBuilding/partyBuilding",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "partyBuilding/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {}
+				    }
+				    
+				},
+				{
+				    "path" : "qinglian/qinglian",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "qinglian/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "files/files",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "files/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "school/school",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {}
+				    }
+				    
+				},
+				{
+				    "path" : "school/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-toast": "/wxcomponents/vant/dist/toast/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "recommend/recommend",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "recommend/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index",
+							"van-dialog": "/wxcomponents/vant/dist/dialog/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "myEnroll/myEnroll",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {}
+				    }
+				    
+				},
+				{
+				    "path" : "myUpload/myUpload",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "beautifulYard/beautifulYard",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-icon": "/wxcomponents/vant/dist/icon/index",
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "beautifulYard/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "beautifulYard/netAdd",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-field": "/wxcomponents/vant/dist/field/index",
+							"van-uploader": "/wxcomponents/vant/dist/uploader/index",
+							"van-toast": "/wxcomponents/vant/dist/toast/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "beautifulYard/showAdd",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-field": "/wxcomponents/vant/dist/field/index",
+							"van-uploader": "/wxcomponents/vant/dist/uploader/index",
+							"van-toast": "/wxcomponents/vant/dist/toast/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "message/message",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {}
+				    }
+				    
+				},
+				{
+				    "path" : "message/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "periphery/periphery",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {}
+				    }
+				    
+				},
+				{
+				    "path" : "refuse/refuse",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-search": "/wxcomponents/vant/dist/search/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "activity/activity",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {}
+				    }
+				    
+				},
+				{
+				    "path" : "space/space",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "space/spaceDetail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "help/help",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "help/helpDetail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "hotel/hotel",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "delicacy/delicacy",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "delicacy/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "scenicSpot/scenicSpot",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "scenicSpot/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
+				    "path" : "recreation/recreation",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				}
+            ]
 		}
 	],
 	"globalStyle": {

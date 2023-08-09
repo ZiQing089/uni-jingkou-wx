@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "van-search": "/wxcomponents/vant/dist/search/index",
+    "nav-bar": "/components/NavBar"
+  }
+}

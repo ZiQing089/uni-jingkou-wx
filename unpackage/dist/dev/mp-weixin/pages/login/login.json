@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "van-toast": "/wxcomponents/vant/dist/toast/index",
+    "van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
+    "nav-bar": "/components/NavBar"
+  }
+}

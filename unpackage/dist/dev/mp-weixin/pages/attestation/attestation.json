@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "van-field": "/wxcomponents/vant/dist/field/index",
+    "van-toast": "/wxcomponents/vant/dist/toast/index",
+    "nav-bar": "/components/NavBar"
+  }
+}

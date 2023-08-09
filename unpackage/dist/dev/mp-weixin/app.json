@@ -1,8 +1,60 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/personal/personal",
+    "pages/attestation/attestation",
+    "pages/convenient/convenient",
+    "pages/jingkou/jingkou",
+    "pages/promote/promote",
+    "pages/village/village",
+    "pages/healthCenter/healthCenter",
+    "pages/yinsi/yinsi",
+    "pages/fuwu/fuwu",
+    "pages/login/login"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "pagesA",
+      "pages": [
+        "map/map",
+        "record/record",
+        "command/command",
+        "command/detail",
+        "partyBuilding/partyBuilding",
+        "partyBuilding/detail",
+        "qinglian/qinglian",
+        "qinglian/detail",
+        "files/files",
+        "files/detail",
+        "school/school",
+        "school/detail",
+        "recommend/recommend",
+        "recommend/detail",
+        "myEnroll/myEnroll",
+        "myUpload/myUpload",
+        "beautifulYard/beautifulYard",
+        "beautifulYard/detail",
+        "beautifulYard/netAdd",
+        "beautifulYard/showAdd",
+        "message/message",
+        "message/detail",
+        "periphery/periphery",
+        "refuse/refuse",
+        "activity/activity",
+        "space/space",
+        "space/spaceDetail",
+        "help/help",
+        "help/helpDetail",
+        "hotel/hotel",
+        "delicacy/delicacy",
+        "delicacy/detail",
+        "scenicSpot/scenicSpot",
+        "scenicSpot/detail",
+        "recreation/recreation"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",

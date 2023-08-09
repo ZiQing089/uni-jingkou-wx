@@ -1,7 +1,42 @@
 {
-  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "projectname": "uni-ddzk-jingkou-wx",
-  "setting": {
-    "compileHotReLoad": true
-  }
+    "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+    "projectname": "uni-ddzk-jingkou-wx",
+    "setting": {
+        "compileHotReLoad": true
+    },
+    "libVersion": "2.32.0",
+    "condition": {
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "我推荐",
+                    "pathName": "pagesA/recommend/recommend",
+                    "query": "title=%E6%88%91%E6%8E%A8%E8%8D%90",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "清廉",
+                    "pathName": "pagesA/qinglian/qinglian",
+                    "query": "title=%E6%B8%85%E5%BB%89%E6%B3%BE%E5%8F%A3",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "12312",
+                    "pathName": "pagesA/record/record",
+                    "query": "title=%E5%81%A5%E5%BA%B7%E6%A1%A3%E6%A1%88",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "map",
+                    "pathName": "pagesA/map/map",
+                    "query": "title=%E6%97%85%E6%B8%B8%E5%9C%B0%E5%9B%BE",
+                    "launchMode": "default",
+                    "scene": null
+                }
+            ]
+        }
+    }
 }

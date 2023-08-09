@@ -13,5 +13,7 @@
 </script>
 
 <style>
+	@import "/wxcomponents/vant/dist/common/index.wxss";
+	@import '~@/static/iconfont/iconfont.css';
 	/*每个页面公共css */
 </style>

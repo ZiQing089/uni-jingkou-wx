@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "van-image": "/wxcomponents/vant/dist/image/index",
+    "van-dialog": "/wxcomponents/vant/dist/dialog/index",
+    "nav-bar": "/components/NavBar"
+  }
+}

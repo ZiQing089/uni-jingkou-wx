@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-nav-bar": "/wxcomponents/vant/dist/nav-bar/index",
+    "van-icon": "/wxcomponents/vant/dist/icon/index",
+    "van-sticky": "/wxcomponents/vant/dist/sticky/index"
+  }
+}
