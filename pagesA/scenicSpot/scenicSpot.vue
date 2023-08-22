@@ -1,6 +1,6 @@
 <template>
 	<view class="scenic-spot page-container">
-		<NavBar :title="title" :use-bg="true" />
+		<NavBar :title="'美丽景点'" :use-bg="true" />
 		<view class="content">
 			<grid-view :cross-axis-gap="6" :main-axis-gap="6" type="masonry">
 				<view v-for="(item, index) in toneList" :key="index" class="item" @click="toDetail(item)">
@@ -10,19 +10,19 @@
 						  height="100%"
 						  fit="cover"
 						  radius="12rpx 12rpx 0 0"
-						  :src="item.img"
+						  :src="item.pic"
 						/>
 					</view>
 					<view class="title">
-						{{ item.title }}
+						{{ item.name }}
 					</view>
 					<view class="text">
-						{{ item.text }}
+						{{ item.introduce }}
 					</view>
 					<view class="like">
 						<view class="left">
 							<image src="../../static/img/jingkou/review.png" class="img-icon" mode="scaleToFill"></image>
-							<span>{{ item.num }}</span>
+							<span>{{ item.viewCount }}</span>
 						</view>
 						<view class="right">
 							<icon class="iconfont">&#xe647;</icon>
@@ -36,6 +36,7 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getScenicSpotsList } from '@/api/jingkou.js'
 	export default {
 		components: {
 			NavBar
@@ -44,81 +45,30 @@
 			return {
 				bgHeight: '',
 				title: '',
-				toneList: [
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: true,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: false,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: false,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: false,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: true,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: true,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					}
-				]
+				toneList: []
 			}
 		},
 		onLoad(option) {
-			console.log(option)
 			this.title = option.title
 		},
 		onShow() {
-			const {
-				top,
-				height,
-				width
-			} = wx.getMenuButtonBoundingClientRect();
-			this.bgHeight = 46 + top + 'px'
+			this.init()
 		},
 		methods: {
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getScenicSpotsList().then(res => {
+					uni.hideLoading()
+					this.toneList = res.data
+					console.log(res)
+				})
+			},
 			// 跳转详情
-			toDetail() {
+			toDetail(item) {
 				uni.navigateTo({
-					url: `/pagesA/scenicSpot/detail`
+					url: `/pagesA/scenicSpot/detail?data=${encodeURIComponent(JSON.stringify(item))}`
 				})
 			}
 		}

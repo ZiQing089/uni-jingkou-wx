@@ -5,74 +5,73 @@
 			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
 				<view class="left">
 					<van-image width="100%" height="100%" radius="4" fit="cover"
-						:src="item.pics" />
+						:src="item.pics[0]" />
 				</view>
 				<view class="right">
 					<view class="title">
 						{{ item.title }}
 					</view>
 					<view class="info">
-						{{ item.content }}
+						{{ item.description }}
 					</view>
 					<view class="nav">
 						查看详情<icon class="iconfont">&#xe647;</icon>
 					</view>
 				</view>
 			</view>
+			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
 	</view>
 </template>
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getList } from "@/api/health.js"
 	export default {
 		components: {
 			NavBar
 		},
 		data() {
 			return {
-				list: [
-					{
-						title: '泾口大桥',
-						num: '1821',
-						content: '清代建筑，位于越城区陶堰镇泾口村关帝庙南清代建筑，位于越城区陶堰镇泾口村关帝庙南',
-						time: '1690526795927',
-						buwei: '血液血管、心脏',
-						chuanran: '无传染性',
-						bingfa: '视网膜',
-						duofa: '中老年',
-						pics: 'https://files.zz-tech.cn/app-files/images/banner1.png'
-					},
-					{
-						title: '泾口大桥',
-						num: '1821',
-						time: '1690526795927',
-						buwei: '血液血管、心脏',
-						chuanran: '无传染性',
-						bingfa: '视网膜',
-						duofa: '中老年',
-						content: '清代建筑，位于越城区陶堰镇泾口村关帝庙南清代建筑，位于越城区陶堰镇泾口村关帝庙南',
-						time: '1690526795927',
-						pics: 'https://files.zz-tech.cn/app-files/images/banner1.png'
-					},
-					{
-						title: '泾口大桥',
-						num: '1821',
-						time: '1690526795927',
-						buwei: '血液血管、心脏',
-						chuanran: '无传染性',
-						bingfa: '视网膜',
-						duofa: '中老年',
-						content: '清代建筑，位于越城区陶堰镇泾口村关帝庙南清代建筑，位于越城区陶堰镇泾口村关帝庙南',
-						time: '1690526795927',
-						pics: 'https://files.zz-tech.cn/app-files/images/banner1.png'
-					}
-				]
+				isLoadMore:false,
+				currentPage: 1,
+				pageSize: 10,
+				isNoMore: false,
+				conditions: [],
+				list: []
 			}
 		},
 		onShow() {
+			this.list = []
+			this.init()
+		},
+		onReachBottom() {
+			if(!this.isLoadMore && !this.isNoMore){  //此处判断，上锁，防止重复请求
+				this.isLoadMore = true
+				this.currentPage += 1  //每次上拉请求新的一页
+				this.init()
+			}
 		},
 		methods: {
+			// 初始化列表页
+			init() {
+				getList({currentPage: this.currentPage, pageSize: this.pageSize, conditions: this.conditions}).then(res => {
+					if(res.success && res.data.list.length !== 0) {
+						this.isLoadMore = false
+						this.list = this.list.concat(res.data.list)
+						if(res.data.list.length < this.pageSize) {
+							this.isNoMore = true
+						} 
+					} else {
+						// uni.hideLoading()
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
+				})
+			},
 			toDetail(item) {
 				uni.navigateTo({
 					url: `/pagesA/command/detail?data=${encodeURIComponent(JSON.stringify(item))}`
@@ -90,6 +89,8 @@
 			border-radius: 12rpx;
 			padding: 40rpx 32rpx;
 			margin-bottom: 24rpx;
+			box-sizing: border-box;
+			height: 276rpx;
 			background-color: #F6F6F6;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/whdabg.png') no-repeat;
 			background-size: 100%;

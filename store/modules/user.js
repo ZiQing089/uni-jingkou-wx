@@ -1,26 +1,16 @@
-import { userInfo, userLogin } from '@/api/login.js'
+import { userInfo, userLogin, preLogin } from '@/api/login.js'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import avatar from "@/static/img/mine/avatarwx.png"
 const getDefaultState = () => {
   return {
 	token: '',
 	user: '',
+	creatorId: '',
 	avatar: avatar,
 	idCard: '',
 	weChartName: '',
-	mobile: '',
-	mapCenter:{
-		shanqian: {
-			Long: '121.588323',
-			Lat: '29.136859',
-			scale: 16.5
-		},
-		shangwang: {
-			Long: '120.742127',
-			Lat: '29.942235',
-			scale: 15.7
-		}
-	}
+	lat: '',
+	mobile: ''
   }
 }
 
@@ -39,9 +29,20 @@ const mutations = {
 	SET_IDCARD: (state, idCard) => {
 	    state.idCard = idCard
 	},
+	SET_CREATORID: (state, creatorId) => {
+	    state.creatorId = creatorId
+	},
 	SET_USER: (state, user) => {
-		console.log(user, 'user')
 	    state.user = user
+	},
+	SET_LAT: (state, lat) => {
+	    state.lat = lat
+	},
+	SET_LNG: (state, lng) => {
+	    state.lng = lng
+	},
+	SET_RULE: (state, rule) => {
+	    state.rule = rule
 	},
 	SET_WECHART: (state, weChartName) => {
 	    state.weChartName = weChartName
@@ -66,32 +67,57 @@ const actions = {
 	userInfo({ commit, state }) {
 		return new Promise((resolve, reject) => {
 			userInfo().then(response => {
-				commit('SET_MOBILE', response.data.phone)
-				commit('SET_USER', response.data.name)
-				commit('SET_IDCARD', response.data.idCard)
+				console.log(response)
 				commit('SET_WECHART', response.data.nickname)
 				commit('SET_AVATAR', response.data.iconUrl)
+				commit('SET_CREATORID', response.data.id)
+				commit('SET_MOBILE', response.data.phone)
+				commit('SET_RULE', response.data.userType.key)
 				resolve(response)
 			}).catch(error => {
 				reject(error)
 			})
 		})
 	},
-	setToken({ commit }, token) {
-		commit('SET_TOKEN', token)
+	
+	// 预登陆
+	preLogin({ commit }, data) {
+		return new Promise((resolve, reject) => {
+			console.log('预登陆陆')
+			preLogin(data).then(response => {
+				setToken(response.data.tokenValue)
+				commit('SET_TOKEN', response.data.tokenValue)
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
 	},
-	setUserName({ commit }, user) {
-		commit('SET_USER', user)
+	
+	setLat({commit}, lat) {
+		commit('SET_LAT', lat)
 	},
-	setIdCard({ commit }, idCard) {
-		commit('SET_IDCARD', idCard)
-	},
-	setAvatar({ commit }, avatar) {
-		commit('SET_AVATAR', avatar)
-	},
-	setMobile({ commit }, mobile) {
-		commit('SET_MOBILE', mobile)
+	setLng({commit}, lng) {
+		commit('SET_LNG', lng)
 	}
+	// setToken({ commit }, token) {
+	// 	commit('SET_TOKEN', token)
+	// },
+	// // setCreatorId({ commit }, creatorId) {
+	// // 	commit('SET_CREATORID', creatorId)
+	// // },
+	// setUserName({ commit }, user) {
+	// 	commit('SET_USER', user)
+	// },
+	// setIdCard({ commit }, idCard) {
+	// 	commit('SET_IDCARD', idCard)
+	// },
+	// setAvatar({ commit }, avatar) {
+	// 	commit('SET_AVATAR', avatar)
+	// },
+	// setMobile({ commit }, mobile) {
+	// 	commit('SET_MOBILE', mobile)
+	// }
 }
 
 export default {

@@ -1,6 +1,6 @@
 <template>
 	<view class="hotel page-container">
-		<NavBar :title="title" :use-bg="true" />
+		<NavBar :title="'民宿酒店'" :use-bg="true" />
 		<view class="content">
 			<view v-for="(item, index) in list" :key="index" class="item">
 				<view class="img">
@@ -9,15 +9,15 @@
 					  height="100%"
 					  fit="cover"
 					  radius="4"
-					  :src="item.img"
+					  :src="item.pic"
 					/>
 				</view>
 				<view class="info">
 					<view class="title">
-						{{ item.title }}
+						{{ item.name }}
 					</view>
 					<view class="distance">
-						{{ item.distance }}
+						约{{ Number(item.distance).toFixed(1) }}km
 					</view>
 				</view>
 				<view class="phone" @click="takePhone(item)">
@@ -43,45 +43,44 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getHomestayList } from '@/api/jingkou.js'
+	import { mapState } from 'vuex'
 	export default {
 		components: {
 			NavBar
+		},
+		computed: {
+			...mapState({
+				lat: (state) => state.user.lat,
+				lng: (state) => state.user.lng
+			})
 		},
 		data() {
 			return {
 				bgHeight: '',
 				title: '',
-				list: [
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						address: '浙江省绍兴市越城区陶堰镇泾口村1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						address: '浙江省绍兴市越城区陶堰镇泾口村1号'
-					}
-				]
+				list: []
 			}
 		},
 		onLoad(option) {
-			console.log(option)
 			this.title = option.title
-		},
-		onShow() {
-		
+			this.init()
 		},
 		methods: {
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getHomestayList({ lat: this.lat, lng: this.lng, mapType: 'gaode'}).then(res => {
+					uni.hideLoading()
+					this.list = res.data
+				})
+			},
 			// 跳转导航
 			navigation(item) {
 				wx.openLocation({
-					 latitude: parseFloat(item.point.lat), //目标经纬度
-					 longitude: parseFloat(item.point.lng),
+					 latitude: parseFloat(item.mapPoint.lat), //目标经纬度
+					 longitude: parseFloat(item.mapPoint.lng),
 					 scale: 18,
 					 name: item.address
 				})
@@ -115,7 +114,7 @@ page {
 		padding: 24rpx 24rpx 0;
 		margin-bottom: 12rpx;
 		.img {
-			height: 434rpx;
+			height: 394rpx;
 			background: #F6F6F6;
 			border-radius: 8rpx;
 		}

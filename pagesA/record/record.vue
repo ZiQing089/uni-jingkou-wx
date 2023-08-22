@@ -3,141 +3,157 @@
 		<view class="record-header" :style="{ height: height }">
 			<NavBar :title="'健康档案'" :border="true" :use-transparent="true" :is-white="true" />
 		</view>
-		<view class="title">
-			个人信息
-		</view>
-		<view class="top">
-			<view class="inline" style="margin-top: 0;">
-				<view class="label">
-					人员姓名：
+		<template v-if="!noData">
+			<view class="title">
+				个人信息
+			</view>
+			<view class="top">
+				<view class="inline" style="margin-top: 0;">
+					<view class="label">
+						人员姓名：
+					</view>
+					<view class="val">
+						{{ detail.name }}
+					</view>
 				</view>
-				<view class="val">
-					{{ detail.name }}
+				<view class="inline">
+					<view class="label">
+						人员性别：
+					</view>
+					<view class="val">
+						{{ detail.gender }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						人员年龄：
+					</view>
+					<view class="val">
+						{{ detail.age }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						证件号码：
+					</view>
+					<view class="val">
+						{{ detail.idCard }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						手机号码：
+					</view>
+					<view class="val">
+						{{ detail.phone }}
+					</view>
 				</view>
 			</view>
-			<view class="inline">
-				<view class="label">
-					人员性别：
+			<view class="title">
+				健康信息
+			</view>
+			<view class="bottom">
+				<view class="inline">
+					<view class="label">
+						档案完善度：
+					</view>
+					<view class="val">
+						{{ detail.percent }}
+					</view>
 				</view>
-				<view class="val">
-					{{ detail.gender }}
+				<view class="inline">
+					<view class="label">
+						管理地址：
+					</view>
+					<view class="val">
+						{{ detail.adminAddress }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						所属网络：
+					</view>
+					<view class="val">
+						{{ detail.locationAddress }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						签约情况：
+					</view>
+					<view class="val">
+						{{ detail.signStatus }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						签约医生：
+					</view>
+					<view class="val">
+						{{ detail.signDoctor }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						签约团队：
+					</view>
+					<view class="val">
+						{{ detail.signTeam }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						签约机构：
+					</view>
+					<view class="val">
+						{{ detail.signClinic }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						签约时间：
+					</view>
+					<view class="val">
+						{{ detail.signDate }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						联系人：
+					</view>
+					<view class="val">
+						{{ detail.contact }}
+					</view>
+				</view>
+				<view class="inline">
+					<view class="label">
+						联系电话：
+					</view>
+					<view class="val">
+						{{ detail.contactPhone }}
+					</view>
 				</view>
 			</view>
-			<view class="inline">
-				<view class="label">
-					人员年龄：
+		</template>
+		<template v-else>
+			<view class="no-data">
+				<view style="text-align: center;">
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/nodata.png" class="img" mode="scaleToFill"></image>
 				</view>
-				<view class="val">
-					{{ detail.age }}
+				<view class="text">
+					暂无您的健康档案
 				</view>
-			</view>
-			<view class="inline">
-				<view class="label">
-					证件号码：
-				</view>
-				<view class="val">
-					{{ detail.id }}
+				<view class="text">
+					请前往对应的机构完善
 				</view>
 			</view>
-			<view class="inline">
-				<view class="label">
-					手机号码：
-				</view>
-				<view class="val">
-					{{ detail.phone }}
-				</view>
-			</view>
-		</view>
-		<view class="title">
-			健康信息
-		</view>
-		<view class="bottom">
-			<view class="inline">
-				<view class="label">
-					档案完善度：
-				</view>
-				<view class="val">
-					{{ detail.persan }}
-				</view>
-			</view>
-			<view class="inline">
-				<view class="label">
-					管理地址：
-				</view>
-				<view class="val">
-					{{ detail.address }}
-				</view>
-			</view>
-			<view class="inline">
-				<view class="label">
-					所属网络：
-				</view>
-				<view class="val">
-					{{ detail.inter }}
-				</view>
-			</view>
-			<view class="inline">
-				<view class="label">
-					签约情况：
-				</view>
-				<view class="val">
-					{{ detail.qingkuang }}
-				</view>
-			</view>
-			<view class="inline">
-				<view class="label">
-					签约医生：
-				</view>
-				<view class="val">
-					{{ detail.doctor }}
-				</view>
-			</view>
-			<view class="inline">
-				<view class="label">
-					签约团队：
-				</view>
-				<view class="val">
-					{{ detail.team }}
-				</view>
-			</view>
-			<view class="inline">
-				<view class="label">
-					签约机构：
-				</view>
-				<view class="val">
-					{{ detail.company }}
-				</view>
-			</view>
-			<view class="inline">
-				<view class="label">
-					签约时间：
-				</view>
-				<view class="val">
-					{{ detail.time | formatDate }}
-				</view>
-			</view>
-			<view class="inline">
-				<view class="label">
-					联系人：
-				</view>
-				<view class="val">
-					{{ detail.lianxi }}
-				</view>
-			</view>
-			<view class="inline">
-				<view class="label">
-					联系电话：
-				</view>
-				<view class="val">
-					{{ detail.lianxiphone }}
-				</view>
-			</view>
-		</view>
+		</template>
 	</view>
 </template>
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getInfo } from "@/api/health.js"
 	export default {
 		components: {
 			NavBar
@@ -145,30 +161,30 @@
 		data() {
 			return {
 				height: '',
-				detail: {
-					name: '广工',
-					gender: '男',
-					age: '31',
-					id: '847389579274923',
-					phone: '15678884949',
-					persan: '100%',
-					address: '邯郸茶楼',
-					inter: '邯郸村委会',
-					qingkuang: '已签约',
-					doctor: '叶主任',
-					team: '中哲数字部门',
-					company: '中哲',
-					time: '1690526795927',
-					lianxi: '李工',
-					lianxiphone: '17899985443'
-				}
+				noData: false,
+				detail: {}
 			}
 		},
-		onShow() {
+		onLoad() {
 			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
 			this.height = height + top + 7 + 'px'
+			this.init()
 		},
 		methods: {
+			// 初始化页面
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getInfo().then(res => {
+					uni.hideLoading()
+					if(res.success) {
+						this.detail = res.data
+					} else {
+						this.noData = true
+					}
+				})
+			}
 		}
 	}
 </script>
@@ -209,6 +225,22 @@
 				line-height: 40rpx;
 				letter-spacing: 1px;
 			}
+		}
+	}
+	
+	.no-data {
+		padding-top: 400rpx;
+		.img {
+			width: 374rpx;
+			height: 288rpx;
+			margin: 0 auto 32rpx;
+		}
+		.text {
+			font-size: 28rpx;
+			text-align: center;
+			color: #999999;
+			line-height: 40rpx;
+			letter-spacing: 1px;
 		}
 	}
 }

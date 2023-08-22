@@ -8,10 +8,10 @@
 				</view>
 				<view class="field">
 					 <van-field
-					    :value="form.name"
+					    :value="form.houseHolder"
 					    placeholder="请输入户主的姓名"
 					    :border="false"
-					    @change="onblur('name', $event)"
+					    @change="onblur('houseHolder', $event)"
 					  />
 				</view>
 			</view>
@@ -21,10 +21,10 @@
 				</view>
 				<view class="field">
 					 <van-field
-					    :value="form.uploadname"
+					    :value="form.uploader"
 					    placeholder="请输入上传人员的姓名"
 					    :border="false"
-					    @change="onblur('uploadname', $event)"
+					    @change="onblur('uploader', $event)"
 					  />
 				</view>
 			</view>
@@ -56,6 +56,9 @@
 </template>
 
 <script>
+	import { addYard } from '@/api/beautifulYard.js'
+	import * as API from '@/config.js'
+	import { getToken } from '@/utils/auth'
 	import NavBar from "@/components/NavBar.vue"
 	import Toast from '@/wxcomponents/vant/dist/toast/toast';
 	export default {
@@ -65,25 +68,23 @@
 		data() {
 			return {
 				form: {
-					name: '',
-					title: '',
-					description: '',
+					houseHolder: '',
+					uploader: '',
 					pics: []
 				},
+				token: getToken(),
+				uploadAPI: API.host + '/api/file/pc/upload',
 				fileList: []
 			}
 		},
 		methods: {
 			onblur(type, event) {
 				console.log(event)
-				if(type === 'title') {
-					tihs.form.title = event.detail
+				if(type === 'houseHolder') {
+					this.form.houseHolder = event.detail
 				} else {
-					this.form.name = event.detail
+					this.form.uploader = event.detail
 				}
-			},
-			onInput(event) {
-				this.form.description = event.detail
 			},
 			// 上传
 			afterRead(event) {
@@ -118,7 +119,16 @@
 				})
 			},
 			submit() {
-				Toast('上传成功，请耐心等待审核！可在“我的-我的上传”中进行管理');
+				if(this.form.pics.length !== 0 && this.form.uploader && this.form.houseHolder ) {
+					addYard(this.form).then(res => {
+						Toast('上传成功，请耐心等待审核！可在“我的-我的上传”中进行管理');
+						setTimeout(() => {
+							uni.navigateBack()
+						}, 2000)
+					})
+				} else {
+					Toast('请填写必填项');
+				}
 			}
 		}
 	}
@@ -206,6 +216,7 @@
 					.van-uploader__upload {
 						background-color: #F7EDEC !important;
 						margin-bottom: 0rpx;
+						margin-right: 0;
 						border-radius: 8rpx;
 					}
 					.van-uploader__wrapper {

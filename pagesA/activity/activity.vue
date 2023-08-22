@@ -2,31 +2,33 @@
 	<view class="page-container activity">
 		<NavBar :title="title" :use-bg="true" :border="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="card" @click="toDetail(item)">
+			<view v-for="(item, index) in list" :key="index" class="card">
 				<view class="top">
 					<view class="title">
-						{{ item.title }}
+						{{ item.name }}
 					</view>
 					<view class="tips">
-						{{ item.tips }}
+						{{ item.type.description }}
 					</view>
 				</view>
 				<view class="address">
 					<span class="key">活动地点：</span><span>{{ item.address }}</span>
 				</view>
 				<view class="time">
-					<span class="key">活动时间：</span><span>{{ item.time }}</span>
+					<span class="key">活动时间：</span><span>{{ item.time | formatDate }}</span>
 				</view>
 				<view class="introduce">
-					<span class="key">活动介绍：</span><span class="val">{{ item.introduce }}</span>
+					<span class="key">活动介绍：</span><span class="val">{{ item.description }}</span>
 				</view>
 			</view>
+			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
 	</view>
 </template>
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getActivitiesList } from "@/api/convenient.js"
 	export default {
 		components: {
 			NavBar
@@ -35,40 +37,51 @@
 			return {
 				bgHeight: '',
 				title: '',
-				list: [
-					{
-						title: '泾口文化宣传',
-						address: '体育场3楼篮球馆',
-						time: '2023-04-26',
-						introduce: '大家锻炼起来，踊跃报名篮球赛！',
-						tips: '习俗文化'
-					},
-					{
-						title: '泾口文化宣传',
-						address: '体育场3楼篮球馆',
-						time: '2023-04-26',
-						introduce: '大家锻炼起来，踊跃报名篮球赛！锻炼起来，踊跃报锻炼起来，踊跃报锻炼起来，踊跃报锻炼起来，踊跃报',
-						tips: '习俗文化'
-					}
-				]
+				isLoadMore:false,
+				currentPage: 1,
+				pageSize: 10,
+				isNoMore: false,
+				conditions: [],
+				list: []
 			}
 		},
 		onLoad(option) {
-			console.log(option)
 			this.title = option.title
 		},
 		onShow() {
-			const {
-				top,
-				height,
-				width
-			} = wx.getMenuButtonBoundingClientRect();
-			this.bgHeight = 46 + top + 'px'
+			this.list = []
+			this.init()
+		},
+		onReachBottom() {
+			if(!this.isLoadMore && !this.isNoMore){  //此处判断，上锁，防止重复请求
+				this.isLoadMore = true
+				this.currentPage += 1  //每次上拉请求新的一页
+				this.init()
+			}
 		},
 		methods: {
-			// 跳转详情页
-			toDetail(item) {
-				
+			// 初始化页面
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getActivitiesList({currentPage: this.currentPage, pageSize: this.pageSize, conditions: this.conditions}).then(res => {
+					uni.hideLoading()
+					if(res.success && res.data.list.length !== 0) {
+						this.isLoadMore = false
+						this.list = this.list.concat(res.data.list)
+						if(res.data.list.length < this.pageSize) {
+							this.isNoMore = true
+						}
+					} else {
+						// uni.hideLoading()
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
+				})
 			}
 		}
 	}
@@ -84,6 +97,8 @@
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/lihdbg.png') no-repeat;
 			background-size: 100%;
 			margin-bottom: 24rpx;
+			height: 305rpx;
+			box-sizing: border-box;
 			padding: 40rpx 32rpx;
 			.top {
 				display: flex;

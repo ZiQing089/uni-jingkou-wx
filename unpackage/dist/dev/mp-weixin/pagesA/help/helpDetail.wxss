@@ -26,7 +26,7 @@
 /* 文章场景相关 */
 .help-detail .content .banner.data-v-70a8997c {
   width: 100%;
-  height: 464rpx;
+  height: 422rpx;
 }
 .help-detail .content .banner .swiper.data-v-70a8997c {
   height: 100%;

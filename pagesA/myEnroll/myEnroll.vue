@@ -6,38 +6,38 @@
 				<view class="inside-border">
 					<view class="header">
 						<view class="title">
-							{{ item.title }}
+							{{ item.name }}
 						</view>
 						<view class="enroll">
-							({{ item.enroll }}人已报名)
+							({{ item.signUpCount }}人已报名)
 						</view>
 					</view>
 					<view class="time">
-						开课时间：{{ item.time }}
+						开课时间：{{ item.startTime | formatDate }}
 					</view>
 					<view class="address">
 						课程地点：{{ item.address }}
 					</view>
 					<view class="enroll-time">
-						报名时间：{{ item.address }}
+						截止时间：{{ item.signUpEndTime | formatDate  }}
 					</view>
 					<view class="people-num">
-						接纳人数：{{ item.people }}
+						接纳人数：{{ item.totalCount }}
 					</view>
-					<view v-if="item.status === '已截止'" class="nav">
+					<view v-if="item.status.description === '已截止'" class="nav">
 						查看<icon class="iconfont">&#xe647;</icon>
 					</view>
-					<view v-if="item.status !== '已截止'" class="cancel" @click.native.stop="cancel">
+					<view v-if="item.status.description !== '已截止'" class="cancel" @click.native.stop="cancel(item)">
 						取消报名
 					</view>
-					<view v-if="item.status === '已截止'" class="status warning">
-						{{ item.status }}
+					<view v-if="item.status.description === '已截止'" class="status warning">
+						{{ item.status.description }}
 					</view>
-					<view v-else-if="item.status === '已报满'" class="status error">
-						{{ item.status }}
+					<view v-else-if="item.status.description === '已报满'" class="status error">
+						{{ item.status.description }}
 					</view>
 					<view v-else class="status">
-						{{ item.status }}
+						{{ item.status.description }}
 					</view>
 				</view>
 			</view>
@@ -47,6 +47,7 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getMySignUp, cancel } from '@/api/promote.js'
 	export default {
 		components: {
 			NavBar
@@ -64,44 +65,38 @@
 						active: false
 					}
 				],
-				list: [
-					{
-						status: '报名中',
-						title: '老年人课堂',
-						enroll: '12',
-						time: '2022-02-02',
-						address: '老年活动中心',
-						enrollTime: ['2023-7-23', '2023-7-30'],
-						people: '20'
-					},
-					{
-						status: '已报满',
-						title: '老年人课堂',
-						enroll: '12',
-						time: '2022-02-02',
-						address: '老年活动中心',
-						enrollTime: ['2023-7-23', '2023-7-30'],
-						people: '20'
-					},
-					{
-						status: '已截止',
-						title: '老年人课堂',
-						enroll: '12',
-						time: '2022-02-02',
-						address: '老年活动中心',
-						enrollTime: ['2023-7-23', '2023-7-30'],
-						people: '20'
-					}
-				]
+				list: []
 			}
 		},
+		onShow() {
+			this.init()
+		},
 		methods: {
-			cancel() {
-				console.log('你好')
+			// 页面初始化
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getMySignUp().then(res => {
+					uni.hideLoading()
+					this.list = res.data
+				})
+			},
+			cancel(item) {
+				cancel({ id: item.id }).then(res => {
+					if(res.success) {
+						uni.showToast({
+							title: res.message,
+							icon: 'success',
+							duration: 2000
+						})
+						this.init()
+					}
+				})
 			},
 			toDetail(item) {
 				uni.navigateTo({
-					url: `/pagesA/beautifulYard/detail?data=${encodeURIComponent(JSON.stringify(item))}`
+					url: `/pagesA/school/detail?data=${encodeURIComponent(JSON.stringify(item))}`
 				})
 			}
 		}
@@ -115,36 +110,34 @@
 		padding: 32rpx 24rpx 90rpx;
 		.item {
 			border-radius: 12rpx;
-			border: 2rpx solid #A3A3A3;
+			padding: 40rpx 32rpx;
 			margin-bottom: 24rpx;
-			.inside-border {
-				border-radius: 8rpx;
-				border: 1rpx solid #C9C9C9;
-				margin: 8rpx;
-				padding: 32rpx 24rpx;
-				position: relative;
-				.header {
-					display: flex;
-					align-items: center;
-					.title {
-						font-size: 28rpx;
-						color: #000000;
-						line-height: 40rpx;
-						margin-right: 20rpx;
-						letter-spacing: 1px;
-					}
-					.enroll {
-						font-size: 24rpx;
-						color: #B94333;
-						line-height: 36rpx;
-					}
+			height: 346rpx;
+			box-sizing: border-box;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/whxtbg.png') no-repeat;
+			background-size: 100%;
+			position: relative;
+			.header {
+				display: flex;
+				align-items: center;
+				.title {
+					font-size: 28rpx;
+					color: #000000;
+					line-height: 40rpx;
+					margin-right: 20rpx;
+					letter-spacing: 1px;
 				}
-				.time, .address, .enroll-time, .people-num {
-					margin-top: 20rpx;
+				.enroll {
 					font-size: 24rpx;
-					color: #333333;
+					color: #B94333;
 					line-height: 36rpx;
 				}
+			}
+			.time, .address, .enroll-time, .people-num {
+				margin-top: 20rpx;
+				font-size: 24rpx;
+				color: #333333;
+				line-height: 36rpx;
 			}
 			.status {
 				position: absolute;

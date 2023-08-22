@@ -32,7 +32,7 @@
   border-bottom: 12rpx solid #F6F6F6;
 }
 .help .content .item .img.data-v-085127cb {
-  height: 434rpx;
+  height: 394rpx;
   background: #F6F6F6;
   border-radius: 8rpx;
 }

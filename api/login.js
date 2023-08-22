@@ -25,3 +25,11 @@ export function userInfo() {
 		method: 'GET'
 	})
 }
+
+// 退出登录
+export function userLoginOut() {
+	return request({
+		url: '/api/user/logout',
+		method: 'POST'
+	})
+}

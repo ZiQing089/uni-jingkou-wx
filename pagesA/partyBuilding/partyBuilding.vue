@@ -1,7 +1,7 @@
 <template>
 	<view class="page-container partyBuilding">
 		<NavBar :title="'党建统领'" :use-bg="true" />
-		<view class="hot-nav">
+		<view class="hot-nav" :style="{ top: total }">
 			<view v-for="(item, index) in hotNav" :key="index" :class="item.active ? 'nav-item active' : 'nav-item'" @click="changeHotNav(item, index)">
 				<span>{{ item.title }}</span>
 			</view>
@@ -9,7 +9,7 @@
 		<view v-if="show === 0" class="content">
 			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
 				<view class="title">
-					{{ item.title }}
+					{{ item.name }}
 				</view>
 				<view class="time" style="margin-top: 36rpx;">
 					时间：{{ item.time | formatDate }}
@@ -21,17 +21,18 @@
 					查看<icon class="iconfont">&#xe647;</icon>
 				</view>
 			</view>
+			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
 		<view v-if="show === 1" class="content-member">
-			<view v-for="(item, index) in list" :key="index" class="list-item">
+			<view v-for="(item, index) in memberList" :key="index" class="list-item">
 				<view class="title">
-					{{ item.branchType }}
+					{{ item.belongTarget }}
 				</view>
 				<view class="img-list">
-					<view v-for="(e, i) in item.partyMemberList" :key="i" class="img-item">
+					<view v-for="(e, i) in item.pics" :key="i" class="img-item">
 						<view class="img">
 							<van-image width="100%" height="100%" radius="4" fit="cover"
-								:src="e.pic" /> 
+								:src="e" /> 
 						</view>
 						<view class="name">
 							{{ e.name }}
@@ -39,12 +40,14 @@
 					</view>
 				</view>
 			</view>
+			<van-divider v-if="isMemberNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
 	</view>
 </template>
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getPartyBuilding, getPartyMember } from "@/api/village.js"
 	export default {
 		components: {
 			NavBar
@@ -62,63 +65,68 @@
 						active: false
 					},
 				],
-				list: [
-					{
-						title: '2023年党支开展党员主题教育学习计划',
-						time: '1690861108884',
-						partyMemberList: [
-							{
-								name: '广工色',
-								pic: ''
-							},
-							{
-								name: '广工唐',
-								pic: ''
-							},
-							{
-								name: '广工咦',
-								pic: ''
-							},
-							{
-								name: '广工啊',
-								pic: ''
-							}
-						],
-						branchType: '第一支部委员会',
-						address: '广工茶楼',
-						content: '广工很色广工很色广工很色广工很色广工很色广工很色广工很色广工很色广工很色广工很色'
-					},
-					{
-						title: '2023年党支开展党员主题教育学习计划',
-						time: '1690861108884',
-						address: '广工茶楼',
-						partyMemberList: [
-							{
-								name: '广工1',
-								pic: ''
-							},
-							{
-								name: '广工2',
-								pic: ''
-							},
-							{
-								name: '广工3',
-								pic: ''
-							},
-							{
-								name: '广工4',
-								pic: ''
-							}
-						],
-						branchType: '第二支部委员会',
-						content: '广工很色广工很色广工很色广工很色广工很色广工很色广工很色广工很色广工很色广工很色'
-					}
-				],
-				title: '',
-				detail: {}
+				active: '党建活动',
+				isLoadMore:false,
+				currentPage: 1,
+				pageSize: 10,
+				isNoMore: false,
+				isMemberLoadMore:false,
+				memberCurrentPage: 1,
+				memberPageSize: 10,
+				isMemberNoMore: false,
+				conditions: [],
+				list: [],
+				memberList: []
+			}
+		},
+		onLoad() {
+			// 获取胶囊位置 { top, height, width }
+			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
+			this.total = top + height + 2 + 7+ 'px'
+			this.getMemberList()
+			this.getList()
+		},
+		onReachBottom() {
+			console.log(this.active)
+			if(this.active === '党建活动') {
+				if(!this.isMemberLoadMore && !this.isMemberNoMore){  //此处判断，上锁，防止重复请求
+					this.isMemberLoadMore = true
+					this.memberCurrentPage += 1  //每次上拉请求新的一页
+					this.getMemberList()
+				}
+			} else {
+				if(!this.isLoadMore && !this.isNoMore){  //此处判断，上锁，防止重复请求
+					this.isLoadMore = true
+					this.currentPage += 1  //每次上拉请求新的一页
+					this.getList()
+				}
 			}
 		},
 		methods: {
+			// 获取整出来列表
+			getList() {
+				getPartyBuilding({currentPage: this.currentPage, pageSize: this.pageSize, conditions: this.conditions}).then(res => {
+					if(res.success && res.data.list.length !== 0) {
+						this.isLoadMore = false
+						this.list = this.list.concat(res.data.list)
+						if(res.data.list.length < this.pageSize) {
+							this.isNoMore = true
+						}
+					}
+				})
+			},
+			// 获取党员列表
+			getMemberList() {
+				getPartyMember({currentPage: this.memberCurrentPage, pageSize: this.memberPageSize, conditions: this.conditions}).then(res => {
+					if(res.success && res.data.list.length !== 0) {
+						this.isMemberLoadMore = false
+						this.memberList = this.memberList.concat(res.data.list)
+						if(res.data.list.length < this.pageSize) {
+							this.isMemberNoMore = true
+						}
+					}
+				}) 
+			},
 			// tab切换
 			changeHotNav(e, i) {
 				this.show = i
@@ -126,6 +134,7 @@
 					item.active = false
 				})
 				e.active = !e.active
+				this.active = e.title
 			},
 			toDetail(item) {	
 				uni.navigateTo({
@@ -140,6 +149,7 @@
 .partyBuilding {
 	.hot-nav {
 		display: flex;
+		position: sticky;
 		padding: 0 56rpx;
 		height: 86rpx;
 		background-color: #ffffff;
@@ -182,7 +192,7 @@
 		padding: 32rpx 24rpx 90rpx;
 		.item {
 			border-radius: 12rpx;
-			padding: 40rpx 32rpx;
+			padding: 45rpx 32rpx;
 			margin-bottom: 24rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/mltybg.png') no-repeat;
 			background-size: 100%;
@@ -202,7 +212,7 @@
 			.nav {
 				position: absolute;
 				right: 40rpx;
-				bottom: 40rpx;
+				bottom: 45rpx;
 			    height: 36rpx;
 			    font-size: 24rpx;
 				display: flex;

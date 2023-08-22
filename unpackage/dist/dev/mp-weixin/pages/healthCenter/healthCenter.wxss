@@ -27,6 +27,29 @@
 .health .content.data-v-2300b8b4 {
   padding: 32rpx 24rpx;
 }
+.health .content .dialog.data-v-2300b8b4 {
+  position: relative;
+}
+.health .content .dialog .img.data-v-2300b8b4 {
+  width: 100%;
+  height: 410rpx;
+}
+.health .content .dialog .iconfont.data-v-2300b8b4 {
+  font-size: 44rpx;
+  color: #666666;
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+}
+.health .content .dialog .tips.data-v-2300b8b4 {
+  width: 448rpx;
+  text-align: center;
+  margin: 32rpx auto 40rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #173355;
+  line-height: 48rpx;
+}
 .health .content .nav-box.data-v-2300b8b4 {
   display: flex;
   flex-wrap: wrap;

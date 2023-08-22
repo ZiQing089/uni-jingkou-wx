@@ -6,30 +6,30 @@
 			  width="100%"
 			  height="100%"
 			  fit="cover"
-			  :src="detail.pic"
+			  :src="detail.pics[0]"
 			/>
 		</view>
 		<view class="title">
-			{{ detail.title }}
+			{{ detail.name }}
 			<view class="num">
-				<icon class="iconfont">&#xe65c;</icon>{{ detail.num }}
+				<icon class="iconfont">&#xe65c;</icon>{{ detail.viewCount }}
 			</view>
 		</view>
 		<view class="info">
 			<view class="left">
-				发布时间：{{ detail.time | formatDate }}
+				发布时间：{{ detail.createTime | formatDate }}
 			</view>
 			<view class="right">
-				共计得票：{{ detail.piao }}票
+				共计得票：{{ detail.voteCount }}票
 			</view>
 		</view>
 		<view class="content">
-			{{ detail.content }}
+			{{ detail.introduce }}
 		</view>
 		<view class="btn-box">
-			<view :class="detail.toupiao ? 'btn-border ytp' : 'btn-border'" @click="!detail.toupiao && vote()">
-				<view :class="detail.toupiao ? 'btn ytp' : 'btn'">
-					{{ detail.toupiao ? '已投票' : '投票' }}
+			<view :class="detail.vote ? 'btn-border ytp' : 'btn-border'" @click="!detail.vote && vote()">
+				<view :class="detail.vote ? 'btn ytp' : 'btn'">
+					{{ detail.vote ? '已投票' : '投票' }}
 				</view>
 			</view>
 		</view>
@@ -65,6 +65,7 @@
 <script>
 	import NavBar from "@/components/NavBar.vue"
 	import Dialog from '@/wxcomponents/vant/dist/dialog/dialog'
+	import { getMyRecomendDetail, vote } from "@/api/promote.js"
 	export default {
 		components: {
 			NavBar
@@ -72,21 +73,49 @@
 		data() {
 			return {
 				show: false,
-				detail: {}
+				detail: {},
+				obj: {}
 			}
 		},
 		onLoad(option) {
-			this.detail = JSON.parse(decodeURIComponent(option.data))
-			console.log(this.detail)
+			this.obj = JSON.parse(decodeURIComponent(option.data))
+			this.init()
 		},
 		methods: {
+			// 初始化页面
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getMyRecomendDetail({ id: this.obj.id }).then(res => {
+					uni.hideLoading()
+					this.detail = res.data
+				})
+			},
 			// 投票
 			vote() {
 				this.show = true
 			},
 			confirm() {
-				console.log('确定')
-				this.show = false
+				vote({ id: this.obj.id }).then(res => {
+					if(res.success) {
+						uni.showToast({
+							title: res.message,
+							icon: 'success',
+							duration: 2000
+						})
+						this.show = false
+						setTimeout(() => {
+							uni.navigateBack()
+						}, 2000)
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
+				})
 			},
 			close() {
 				this.show = false

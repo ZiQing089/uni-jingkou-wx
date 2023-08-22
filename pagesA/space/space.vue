@@ -2,21 +2,21 @@
 	<view class="page-container space">
 		<NavBar :title="title" :use-bg="true" :border="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click.prevent.stop="toDetail">
+			<view v-for="(item, index) in list" :key="index" class="item" @click.prevent.stop="toDetail(item)">
 				<view class="img">
 					<van-image
 					  width="100%"
 					  height="100%"
 					  fit="cover"
 					  radius="4"
-					  :src="item.img"
+					  :src="item.pics"
 					/>
 				</view>
 				<view class="title">
-					{{ item.title }}
+					{{ item.name }}
 				</view>
 				<view class="text">
-					{{ item.info }}
+					{{ item.description }}
 				</view>
 				<view class="phone" @click.prevent.stop="takePhone(item)">
 					<view class="left">
@@ -38,12 +38,14 @@
 					查看详情<icon class="iconfont">&#xe647;</icon>
 				</view>
 			</view>
+			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
 	</view>
 </template>
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getSpaceList } from "@/api/convenient.js"
 	export default {
 		components: {
 			NavBar
@@ -52,43 +54,56 @@
 			return {
 				bgHeight: '',
 				title: '邻里空间',
-				list: [
-					{
-						img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fci.xiaohongshu.com%2F35ccdf0a-0f47-cb25-d9fc-7ef123a02c48%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fci.xiaohongshu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1687334875&t=448cdaef197d59905b223d78c62f2655',
-						title: '老年活动中心',
-						info: '中心集休闲、娱乐、健身、文化、学习于一体，突出文化休闲特色，寓教于乐，乐中健...',
-						phone: '0575-82049777',
-						address: '浙江省绍兴市上虞区泾肖南路30号'
-					},
-					{
-						img: 'https://img0.baidu.com/it/u=1923555384,833149565&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500',
-						title: '老年活动中心',
-						info: '中心集休闲、娱乐、健身、文化、学习于一体，突出发地方但是防守打法师德师风水电费水电费文化休闲特色，寓教于乐，乐中健...',
-						phone: '0575-82049777',
-						address: '浙江省绍兴市上虞区泾肖南路30号'
-					}
-				]
+				isLoadMore:false,
+				currentPage: 1,
+				pageSize: 10,
+				isNoMore: false,
+				conditions: [],
+				list: []
 			}
 		},
 		onLoad(option) {
-			console.log(option)
 			this.title = option.title
 		},
 		onShow() {
-			
+			this.list = []
+			this.init()
+		},
+		onReachBottom() {
+			if(!this.isLoadMore && !this.isNoMore){  //此处判断，上锁，防止重复请求
+				this.isLoadMore = true
+				this.currentPage += 1  //每次上拉请求新的一页
+				this.init()
+			}
 		},
 		methods: {
+			// 初始化页面
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getSpaceList({currentPage: this.currentPage, pageSize: this.pageSize, conditions: this.conditions}).then(res => {
+					uni.hideLoading()
+					if(res.success && res.data.list.length !== 0) {
+						this.isLoadMore = false
+						this.list = this.list.concat(res.data.list)
+						if(res.data.list.length < this.pageSize) {
+							this.isNoMore = true
+						}
+					}
+				})
+			},
 			// 跳转详情
-			toDetail() {
+			toDetail(item) {
 				uni.navigateTo({
-					url: '/pagesA/space/spaceDetail'
+					url: `/pagesA/space/spaceDetail?data=${encodeURIComponent(JSON.stringify(item))}`
 				})
 			},
 			// 跳转导航
 			navigation(item) {
 				wx.openLocation({
-					 latitude: parseFloat(item.point.lat), //目标经纬度
-					 longitude: parseFloat(item.point.lng),
+					 latitude: parseFloat(item.mapPoint.lat), //目标经纬度
+					 longitude: parseFloat(item.mapPoint.lng),
 					 scale: 18,
 					 name: item.address
 				})
@@ -119,7 +134,7 @@
 			background: #ffffff;
 			border-bottom: 12rpx solid #F6F6F6;
 			.img {
-				height: 434rpx;
+				height: 394rpx;
 				background: black;
 				border-radius: 8rpx;
 			}

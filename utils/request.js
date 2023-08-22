@@ -11,6 +11,7 @@ function request(options = {}) {
 			if (res.data.success) {
 				resolved(res.data)
 			} else {
+				console.log('草拟寄')
 				switch (res.data.code){
 					case 'P0001':
 						removeToken()
@@ -22,6 +23,12 @@ function request(options = {}) {
 						uni.navigateTo({
 							url: "/pages/myInfo/myInfo"
 						})
+						break;
+					case 'V0002':
+						resolved(res.data)
+						break;
+					case 'VHA000':
+						resolved(res.data)
 						break;
 					default:
 						rejected(res.data)

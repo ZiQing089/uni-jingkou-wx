@@ -6,20 +6,20 @@
 				{{ detail.title }}
 			</view>
 			<view class="val" style="margin-top: 40rpx;">
-				发病部位：{{ detail.buwei }}
+				发病部位：{{ detail.affectedArea }}
 			</view>
 			<view class="val">
-				传染性：{{ detail.chuanran }}
+				传染性：{{ detail.contagious }}
 			</view>
 			<view class="val">
-				并发症：{{ detail.bingfa }}
+				并发症：{{ detail.comorbidity }}
 			</view>
 			<view class="val">
-				多发人群：{{ detail.duofa }}
+				多发人群：{{ detail.highRiskPopulation }}
 			</view>
 		</view>
 		<view class="content">
-			{{ detail.content }}
+			{{ detail.description }}
 		</view>
 	</view>
 </template>

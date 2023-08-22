@@ -25,7 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .delicacy-detail .content .img.data-v-649f2cea {
-  height: 464rpx;
+  height: 422rpx;
 }
 .delicacy-detail .content .title.data-v-649f2cea {
   height: 66rpx;
@@ -41,6 +41,9 @@
 .delicacy-detail .content .info.data-v-649f2cea {
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 0 138rpx;
+  justify-content: space-between;
 }
 .delicacy-detail .content .info .left.data-v-649f2cea {
   font-size: 26rpx;
@@ -50,17 +53,19 @@
 }
 .delicacy-detail .content .info .right.data-v-649f2cea {
   display: flex;
-  align-items: center;
   font-size: 24rpx;
   color: #999999;
   line-height: 36rpx;
   letter-spacing: 4px;
 }
-.delicacy-detail .content .info .right .img-icon.data-v-649f2cea {
-  width: 32rpx;
-  height: 32rpx;
+.delicacy-detail .content .info .right .iconfont.data-v-649f2cea {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
   margin-right: 12rpx;
-  margin-left: 60rpx;
+}
+.delicacy-detail .content .info .right .islike.data-v-649f2cea {
+  color: #F4474B;
 }
 .delicacy-detail .content .text.data-v-649f2cea {
   padding: 32rpx 24rpx 98rpx;

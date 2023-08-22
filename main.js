@@ -28,3 +28,8 @@ Vue.filter("formatDate", (date) => {
 	date = new Date(Number(date))
 	return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 })
+
+Vue.filter("formatMin", (date) => {
+	date = new Date(Number(date))
+	return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
+})

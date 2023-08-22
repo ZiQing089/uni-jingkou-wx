@@ -35,13 +35,15 @@
   background: url("https://files.zz-tech.cn/app-files/images/jingkou/whdabg.png") no-repeat;
   background-size: 100%;
   position: relative;
+  height: 279rpx;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
 }
 .files .content .item .nav.data-v-727bab4a {
   position: absolute;
   right: 32rpx;
-  bottom: 40rpx;
+  bottom: 45rpx;
   height: 36rpx;
   font-size: 24rpx;
   display: flex;

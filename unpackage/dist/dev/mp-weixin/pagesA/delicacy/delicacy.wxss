@@ -80,7 +80,7 @@ page {
   margin-bottom: 12rpx;
 }
 .delicacy .item .img.data-v-5eaf17eb {
-  height: 434rpx;
+  height: 394rpx;
   background: #F6F6F6;
   border-radius: 8rpx;
 }
@@ -128,7 +128,7 @@ page {
   line-height: 36rpx;
 }
 .delicacy .other-content.data-v-5eaf17eb {
-  padding: 0 12rpx;
+  padding: 0 12rpx 60rpx;
 }
 .delicacy .other-content .tone-item.data-v-5eaf17eb {
   width: 358rpx;

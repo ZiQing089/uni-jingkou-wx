@@ -11,39 +11,52 @@
 			</swiper>
 		</view>
 		<view class="title">
-			{{ detail.title }}
+			{{ detail.name }}
 		</view>
 		<view class="info">
 			<view class="time">
-				发布时间：{{ detail.time | formatDate }}
+				发布时间：{{ detail.createTime | formatDate }}
 			</view>
 			<view class="num">
-				<icon class="iconfont">&#xe65c;</icon>{{ detail.num }}
+				<icon class="iconfont">&#xe65c;</icon>{{ detail.viewCount }}
 			</view>
 		</view>
 		<view class="content">
-			{{ detail.content }}
+			{{ detail.introduce }}
 		</view>
 	</view>
 </template>
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getCultureDetail } from "@/api/promote.js"
 	export default {
 		components: {
 			NavBar
 		},
 		data() {
 			return {
+				obj: {},
 				detail: {}
 			}
 		},
 		onLoad(option) {
-			this.detail = JSON.parse(decodeURIComponent(option.data))
-			console.log(this.detail)
+			this.obj = JSON.parse(decodeURIComponent(option.data))
+		},
+		onShow() {
+			this.init()
 		},
 		methods: {
-			
+			// 初始化页面
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getCultureDetail({ id: this.obj.id }).then(res => {
+					uni.hideLoading()
+					this.detail = res.data
+				})
+			}
 		}
 	}
 </script>
@@ -56,7 +69,7 @@
 		.swiper {
 			height: 100%;
 			-webkit-transform: translateY(0);
-			background-color: #000000;
+			// background-color: #000000;
 			overflow: hidden;
 		}
 	}

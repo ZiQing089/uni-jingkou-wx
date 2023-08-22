@@ -35,7 +35,7 @@ page {
   margin-bottom: 12rpx;
 }
 .recreation .item .img.data-v-86597aaa {
-  height: 434rpx;
+  height: 394rpx;
   background: #F6F6F6;
   border-radius: 8rpx;
 }

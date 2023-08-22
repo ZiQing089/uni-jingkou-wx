@@ -7,23 +7,23 @@
 				  width="100%"
 				  height="100%"
 				  fit="cover"
-				  :src="detail.img"
+				  :src="detail.pic"
 				/>
 			</view>
 			<view class="title">
-				{{ detail.title }}
+				{{ detail.name }}
 			</view>
 			<view class="info">
 				<view class="left">
-					发布时间：{{ detail.time }}
+					发布时间：{{ detail.createTime | formatDate }}
 				</view>
 				<view class="right">
 					<image src="../../static/img/jingkou/graySee.png" class="img-icon" mode="scaleToFill"></image>
-					{{ detail.num }}
+					{{ detail.viewCount }}
 				</view>
 			</view>
 			<view class="text">
-				{{ detail.text }}
+				{{ detail.introduce }}
 			</view>
 		</view>
 	</view>
@@ -31,25 +31,31 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getScenicSpotsDetail } from '@/api/jingkou.js'
 	export default {
 		components: {
 			NavBar
 		},
 		data() {
 			return {
-				detail: {
-					img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-					title: '老年活动中心',
-					phone: '0575-82049777',
-					num: '1244',
-					time: '2023-04-23',
-					address: '浙江省绍兴市上虞区泾肖南路30号',
-					text: '老年活动中心集休闲、娱乐、健身、文化、学习于一体，突出文化休动场所。中心一直坚持以为老年人服务为宗旨性化服务赢得了老年朋友的好口碑，也吸引越来越多的人参与进来。2006年，中心被命名为我省首批四星级老年活动中心，被誉为老年人的“温馨家园”。中心内部设计充分体现了浓重的“文化气息、体育色彩”，设有书画室、茶室、健身房等娱乐、教学活动场所。'
-				}
+				obj: {},
+				detail: {}
 			}
 		},
+		onLoad(option) {
+			this.obj = JSON.parse(decodeURIComponent(option.data))
+			this.init(this.obj.id)
+		},
 		methods: {
-			
+			init(id) {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getScenicSpotsDetail({ id: id}).then(res => {
+					uni.hideLoading()
+					this.detail = res.data
+				})
+			}
 		}
 	}
 </script>
@@ -58,7 +64,7 @@
 .sceni-spot-detail {
 	.content {
 		.img {
-			height: 464rpx;
+			height: 422rpx;
 		}
 		.title {
 			height: 66rpx;

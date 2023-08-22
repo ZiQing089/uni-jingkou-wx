@@ -3,7 +3,7 @@
 		<NavBar :title="'登录授权'" :leftEmit="true"></NavBar>
 		<view class="login-content">
 			<view class="img-box">
-				<image class="logo" src="../../static/logo/logo.png"></image>
+				<image class="logo" src="https://files.zz-tech.cn/app-files/images/jingkou/logo.png"></image>
 			</view>
 			<view class="title">
 				{{ name }}
@@ -49,12 +49,12 @@ export default {
 			if(self.checked) {
 				uni.login({
 					success(res) {
-						preLogin({ jsCode: res.code }).then(res => {
-							console.log(res)
+						self.$store.dispatch('user/preLogin', { jsCode: res.code }).then(res => {
 							if(res.data.needPhone) {
 								self.needPhone = res.data.needPhone
 								Toast('首次登录，请使用手机号登录')
 							} else {
+								self.$store.dispatch('user/userInfo', {}).then(res => {})
 								uni.navigateBack()
 							}
 						})
@@ -75,7 +75,7 @@ export default {
 						success: (res) => {
 							console.log(res, 'res')
 							const loginCode = res.code
-							self.$store.dispatch('user/userLogin', {loginCode: loginCode, code: code, encryptData: encryptedData, iv: iv }).then(res => {
+							self.$store.dispatch('user/userLogin', {jsCode: loginCode, code: code, encryptData: encryptedData, iv: iv }).then(res => {
 								if(res.success) {
 									self.$store.dispatch('user/userInfo', {}).then(res => {})
 									uni.navigateBack()
@@ -136,7 +136,7 @@ export default {
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				background: #387EF7;
+				background: #2A4C7B;
 				box-shadow: 4rpx 4rpx 12rpx 0rpx rgba(0,0,0,0.1);
 				border-radius: 12rpx;
 				font-size: 32rpx;
@@ -157,7 +157,7 @@ export default {
 			color: #333333;
 			line-height: 28rpx;
 			.link {
-				color: #2B75DA;
+				color: #666666;
 			}
 		}
 	}

@@ -2,6 +2,7 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "van-image": "/wxcomponents/vant/dist/image/index",
+    "van-toast": "/wxcomponents/vant/dist/toast/index",
     "nav-bar": "/components/NavBar"
   }
 }

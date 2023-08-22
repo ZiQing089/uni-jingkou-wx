@@ -6,15 +6,15 @@
 		</view>
 		<view class="info">
 			<view class="time">
-				发布时间：{{ detail.time | formatDate }}
+				发布时间：{{ detail.createTime | formatDate }}
 			</view>
 			<view class="num">
 				<icon class="iconfont">&#xe65c;</icon>
-				{{ detail.num }}
+				{{ detail.view ? detail.view : 0 }}
 			</view>
 		</view>
 		<view class="content">
-			<view v-for="(item, index) in detail.pics" class="img">
+			<view v-for="(item, index) in detail.files" :key="index" class="img">
 				<van-image width="100%" height="100%" radius="4" fit="cover"
 					:src="item" />
 			</view>

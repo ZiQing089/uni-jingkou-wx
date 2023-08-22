@@ -9,9 +9,9 @@
 			<view class="banner">
 				<swiper class="swiper" circular :indicator-dots="true" :autoplay="true" :interval="5000" :duration="500"
 					indicator-active-color="#FFFFFF" indicator-color="rgba(255, 255, 255, 0.58)">
-					<swiper-item v-for="(item, index) in swiperList" :key="index">
+					<swiper-item v-for="(item, index) in pics" :key="index">
 						<van-image width="100%" height="100%" fit="cover"
-							:src="item" />
+							:src="item.pics" />
 					</swiper-item>
 				</swiper>
 			</view>
@@ -34,146 +34,209 @@
 				</template>
 			</view>
 			<view class="message-box">
-				<view class="inside-border">
-					<view class="top">
-						<view class="left">
-							<span class="time" style="margin-right: 16rpx;">{{ time | formatDate }}</span><span class="time">{{ week[weekIndex] }}</span>
-						</view>
-						<view class="right">
-							<span class="weather">多云</span><span class="weather">12~16</span>
+				<view class="top">
+					<view class="left">
+						<span class="time" style="margin-right: 16rpx;">{{ weather.date }}</span><span class="time">{{ weather.week }}</span>
+					</view>
+					<view class="right">
+						<image
+						  v-if="weather.wea_img === 'qing'"
+						  src="../../static/img/index/qing.png"
+						  mode="aspectFit"
+						  class="weather-img"
+						/>
+						<image
+						  v-if="weather.wea_img === 'xue'"
+						  src="../../static/img/index/xue.png"
+						  mode="aspectFit"
+						  class="weather-img"
+						/>
+						<image
+						  v-if="weather.wea_img === 'lei'"
+						  src="../../static/img/index/lei.png"
+						  mode="aspectFit"
+						  class="weather-img"
+						/>
+						<image
+						  v-if="weather.wea_img === 'shachen'"
+						  src="../../static/img/index/shachen.png"
+						  mode="aspectFit"
+						  class="weather-img"
+						/>
+						<image
+						  v-if="weather.wea_img === 'wu'"
+						  src="../../static/img/index/wu.png"
+						  mode="aspectFit"
+						  class="weather-img"
+						/>
+						<image
+						  v-if="weather.wea_img === 'bingbao'"
+						  src="../../static/img/index/bingbao.png"
+						  mode="aspectFit"
+						  class="weather-img"
+						/>
+						<image
+						  v-if="weather.wea_img === 'yun'"
+						  src="../../static/img/index/duoyun.png"
+						  mode="aspectFit"
+						  class="weather-img"
+						/>
+						<image
+						  v-if="weather.wea_img === 'yu'"
+						  src="../../static/img/index/yu.png"
+						  mode="aspectFit"
+						  class="weather-img"
+						/>
+						<image
+						  v-if="weather.wea_img === 'yin'"
+						  src="../../static/img/index/yin.png"
+						  mode="aspectFit"
+						  class="weather-img"
+						/>
+						<view>
+							<span class="weather" style="margin-right: 12rpx;">{{ weather.wea }}</span><span class="weather">{{ weather.tem2 }}~{{ weather.tem1 }}°C</span>
 						</view>
 					</view>
-					<view class="center-line"></view>
-					<view class="bottom" @click="toMessage">
-						<view class="souce">
-							<image
-							  src="/static/img/index/souce.png"
-							  mode="aspectFit"
-							  style="width: 68rpx; height: 68rpx;"
-							/>
-						</view>
-						<view class="list">
-							<view v-for="(item, index) in messageList" :key="index" class="item">
-								{{ item.title }}
-							</view>
-						</view>
-						<van-icon name="arrow" size="18px" />
+				</view>
+				<view class="bottom" @click="toMessage">
+					<view class="souce">
+						<image
+						  src="https://files.zz-tech.cn/app-files/images/jingkou/souce.png"
+						  mode="aspectFit"
+						  style="width: 68rpx; height: 68rpx;"
+						/>
 					</view>
+					<view class="list">
+						<view v-for="(item, index) in messageList.slice(0, 2)" :key="index" class="item">
+							{{ item.title }}
+						</view>
+					</view>
+					<van-icon name="arrow" size="18px" />
 				</view>
 			</view>
 		</view>
 		<view class="see">
 			<view class="main-title">
-				<image src="../../static/img/index/title-icon.png" class="img-icon" mode="scaleToFill"></image>
-				看一看
+				<view class="left">
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mainIcon.png" class="img-icon" mode="scaleToFill"></image>
+					<span>看一看</span>
+				</view>
+				<view class="right">
+					美丽景点
+				</view>
 			</view>
-			<view class="out-side-border">
-				<view class="in-side-border">
-					<view v-for="(item, index) in seeList.slice(0, 3)" :key="index" class="see-item">
-						<view class="left">
-							<van-image width="100%" height="100%" fit="cover"
-								:src="item.img" />
+			<view class="see-box">
+				<view v-for="(item, index) in seeList.slice(0, 3)" :key="index" @click="toDetail(item)" class="see-item">
+					<view class="left">
+						<van-image width="100%" height="100%" fit="cover"
+							:src="item.pic" />
+					</view>
+					<view class="right">
+						<view class="title">
+							{{ item.name }}
 						</view>
-						<view class="right">
-							<view class="title">
-								{{ item.title }}
-							</view>
-							<view class="text">
-								{{ item.info }}
-							</view>
-							<view class="btn">
-								查看详情<icon class="iconfont">&#xe647;</icon>
-							</view>
+						<view class="text">
+							{{ item.introduce }}
+						</view>
+						<view class="btn">
+							查看详情<icon class="iconfont">&#xe647;</icon>
 						</view>
 					</view>
 				</view>
 			</view>
-			<view class="more">
-				<image src="../../static/img/index/more.png" class="more-icon" mode="scaleToFill"></image>
+			<view class="more" @click="seeMore('/pagesA/scenicSpot/scenicSpot')">
+				<image src="https://files.zz-tech.cn/app-files/images/jingkou/seemore.png" class="more-icon" mode="scaleToFill"></image>
 			</view>
 		</view>
 		<view class="blow">
 			<view class="main-title">
-				<image src="../../static/img/index/title-icon.png" class="img-icon" mode="scaleToFill"></image>
-				品一品
+				<view class="left">
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mainIcon.png" class="img-icon" mode="scaleToFill"></image>
+					<span>品一品</span>
+				</view>
+				<view class="right">特色美食</view>
 			</view>
-			<view class="out-side-border">
-				<view class="in-side-border">
-					<view  v-for="(item, index) in blowList.slice(0, 1)" :key="index" class="blow-item">
-						<view class="blow-img">
-							<van-image width="100%" height="100%" radius="4" fit="cover"
-								:src="item.img" />
+			<view class="blow-box">
+				<view  v-for="(item, index) in blowList.slice(0, 1)" :key="index" class="blow-item">
+					<view class="blow-img">
+						<van-image width="100%" height="100%" radius="4" fit="cover"
+							:src="item.pic" />
+					</view>
+					<view class="blow-info">
+						<view class="title">
+							{{ item.name }}
 						</view>
-						<view class="blow-info">
-							<view class="title">
-								{{ item.title }}
-							</view>
-							<view class="like-num">
-								<icon v-if="item.like" class="iconfont islike">&#xe65b;</icon>
-								<icon v-else class="iconfont">&#xe659;</icon>
-								{{ item.likeNum }}
-							</view>
+						<view class="like-num">
+							<icon v-if="item.like" class="iconfont islike" @click.native.stop="addlike(item)">&#xe65b;</icon>
+							<icon v-else class="iconfont" @click.native.stop="addlike(item)">&#xe659;</icon>
+							{{ item.likeCount }}
 						</view>
-						<view class="blow-text">
-							{{ item.info }}
-						</view>
+					</view>
+					<view class="blow-text">
+						{{ item.introduce }}
 					</view>
 				</view>
 			</view>
-			<view class="more">
-				<image src="../../static/img/index/more.png" class="more-icon" mode="scaleToFill"></image>
+			<view class="more" @click="seeMore('/pagesA/delicacy/delicacy')">
+				<image src="https://files.zz-tech.cn/app-files/images/jingkou/seemore.png" class="more-icon" mode="scaleToFill"></image>
 			</view>
 		</view>
 		<view class="live">
 			<view class="main-title">
-				<image src="../../static/img/index/title-icon.png" class="img-icon" mode="scaleToFill"></image>
-				住一住
+				<view class="left">
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mainIcon.png" class="img-icon" mode="scaleToFill"></image>
+					<span>住一住</span>
+				</view>
+				<view class="right">民宿酒店</view>
 			</view>
-			<view class="out-side-border">
-				<view class="in-side-border">
-					<view v-for="(item, index) in liveList.slice(0, 1)" :key="index" class="live-item">
-						<view class="live-img">
-							<van-image width="100%" height="100%" radius="4" fit="cover"
-								:src="item.img" />
-						</view>
+			<view class="live-box">
+				<view v-for="(item, index) in liveList.slice(0, 1)" :key="index" class="live-item">
+					<view class="live-img">
+						<van-image width="100%" height="100%" radius="4" fit="cover"
+							:src="item.pic" />
 					</view>
 				</view>
 			</view>
-			<view class="more">
-				<image src="../../static/img/index/more.png" class="more-icon" mode="scaleToFill"></image>
+			<view class="more" @click="seeMore('/pagesA/hotel/hotel')">
+				<image src="https://files.zz-tech.cn/app-files/images/jingkou/seemore.png" class="more-icon" mode="scaleToFill"></image>
 			</view>
 		</view>
 		<view class="stroll">
 			<view class="main-title">
-				<image src="../../static/img/index/title-icon.png" class="img-icon" mode="scaleToFill"></image>
-				逛一逛
+				<view class="left">
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mainIcon.png" class="img-icon" mode="scaleToFill"></image>
+					<span>逛一逛</span>
+				</view>
+				<view class="right">美丽庭院</view>
 			</view>
-			<view class="out-side-border">
-				<view class="in-side-border">
-					<view v-for="(item, index) in strollList.slice(0, 1)" :key="index" class="stroll-item">
-						<view class="name">
-							户主：{{ item.name }}
+			<view class="stroll-box">
+				<view v-for="(item, index) in strollList.slice(0, 1)" :key="index" class="stroll-item">
+					<view class="name">
+						户主：{{ item.houseHolder }}
+					</view>
+					<view class="stroll-img">
+						<swiper class="swiper" circular :indicator-dots="true"
+							indicator-active-color="#FFFFFF" indicator-color="rgba(255, 255, 255, 0.58)">
+							<swiper-item v-for="(e, i) in item.pics" :key="i">
+								<van-image width="100%" height="100%" fit="cover" radius="4"
+									:src="e" />
+							</swiper-item>
+						</swiper>
+					</view>
+					<view class="stroll-info">
+						<view class="left">
+							<icon v-if="item.liked" class="iconfont islike" @click.native.stop="addtingyuanlike(item)">&#xe65b;</icon>
+							<icon v-else class="iconfont" @click.native.stop="addtingyuanlike(item)">&#xe659;</icon>
+							{{ item.likeCount }}
 						</view>
-						<view class="stroll-img">
-							<van-image width="100%" height="100%" radius="4" fit="cover"
-								:src="item.img" />
-						</view>
-						<view class="stroll-info">
-							<view class="left">
-								<icon v-if="item.like" class="iconfont islike">&#xe65b;</icon>
-								<icon v-else class="iconfont">&#xe659;</icon>
-								{{ item.likeNum }}
-							</view>
-							<view class="right">
-								<icon class="iconfont">&#xe65a;</icon>
-								转发
-							</view>
-						</view>
+						<button class="share-btn" type="default" open-type="share">
+							<icon class="iconfont">&#xe65a;</icon><span>转发</span>
+						</button>
 					</view>
 				</view>
 			</view>
-			<view class="more">
-				<image src="../../static/img/index/more.png" class="more-icon" mode="scaleToFill"></image>
+			<view class="more" @click="seeMore('/pagesA/beautifulYard/beautifulYard')">
+				<image src="https://files.zz-tech.cn/app-files/images/jingkou/seemore.png" class="more-icon" mode="scaleToFill"></image>
 			</view>
 		</view>
 		<van-tabbar :active="active" inactive-color="#7C7C7C" :placeholder="true" active-color="#B94333" @change="tabbarChange">
@@ -212,112 +275,31 @@
 </template>
 
 <script>
+	import { getToken } from '@/utils/auth.js'
+	import { userInfo } from '@/api/login.js'
+	import { getBannerList, getWeater } from '@/api/index.js'
+	import { getShowlist, addLike } from '@/api/beautifulYard.js'
+	import { getMessage } from '@/api/message.js'
+	import { getScenicSpotsList, getHomestayList, getSpecialityList, addlike } from '@/api/jingkou.js'
 	export default {
 		data() {
 			return {
 				title: '泾口未来乡村',
-				token: '',
 				time: '',
-				show: 0,
-				week: {
-					0: '周日',
-					1: '周一',
-					2: '周二',
-					3: '周三',
-					4: '周四',
-					5: '周五',
-					6: '周六'
-				},
 				weekIndex: '',
-				active: 0,
 				menuButtonTop: '',
 				menuButtonHeight: '',
 				menuButtonRight: '',
-				blowList: [
-					{
-						title: '志愿者活动',
-						info: '在清明节，志愿者们一起带着清明粿一同前往看望70岁以上往看望70岁往看望70岁往看望70岁的老人......',
-						img: '',
-						like: false,
-						likeNum: 2345
-					},
-					{
-						title: '志愿者活动',
-						info: '在清明节，志愿者们一起带着清明粿一同前往看望70岁往看望70岁往看望70岁往看望70岁以上的老人......',
-						img: '',
-						like: false,
-						likeNum: 2345
-					}
-				],
-				liveList: [
-					{
-						img: ''
-					},
-					{
-						img: ''
-					}
-				],
-				strollList: [
-					{
-						img: '',
-						name: '张三',
-						likeNum: 2345,
-						like: false
-					},
-					{
-						img: '',
-						name: '李四',
-						likeNum: 2345,
-						like: false
-					}
-				],
-				seeList: [
-					{
-						title: '志愿者活动',
-						info: '在清明节，志愿者们一起带着清明粿一同前往看望70岁以上的老人......',
-						img: ''
-					},
-					{
-						title: '邻里活动',
-						info: '为丰富社区居民的文化生活，增强邻里之间的互动，积极倡导健...',
-						img: ''
-					},
-					{
-						title: '邻里活动',
-						info: '为丰富社区居民的文化生活，增强邻里之间的互动，积极倡导健...',
-						img: ''
-					},
-					{
-						title: '邻里活动',
-						info: '为丰富社区居民的文化生活，增强邻里之间的互动，积极倡导健...',
-						img: ''
-					}
-				],
-				activityList: [
-					{
-						title: '叫你活动',
-						info: '在清明节，志愿者们一起带着清明粿一同前往看望70岁以上的老人......',
-						img: ''
-					},
-					{
-						title: '叫你崩铁',
-						info: '为丰富社区居民的文化生活，增强邻里之间的互动，积极倡导健...',
-						img: ''
-					}
-				],
-				messageList: [
-					{
-						title: '特色沿河餐厅即将开业，请大家尽情期待！'
-					},
-					{
-						title: '“十碗头”体验馆已对外开放，游客可前家具风口浪尖螺丝刀'
-					}
-				],
-				swiperList: [
-					'https://files.zz-tech.cn/app-files/images/banner1.png',
-					'https://files.zz-tech.cn/app-files/images/banner2.png',
-					'https://files.zz-tech.cn/app-files/images/banner3.png'
-				],
+				token: getToken(),
+				show: 0,
+				active: 0,
+				weather: {},
+				blowList: [],
+				liveList: [],
+				strollList: [],
+				seeList: [],
+				pics: [],
+				messageList: [],
 				navList: [
 					{
 						title: '泾口游',
@@ -363,33 +345,145 @@
 			}
 		},
 		onLoad() {
-			console.log(new Date().getDay())
 		},
 		onShow() {
-			// this.token = getToken()
-			// 获取胶囊位置
-			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
-			this.menuButtonTop = top + 'px'
-			this.menuButtonHeight = height + 'px'
-			this.menuButtonRight = width + 70 + 'px'
-			this.time = new Date()
-			this.weekIndex = this.time.getDay()
-			// if (this.token) {
-			// 	this.getUserInfo()
-			// }
+			const self = this
+			uni.authorize({
+				scope: 'scope.userLocation',
+				success() {
+					uni.getLocation({
+						type: 'wgs84',
+						success(res) {
+							self.lat = res.latitude
+							self.lng = res.longitude
+							self.showTwo(res.latitude, res.longitude)
+							self.$store.dispatch('user/setLat', res.latitude)
+							self.$store.dispatch('user/setLng', res.longitude)
+						},
+						fail(err) {
+							console.log(err)
+						}
+					})
+				}
+			})
+			const { top, height, width } = wx.getMenuButtonBoundingClientRect(); // 获取胶囊位置
+			self.token = getToken() // 获取token
+			self.getBannerList() // 轮播
+			self.initAll()
+			// 获取手机顶部内容
+			self.menuButtonTop = top + 'px'
+			self.menuButtonHeight = height + 'px'
+			self.menuButtonRight = width + 70 + 'px'
+			// 获取个人信息
+			if (self.token) {
+				self.getUserInfo()
+			}
 		},
 		methods: {
+			initAll() {
+				this.showOne()
+				this.showThree()
+				this.showFour()
+				this.showFive()
+				this.getWeater()
+			},
+			// 景点
+			showOne() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getScenicSpotsList().then(res => {
+					uni.hideLoading()
+					this.seeList = res.data
+				})
+			},
+			// 住宿
+			showTwo(lat, lng) {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getHomestayList({ lat: lat, lng: lng, mapType: 'gaode'}).then(res => {
+					uni.hideLoading()
+					this.liveList = res.data
+				})
+			},
+			// 特产
+			showThree() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getSpecialityList().then(res => {
+					uni.hideLoading()
+					this.blowList = res.data
+				})
+			},
+			// 逛一逛
+			showFour() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getShowlist({ currentPage: 1, pageSize: 10, conditions: [] }).then(res => {
+					uni.hideLoading()
+					this.strollList = res.data.list
+				})
+			},
+			// 公告
+			showFive() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getMessage().then(res => {
+					uni.hideLoading()
+					this.messageList = res.data
+				})
+			},
+			// 天气
+			getWeater() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getWeater({}).then(res => {
+					uni.hideLoading()
+					this.weather = res.data
+				})
+			},
+			// 住宿
+			onShareAppMessage(res) {
+				return{
+				      title:'转发分享',    // 转发标题
+				      path: '/pagesA/beautifulYard/beautifulYard',
+				      imageUrl:''   
+				}
+			},
+			// 获取轮播
+			getBannerList() {
+				getBannerList().then(res => {
+					this.pics = res.data
+				})
+			},
+			// 获取用户信息
+			getUserInfo() {
+				const self = this
+				self.$store.dispatch('user/userInfo', {}).then(res => {})
+			},
+			// 更多跳转
+			seeMore(path) {
+				if (this.token) {
+					uni.navigateTo({
+						url: path
+					})
+				} else {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				}
+			},
 			tabbarChange(event) {
 				this.active = event.detail
 				switch (this.active) {
 					case 1:
 						uni.redirectTo({
 							url: "/pages/mine/mine"
-						})
-						break;
-					case 2:
-						uni.redirectTo({
-							url: "/pages/map/map"
 						})
 						break;
 					default:
@@ -401,36 +495,69 @@
 			},
 			// 金刚区跳转
 			navTo(item) {
-				uni.navigateTo({
-					url: `${item.path}?title=${item.title}`
-				})
-				// if (this.token) {
-				// 	uni.navigateTo({
-				// 		url: `${item.path}?title=${item.title}`
-				// 	})
-				// } else {
-				// 	uni.navigateTo({
-				// 		url: '/pages/login/login'
-				// 	})
-				// }
+				if (this.token) {
+					uni.navigateTo({
+						url: `${item.path}?title=${item.title}`
+					})
+				} else {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				}
 			},
 			// 跳转消息页面
 			toMessage() {
-				uni.navigateTo({
-					url: '/pagesA/message/message'
-				})
-			},
-			// 热门切换
-			changeHotNav(e, i) {
-				this.show = i
-				this.hotNav.forEach((item, index) => {
-					item.active = false
-				})
-				e.active = !e.active
+				if(this.token) {
+					uni.navigateTo({
+						url: '/pagesA/message/message'
+					})
+				} else {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				}
 			},
 			// 去详情页
-			toDetail() {
-				console.log('nice')
+			toDetail(item) {
+				if(this.token) {
+					uni.navigateTo({
+						url: `/pagesA/scenicSpot/detail?data=${encodeURIComponent(JSON.stringify(item))}`
+					})
+				} else {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				}
+			},
+			addlike(item) {
+				if(this.token) {
+					uni.showLoading({
+						title: '正在加载'
+					})
+					addlike({ id: item.id }).then(res => {
+						uni.hideLoading()
+						this.showThree()
+					}) 
+				} else {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				}
+			},
+			addtingyuanlike(item) {
+				if(this.token) {
+					uni.showLoading({
+						title: '正在加载'
+					})
+					addLike(item.id).then(res => {
+						uni.hideLoading()
+						this.showFour()
+					}) 
+				} else {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				}
 			}
 		}
 	}
@@ -451,7 +578,7 @@ page {
 		background-color: #ffffff;
 		.title-bg {
 			height: 264rpx;
-			background: url('../../static/img/index/index-bg.png') no-repeat;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/indexTop.png') no-repeat;
 			background-size: 100%;
 			.menu-title {
 				display: flex;
@@ -476,7 +603,7 @@ page {
 				height: 100%;
 				-webkit-transform: translateY(0);
 				margin: 0 24rpx;
-				background-color: #000000;
+				// background-color: #000000;
 				border-radius: 12rpx;
 				overflow: hidden;
 			}
@@ -523,69 +650,61 @@ page {
 			height: 204rpx;
 			margin: 0 24rpx;
 			border-radius: 12rpx;
-			display: flex;
 			box-sizing: border-box;
-			align-items: center;
-			background-color: #ffffff;
-			border: 2rpx solid #A3A3A3;
-			.inside-border {
-				width: 100%;
-				height: 192rpx;
-				margin: 0 6rpx;
-				border-radius: 8rpx;
-				box-sizing: border-box;
-				border: 1rpx solid #C9C9C9;
-				.top {
-					height: 68rpx;
-					padding: 0 26rpx;
-					display: flex;
-					align-items: center;
-					justify-content: space-between;
-					.left {
-						.time {
-							font-size: 28rpx;
-							font-weight: bold;
-							color: #000000;
-						}
-					}
-					.right {
-						.weather {
-							font-size: 28rpx;
-							font-weight: bold;
-							color: #000000;
-						}
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/gonggao.png') no-repeat;
+			background-size: 100%;
+			.top {
+				height: 84rpx;
+				padding: 0 26rpx;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.left {
+					.time {
+						font-size: 28rpx;
+						font-weight: bold;
+						color: #000000;
 					}
 				}
-				.center-line {
-					height: 4rpx;
-					box-sizing: border-box;
-					border: 1rpx solid #C9C9C9;
-				}
-				.bottom {
-					height: 120rpx;
+				.right {
 					display: flex;
 					align-items: center;
-					cursor: pointer;
-					padding: 0 26rpx;
-					justify-content: space-between;
-					.list {
-						width: 456rpx;
-						height: 80rpx;
-						.item {
-							width: 100%;
-							height: 36rpx;
-							margin-bottom: 8rpx;
-							font-size: 24rpx;
-							color: #333333;
-							line-height: 36rpx;
-							text-decoration: underline;
-							overflow: hidden;
-							white-space: nowrap;
-							text-overflow: ellipsis;
-						}
-						.item:last-child {
-							margin-bottom: 0;
-						}
+					.weather-img {
+						width: 40rpx;
+						height: 40rpx;
+						margin-right: 12rpx;
+					}
+					.weather {
+						font-size: 28rpx;
+						font-weight: bold;
+						color: #000000;
+					}
+				}
+			}
+			.bottom {
+				height: 120rpx;
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				padding: 0 32rpx;
+				justify-content: space-between;
+				.list {
+					width: 456rpx;
+					height: 80rpx;
+					.item {
+						width: 100%;
+						height: 36rpx;
+						margin-bottom: 8rpx;
+						font-size: 24rpx;
+						color: #333333;
+						line-height: 36rpx;
+						text-decoration: underline;
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					}
+					.item:last-child {
+						margin-bottom: 0;
 					}
 				}
 			}
@@ -598,16 +717,26 @@ page {
 		.main-title {
 			display: flex;
 			align-items: center;
+			justify-content: space-between;
 			height: 48rpx;
 			font-size: 32rpx;
 			font-weight: bold;
 			color: #000000;
 			margin-bottom: 24rpx;
 			line-height: 48rpx;
-			.img-icon {
-				width: 30rpx;
-				height: 30rpx;
-				margin-right: 12rpx;
+			.left {
+				display: flex;
+				align-items: center;
+				.img-icon {
+					width: 30rpx;
+					height: 30rpx;
+					margin-right: 12rpx;
+				}
+			}
+			.right {
+				font-size: 24rpx;
+				color: #666666;
+				line-height: 36rpx;
 			}
 		}
 		.more {
@@ -618,98 +747,35 @@ page {
 				height: 24rpx;
 			}
 		}
-		.out-side-border {
+		.see-box, .blow-box, .stroll-box, .live-box {
 			border-radius: 12rpx;
-			border: 2rpx solid #A3A3A3;
-			.in-side-border {
-				margin: 8rpx;
-				border-radius: 8rpx;
-				border: 1rpx solid #C9C9C9;
-				padding: 32rpx 24rpx 32rpx;
-				.see-item {
-					display: flex;
-					justify-content: space-between;
-					margin-bottom: 20rpx;
-					padding-bottom: 20rpx;
-					border-bottom: 2rpx solid #F0F0F2;
-					.left {
-						width: 260rpx;
-						height: 194rpx;
-						margin-right: 22rpx;
-					}
-					.right {
-						width: calc(100% - 282rpx);
-						.title {
-							font-size: 28rpx;
-							margin-bottom: 4rpx;
-							font-weight: bold;
-							color: #000000;
-							line-height: 44rpx;
-							letter-spacing: 1px;
-						}
-						.text {
-							font-size: 28rpx;
-							color: #666666;
-							line-height: 44rpx;
-							letter-spacing: 1px;
-							overflow: hidden;
-							text-overflow: ellipsis;
-							display: -webkit-box;
-							-webkit-box-orient: vertical;
-							-webkit-line-clamp: 2;
-						}
-					   .btn {
-						   text-align: right;
-						   font-size: 24rpx;
-						   color: #B94333;
-						   line-height: 36rpx;
-						   .iconfont  {
-							   font-size: 20rpx;
-							   margin-left: 12rpx;
-						   }
-					   }
-					}
+			height: 751rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/kan.png') no-repeat;
+			background-size: 100%;
+			box-sizing: border-box;
+			padding: 40rpx 32rpx 40rpx;
+			.see-item {
+				display: flex;
+				justify-content: space-between;
+				margin-bottom: 20rpx;
+				padding-bottom: 20rpx;
+				border-bottom: 2rpx solid #F0F0F2;
+				.left {
+					width: 260rpx;
+					height: 194rpx;
+					margin-right: 22rpx;
 				}
-				.see-item:nth-child(3n) {
-					border-bottom: none;
-					margin-bottom: 0;
-				}
-				.blow-item {
-					.blow-img {
-						height: 358rpx;
-						background: #DCDCDC;
-						border-radius: 8rpx;
+				.right {
+					width: calc(100% - 282rpx);
+					.title {
+						font-size: 28rpx;
+						margin-bottom: 4rpx;
+						font-weight: bold;
+						color: #000000;
+						line-height: 44rpx;
+						letter-spacing: 1px;
 					}
-					.blow-info {
-						margin: 24rpx 0 12rpx;
-						display: flex;
-						justify-content: space-between;
-						align-items: center;
-						.title {
-							font-size: 28rpx;
-							font-weight: bold;
-							color: #000000;
-							line-height: 44rpx;
-							letter-spacing: 1px;
-						}
-						.like-num {
-							display: flex;
-							font-size: 24rpx;
-							color: #666666;
-							line-height: 36rpx;
-							letter-spacing: 4px;
-							.iconfont {
-								display: flex;
-								align-items: center;
-								font-size: 32rpx;
-								margin-right: 12rpx;
-							}
-							.islike {
-								color: #F4474B;
-							}
-						}
-					}
-					.blow-text {
+					.text {
 						font-size: 28rpx;
 						color: #666666;
 						line-height: 44rpx;
@@ -720,50 +786,143 @@ page {
 						-webkit-box-orient: vertical;
 						-webkit-line-clamp: 2;
 					}
+				   .btn {
+					   text-align: right;
+					   font-size: 24rpx;
+					   color: #B94333;
+					   line-height: 36rpx;
+					   .iconfont  {
+						   font-size: 20rpx;
+						   margin-left: 12rpx;
+					   }
+				   }
 				}
-				.live-item {
-					.live-img {
-						height: 358rpx;
-						background: #DCDCDC;
-						border-radius: 8rpx;
-					}
+			}
+			.see-item:nth-child(3n) {
+				border-bottom: none;
+				margin-bottom: 0;
+			}
+			.blow-item {
+				.blow-img {
+					height: 358rpx;
+					background: #DCDCDC;
+					border-radius: 8rpx;
 				}
-				.stroll-item {
-					.name {
+				.blow-info {
+					margin: 24rpx 0 12rpx;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					.title {
 						font-size: 28rpx;
+						font-weight: bold;
 						color: #000000;
-						line-height: 40rpx;
+						line-height: 44rpx;
 						letter-spacing: 1px;
-						margin-bottom: 24rpx;
 					}
-					.stroll-img {
-						height: 358rpx;
-						background: #DCDCDC;
-						border-radius: 8rpx;
-					}
-					.stroll-info {
-						margin-top: 32rpx;
+					.like-num {
 						display: flex;
-						justify-content: space-between;
-						.left, .right {
+						font-size: 24rpx;
+						color: #666666;
+						line-height: 36rpx;
+						letter-spacing: 1px;
+						.iconfont {
 							display: flex;
-							font-size: 24rpx;
-							color: #666666;
-							line-height: 36rpx;
-							letter-spacing: 4px;
-							.iconfont {
-								display: flex;
-								align-items: center;
-								font-size: 32rpx;
-								margin-right: 12rpx;
-							}
-							.islike {
-								color: #F4474B;
-							}
+							align-items: center;
+							font-size: 32rpx;
+							margin-right: 12rpx;
+						}
+						.islike {
+							color: #F4474B;
 						}
 					}
 				}
+				.blow-text {
+					font-size: 28rpx;
+					color: #666666;
+					line-height: 44rpx;
+					letter-spacing: 1px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 2;
+				}
 			}
+			.live-item {
+				.live-img {
+					height: 358rpx;
+					background: #DCDCDC;
+					border-radius: 8rpx;
+				}
+			}
+			.stroll-item {
+				.name {
+					font-size: 28rpx;
+					color: #000000;
+					line-height: 40rpx;
+					letter-spacing: 1px;
+					margin-bottom: 24rpx;
+				}
+				.stroll-img {
+					height: 358rpx;
+					background: #DCDCDC;
+					border-radius: 8rpx;
+					margin-top: 24rpx;
+					.swiper {
+						height: 100%;
+						-webkit-transform: translateY(0);
+						border-radius: 12rpx;
+						overflow: hidden;
+					}
+				}
+				.stroll-info {
+					margin-top: 32rpx;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					.left, .share-btn {
+						display: flex;
+						font-size: 24rpx;
+						color: #666666;
+						line-height: 36rpx;
+						letter-spacing: 1px;
+						.iconfont {
+							display: flex;
+							align-items: center;
+							font-size: 32rpx;
+							margin-right: 12rpx;
+						}
+						.islike {
+							color: #F4474B;
+						}
+					}
+					.share-btn {
+						border: none;
+						background: none;
+						padding: 0;
+						margin: 0;
+					}
+					.share-btn::after {
+						border: 0;
+					}
+				}
+			}
+		}
+		.blow-box {
+			height: 612rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/pin.png') no-repeat;
+			background-size: 100%;
+		}
+		.stroll-box {
+			height: 568rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/guang.png') no-repeat;
+			background-size: 100%;
+		}
+		.live-box {
+			height: 445rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/zhu.png') no-repeat;
+			background-size: 100%;
 		}
 	}
 }

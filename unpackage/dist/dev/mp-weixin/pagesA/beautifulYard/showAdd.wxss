@@ -96,6 +96,7 @@
 .show-add .content .form-block .upload.data-v-73ab3ebc .van-uploader__upload {
   background-color: #F7EDEC !important;
   margin-bottom: 0rpx;
+  margin-right: 0;
   border-radius: 8rpx;
 }
 .show-add .content .form-block .upload.data-v-73ab3ebc .van-uploader__wrapper {

@@ -7,7 +7,7 @@
 					{{ item.title }}
 				</view>
 				<view class="time">
-					{{ item.time }}
+					{{ item.createTime | formatDate }}
 				</view>
 				<view class="nav">
 					查看<icon class="iconfont">&#xe647;</icon>
@@ -19,36 +19,33 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getMessage } from '@/api/message.js'
 	export default {
 		components: {
 			NavBar
 		},
 		data() {
 			return {
-				list: [
-					{
-						title: '游客停车场',
-						time: '2023-05-04',
-						address: '浙江省绍兴市越城区陶堰镇泾口村3号'
-					},
-					{
-						title: '游客停车场游客停车游客停车场场游客停车场游客停车场',
-						time: '2023-05-04',
-						address: '浙江省绍兴市越城区陶堰镇泾口村3号'
-					},
-					{
-						title: '游客停车游客停车场场',
-						time: '2023-05-04',
-						address: '浙江省绍兴市越城区陶堰镇泾口村3号'
-					}
-				]
+				list: []
 			}
 		},
+		onShow() {
+			this.init()
+		},
 		methods: {
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getMessage().then(res => {
+					uni.hideLoading()
+					this.list = res.data
+				})
+			},
 			// 去详情页
 			toDetail(item) {
 				uni.navigateTo({
-					url: `/pagesA/message/detail`
+					url: `/pagesA/message/detail?data=${encodeURIComponent(JSON.stringify(item))}`
 				})
 			}
 		}

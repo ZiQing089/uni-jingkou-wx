@@ -52,13 +52,13 @@
 			<NavBar :title="'村名认证'" :border="true" />
 			<view class="img"></view>
 			<view class="tips">
-				身份验证通过
+				身份已认证
 			</view>
 			<view class="name">
-				张*
+				{{ userInfo.name ? userInfo.name : userInfo.nickname }}
 			</view>
 			<view class="idCard">
-				130*************36
+				{{ userInfo.idCard }}
 			</view>
 			<view class="btn-border" @click="finish">
 				<view class="btn">
@@ -82,7 +82,9 @@
 </template>
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { preLogin } from '@/api/login.js'
 	import Toast from '@/wxcomponents/vant/dist/toast/toast';
+	import { postVillager } from '@/api/attestation.js'
 	export default {
 		components: {
 			NavBar
@@ -91,14 +93,32 @@
 			return {
 				form: {
 					name: '',
-					idCard: ''
+					idCard: '',
+					idCardPics: []
 				},
+				userInfo: {},
 				showForm: true,
+				needPhone: '',
 				showSuccess: false,
 				showError: false
 			}
 		},
+		onShow() {
+			this.getUserInfo()
+		},
 		methods: {
+			// 获取用户信息
+			getUserInfo() {
+				const self = this
+				self.$store.dispatch('user/userInfo', {}).then(res => {
+					this.userInfo = res.data
+					if(res.data.userType.key === 'VILLAGER') {
+						this.showSuccess = true
+						this.showForm = false
+				
+					}
+				})
+			},
 			// 输入框监听
 			onblur(t, e) {
 				if (t === 'name') {
@@ -107,10 +127,39 @@
 					this.form.idCard = e.detail
 				}
 			},
+			preLogin() {
+				let self = this
+				uni.login({
+					success(res) {
+						self.$store.dispatch('user/preLogin', { jsCode: res.code }).then(res => {
+							if(res.data.needPhone) {
+								self.needPhone = res.data.needPhone
+							} else {
+								self.$store.dispatch('user/userInfo', {}).then(res => {})
+								// uni.navigateBack()
+							}
+						})
+					}
+				})
+			},
 			// 提交
 			submit() {
 				if (this.form.name && this.form.idCard) {
-					console.log('可以')
+					postVillager(this.form).then(res => {
+						if(res.code === 'V0002') {
+							this.showError = true
+							this.showForm = false
+						} else {
+							uni.showToast({
+								title: '请重新登录',
+								icon: 'success',
+								duration: 2000
+							})
+							this.showSuccess = true
+							this.showForm = false
+							this.preLogin()
+						}
+					})
 				} else {
 					Toast('请填写必填项');
 				}

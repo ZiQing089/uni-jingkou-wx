@@ -7,18 +7,52 @@
 			</view>
 		</view>
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+			<view v-if="item.publicType.key === 'ECONOMY' && active === '三资公开'" v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
 				<view class="header">
 					<view class="title">
 						{{ item.title }}
 					</view>
 					<view class="num">
 						<icon class="iconfont">&#xe65c;</icon>
-						{{ item.num }}
+						{{ item.view ? item.view : 0 }}
 					</view>
 				</view>
 				<view class="time">
-					{{ item.time | formatDate }}
+					{{ item.createTime | formatDate }}
+				</view>
+				<view class="nav">
+					查看<icon class="iconfont">&#xe647;</icon>
+				</view>
+			</view>
+			<view v-if="item.publicType.key === 'VILLAGE' && active === '村务公开'" v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+				<view class="header">
+					<view class="title">
+						{{ item.title }}
+					</view>
+					<view class="num">
+						<icon class="iconfont">&#xe65c;</icon>
+						{{ item.view ? item.view : 0 }}
+					</view>
+				</view>
+				<view class="time">
+					{{ item.createTime | formatDate }}
+				</view>
+				<view class="nav">
+					查看<icon class="iconfont">&#xe647;</icon>
+				</view>
+			</view>
+			<view v-if="item.publicType.key === 'PARTY' && active === '党务公开'" v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+				<view class="header">
+					<view class="title">
+						{{ item.title }}
+					</view>
+					<view class="num">
+						<icon class="iconfont">&#xe65c;</icon>
+						{{ item.view ? item.view : 0 }}
+					</view>
+				</view>
+				<view class="time">
+					{{ item.createTime | formatDate }}
 				</view>
 				<view class="nav">
 					查看<icon class="iconfont">&#xe647;</icon>
@@ -30,6 +64,7 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getPublic, viewAdd } from "@/api/village.js"
 	export default {
 		components: {
 			NavBar
@@ -50,43 +85,52 @@
 						active: false
 					}
 				],
-				title: '三资公开',
-				list: [
-					{
-						title: '2023年3月财务公开表2023年3月财2023年3月财务公开表2023年3月财…',
-						num: '1821',
-						time: '1690861108884',
-						file: '.pdf',
-						pics: ['', '', '']
-					},
-					{
-						title: '2023年3月财务公开表2023年3月财2023年3月财务公开表2023年3月财…',
-						num: '1821',
-						time: '1690861108884',
-						file: '',
-						pics: ['', '', '']
-					}
-				]
+				active: '三资公开',
+				isLoadMore:false,
+				currentPage: 1,
+				pageSize: 500,
+				isNoMore: false,
+				conditions: [],
+				list: []
 			}
 		},
 		onShow() {
-			console.log(new Date().getTime())
+			this.init()
 		},
 		methods: {
+			// 初始化页面
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getPublic({currentPage: this.currentPage, pageSize: this.pageSize, conditions: this.conditions}).then(res => {
+					uni.hideLoading()
+					if(res.success) {
+						this.list = res.data.list
+					} else {
+						// uni.hideLoading()
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
+				})
+			},
 			// tab切换
 			changeHotNav(e, i) {
 				this.show = i
 				this.hotNav.forEach((item, index) => {
 					item.active = false
 				})
-				this.title = e.title
+				this.active = e.title
 				e.active = !e.active
 			},
 			// 跳转
 			toDetail(item) {
-				if(item.file.includes('pdf')) {
+				if(item.type === 'PDF') {
 					uni.downloadFile({
-					      url: item.file,
+					      url: item.files[0],
 					      success: function (res) {
 					        var filePath = res.tempFilePath;
 					        uni.openDocument({
@@ -98,9 +142,15 @@
 						  })
 						}
 					})
+					viewAdd(item.id).then(res => {
+						console.log(res)
+					})
 				} else {
+					viewAdd(item.id).then(res => {
+						console.log(res)
+					})
 					uni.navigateTo({
-						url: `/pagesA/qinglian/detail?title=${this.title}&data=${encodeURIComponent(JSON.stringify(item))}`
+						url: `/pagesA/qinglian/detail?title=${this.active}&data=${encodeURIComponent(JSON.stringify(item))}`
 					})
 				}
 			}
@@ -155,7 +205,7 @@
 		padding: 32rpx 24rpx 90rpx;
 		.item {
 			border-radius: 12rpx;
-			padding: 40rpx 32rpx;
+			padding: 45rpx 32rpx;
 			margin-bottom: 24rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/qljkbg.png') no-repeat;
 			background-size: 100%;
@@ -196,7 +246,7 @@
 			.nav {
 				position: absolute;
 				right: 40rpx;
-				bottom: 40rpx;
+				bottom: 45rpx;
 			    height: 36rpx;
 			    font-size: 24rpx;
 				display: flex;

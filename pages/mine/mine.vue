@@ -9,14 +9,14 @@
 						  width="100%"
 						  height="100%"
 						  fit="cover"
-						  :src="avatar"
+						  :src="userInfo.iconUrl"
 						/>
 					</view>
 					<view class="name">
-						{{ userInfo.name }}
+						{{ userInfo.name ? userInfo.name : userInfo.nickname }}
 					</view>
 					<view class="type">
-						{{ userInfo.type }}
+						{{ userInfo.userType.description }}
 					</view>
 				</view>
 				<view class="right">
@@ -83,22 +83,20 @@
 </template>
 
 <script>
-	// import { mapState } from 'vuex'
+	import { getToken } from '@/utils/auth.js'
 	export default {
 		data() {
 			return {
 				active: 1,
-				userInfo: {
-					type: '游客',
-					name: '阿光'
-				}
+				avatar: '',
+				token: getToken(),
+				userInfo: {}
 			}
 		},
-		// computed: {
-		// 	...mapState({
-		// 		avatar: (state) => state.user.avatar
-		// 	})
-		// },
+		onShow() {
+			this.token = getToken()
+			this.getUserInfo()
+		},
 		methods: {
 			tabbarChange(event) {
 				this.active = event.detail
@@ -120,67 +118,52 @@
 						break;
 				}
 			},
+			// 获取用户信息
+			getUserInfo() {
+				const self = this
+				self.$store.dispatch('user/userInfo', {}).then(res => {
+					this.userInfo = res.data
+				})
+			},
 			// 个人资料页面
 			toPersonal() {
-				uni.navigateTo({
-					url: '/pages/personal/personal'
-				})
-				// if (this.token) {
-				// 	uni.navigateTo({
-				// 		url: '/pages/personal/personal'
-				// 	})
-				// } else {
-				// 	uni.navigateTo({
-				// 		url: '/pages/login/login'
-				// 	})
-				// }
+				if (this.token) {
+					uni.navigateTo({
+						url: '/pages/personal/personal'
+					})
+				} else {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				}
 			},
 			// 跳转
 			navTo(n) {
-				switch(n) {
-					case '0':
-						uni.navigateTo({
-							url: `/pages/attestation/attestation`
-						})
-						break;
-					case '1':
-						uni.navigateTo({
-							url: '/pagesA/myEnroll/myEnroll'
-						})
-						break;
-					case '2':
-						uni.navigateTo({
-							url: '/pagesA/myUpload/myUpload'
-						})
-						break;
-					default:
-						break;
+				if (this.token) {
+					switch(n) {
+						case '0':
+							uni.navigateTo({
+								url: `/pages/attestation/attestation`
+							})
+							break;
+						case '1':
+							uni.navigateTo({
+								url: '/pagesA/myEnroll/myEnroll'
+							})
+							break;
+						case '2':
+							uni.navigateTo({
+								url: '/pagesA/myUpload/myUpload'
+							})
+							break;
+						default:
+							break;
+					}
+				} else {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
 				}
-				// if (this.token) {
-				// 	switch(n) {
-				// 		case '0':
-				// 			uni.navigateTo({
-				// 				url: `/pages/atterstation/atterstation`
-				// 			})
-				// 			break;
-				// 		case '1':
-				// 			uni.navigateTo({
-				// 				url: '/packageD/enroll/enroll'
-				// 			})
-				// 			break;
-				// 		case '2':
-				// 			uni.navigateTo({
-				// 				url: '/packageD/apply/apply'
-				// 			})
-				// 			break;
-				// 		default:
-				// 			break;
-				// 	}
-				// } else {
-				// 	uni.navigateTo({
-				// 		url: '/pages/login/login'
-				// 	})
-				// }
 			}
 		}
 	}

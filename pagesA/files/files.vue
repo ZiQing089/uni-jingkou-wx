@@ -10,17 +10,17 @@
 				<view class="right">
 					<view class="header">
 						<view class="title">
-							{{ item.title }}
+							{{ item.name }}
 						</view>
 						<view class="num">
-							<icon class="iconfont">&#xe65c;</icon>{{ item.num }}
+							<icon class="iconfont">&#xe65c;</icon>{{ item.viewCount }}
 						</view>
 					</view>
 					<view class="info">
-						{{ item.content }}
+						{{ item.introduce }}
 					</view>
 					<view class="time">
-						{{ item.time | formatDate }}
+						{{ item.createTime | formatDate }}
 					</view>
 					<view class="nav">
 						查看详情<icon class="iconfont">&#xe647;</icon>
@@ -33,52 +33,30 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getCultureList } from "@/api/promote.js"
 	export default {
 		components: {
 			NavBar
 		},
 		data() {
 			return {
-				list: [
-					{
-						title: '泾口大桥',
-						num: '1821',
-						content: '清代建筑，位于越城区陶堰镇泾口村关帝庙南清代建筑，位于越城区陶堰镇泾口村关帝庙南',
-						time: '1690526795927',
-						pics: [
-							'https://files.zz-tech.cn/app-files/images/banner1.png',
-							'https://files.zz-tech.cn/app-files/images/banner2.png',
-							'https://files.zz-tech.cn/app-files/images/banner3.png'
-						]
-					},
-					{
-						title: '泾口大桥',
-						num: '1821',
-						content: '清代建筑，位于越城区陶堰镇泾口村关帝庙南清代建筑，位于越城区陶堰镇泾口村关帝庙南',
-						time: '1690526795927',
-						pics: [
-							'https://files.zz-tech.cn/app-files/images/banner1.png',
-							'https://files.zz-tech.cn/app-files/images/banner2.png',
-							'https://files.zz-tech.cn/app-files/images/banner3.png'
-						]
-					},
-					{
-						title: '泾口大桥',
-						num: '1821',
-						content: '清代建筑，位于越城区陶堰镇泾口村关帝庙南清代建筑，位于越城区陶堰镇泾口村关帝庙南',
-						time: '1690526795927',
-						pics: [
-							'https://files.zz-tech.cn/app-files/images/banner1.png',
-							'https://files.zz-tech.cn/app-files/images/banner2.png',
-							'https://files.zz-tech.cn/app-files/images/banner3.png'
-						]
-					}
-				]
+				list: []
 			}
 		},
-		onShow() {
+		onLoad() {
+			this.init()
 		},
 		methods: {
+			// 初始化页面
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getCultureList().then(res => {
+					uni.hideLoading()
+					this.list = res.data
+				})
+			},
 			toDetail(item) {
 				uni.navigateTo({
 					url: `/pagesA/files/detail?data=${encodeURIComponent(JSON.stringify(item))}`
@@ -100,12 +78,14 @@
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/whdabg.png') no-repeat;
 			background-size: 100%;
 			position: relative;
+			height: 279rpx;
+			box-sizing: border-box;
 			display: flex;
 			justify-content: space-between;
 			.nav {
 				position: absolute;
 				right: 32rpx;
-				bottom: 40rpx;
+				bottom: 45rpx;
 			    height: 36rpx;
 			    font-size: 24rpx;
 				display: flex;

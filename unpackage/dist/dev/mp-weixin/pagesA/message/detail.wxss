@@ -26,7 +26,7 @@
 /* 文章场景相关 */
 .message-detail .banner-img.data-v-a061e6e6 {
   width: 100%;
-  height: 464rpx;
+  height: 422rpx;
 }
 .message-detail .title.data-v-a061e6e6 {
   font-size: 44rpx;

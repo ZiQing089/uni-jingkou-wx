@@ -21,10 +21,10 @@
 				</view>
 				<view class="field">
 					 <van-field
-					    :value="form.name"
+					    :value="form.uploader"
 					    placeholder="请输入上传人员的姓名"
 					    :border="false"
-					    @change="onblur('name', $event)"
+					    @change="onblur('uploader', $event)"
 					  />
 				</view>
 			</view>
@@ -34,7 +34,7 @@
 				</view>
 				<view class="filed">
 					<van-field
-					   :value="form.description"
+					   :value="form.content"
 					   type="textarea"
 					   placeholder="请输入要咨询的问题....."
 					   rows="1"
@@ -71,6 +71,9 @@
 </template>
 
 <script>
+	import { addRectify } from '@/api/beautifulYard.js'
+	import * as API from '@/config.js'
+	import { getToken } from '@/utils/auth'
 	import NavBar from "@/components/NavBar.vue"
 	import Toast from '@/wxcomponents/vant/dist/toast/toast';
 	export default {
@@ -80,11 +83,13 @@
 		data() {
 			return {
 				form: {
-					name: '',
+					uploader: '',
 					title: '',
-					description: '',
+					content: '',
 					pics: []
 				},
+				token: getToken(),
+				uploadAPI: API.host + '/api/file/pc/upload',
 				fileList: []
 			}
 		},
@@ -92,13 +97,13 @@
 			onblur(type, event) {
 				console.log(event)
 				if(type === 'title') {
-					tihs.form.title = event.detail
+					this.form.title = event.detail
 				} else {
-					this.form.name = event.detail
+					this.form.uploader = event.detail
 				}
 			},
 			onInput(event) {
-				this.form.description = event.detail
+				this.form.content = event.detail
 			},
 			// 上传
 			afterRead(event) {
@@ -133,7 +138,16 @@
 				})
 			},
 			submit() {
-				Toast('上传成功，请耐心等待审核！可在“我的-我的上传”中进行管理');
+				if(this.form.pics.length !== 0 && this.form.uploader && this.form.title && this.form.content ) {
+					addRectify(this.form).then(res => {
+						Toast('上传成功，请耐心等待审核！可在“我的-我的上传”中进行管理');
+						setTimeout(() => {
+							uni.navigateBack()
+						}, 2000)
+					})
+				} else {
+					Toast('请填写必填项');
+				}
 			}
 		}
 	}

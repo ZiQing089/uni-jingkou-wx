@@ -9,15 +9,15 @@
 					  height="100%"
 					  fit="cover"
 					  radius="4"
-					  :src="item.img"
+					  :src="item.pics[0]"
 					/>
 				</view>
 				<view class="title">
-					{{ item.title }}
+					{{ item.name }}
 				</view>
 				<view class="info">
 					<view class="time">
-						时间：{{ item.time }}
+						时间：{{ item.time | formatDate }}
 					</view>
 					<view class="address">
 						地点：{{ item.address }}
@@ -25,24 +25,26 @@
 				</view>
 				<view class="text-box">
 					<view class="text">
-						{{ item.info }}
+						{{ item.description }}
 					</view>
 				</view>
 				<view class="bottom">
 					<view class="num">
-						参与人数：{{ item.num }}人
+						参与人数：{{ item.number }}人
 					</view>
 					<view class="btn">
 						查看详情<icon class="iconfont">&#xe647;</icon>
 					</view>
 				</view>
 			</view>
+			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
 	</view>
 </template>
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getHelpList } from "@/api/convenient.js"
 	export default {
 		components: {
 			NavBar
@@ -51,37 +53,56 @@
 			return {
 				bgHeight: '',
 				title: '',
-				list: [
-					{
-						title: '慰问老人',
-						img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fci.xiaohongshu.com%2F35ccdf0a-0f47-cb25-d9fc-7ef123a02c48%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fci.xiaohongshu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1687334875&t=448cdaef197d59905b223d78c62f2655',
-						address: '老年活动中心',
-						time: '2023-04-05',
-						num: 3,
-						info: '中心集休闲、娱乐、健身、文化、学习于一体，突出文化休闲特色，寓教于乐，乐中健...'
-					},
-					{
-						title: '慰问老人',
-						img: 'https://img0.baidu.com/it/u=1923555384,833149565&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500',
-						address: '老年活动中心',
-						time: '2023-04-05',
-						num: 9,
-						info: '中心集休闲、娱乐、健身、文化、学习于一体，突出发地方但是防守打法师德师风水电费水电费文化休闲特色，寓教于乐，乐中健...'
-					}
-				]
+				isLoadMore:false,
+				currentPage: 1,
+				pageSize: 10,
+				isNoMore: false,
+				conditions: [],
+				list: []
 			}
 		},
 		onLoad(option) {
-			console.log(option)
 			this.title = option.title
 		},
 		onShow() {
+			this.list = []
+			this.init()
+		},
+		onReachBottom() {
+			if(!this.isLoadMore && !this.isNoMore){  //此处判断，上锁，防止重复请求
+				this.isLoadMore = true
+				this.currentPage += 1  //每次上拉请求新的一页
+				this.init()
+			}
 		},
 		methods: {
+			// 初始化页面
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getHelpList({currentPage: this.currentPage, pageSize: this.pageSize, conditions: this.conditions}).then(res => {
+					uni.hideLoading()
+					if(res.success && res.data.list.length !== 0) {
+						this.isLoadMore = false
+						this.list = this.list.concat(res.data.list)
+						if(res.data.list.length < this.pageSize) {
+							this.isNoMore = true
+						}
+					} else {
+						// uni.hideLoading()
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
+				})
+			},
 			// 去详情页
 			toDetail(item) {
 				uni.navigateTo({
-					url: '/pagesA/help/helpDetail'
+					url: `/pagesA/help/helpDetail?data=${encodeURIComponent(JSON.stringify(item))}`
 				})
 			}
 		}
@@ -96,7 +117,7 @@
 			padding: 24rpx 24rpx 0;
 			border-bottom: 12rpx solid #F6F6F6;
 			.img {
-				height: 434rpx;
+				height: 394rpx;
 				background: #F6F6F6;
 				border-radius: 8rpx;
 			}

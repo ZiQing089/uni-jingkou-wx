@@ -981,8 +981,8 @@ function populateParameters(result) {
     appVersion: "1.0.0",
     appVersionCode: "100",
     appLanguage: getAppLanguage(hostLanguage),
-    uniCompileVersion: "3.8.7",
-    uniRuntimeVersion: "3.8.7",
+    uniCompileVersion: "3.8.12",
+    uniRuntimeVersion: "3.8.12",
     uniPlatform: undefined || "mp-weixin",
     deviceBrand: deviceBrand,
     deviceModel: model,
@@ -10830,6 +10830,18 @@ var getters = {
   user: function user(state) {
     return state.user.user;
   },
+  lat: function lat(state) {
+    return state.user.lat;
+  },
+  lng: function lng(state) {
+    return state.user.lng;
+  },
+  rule: function rule(state) {
+    return state.user.rule;
+  },
+  creatorId: function creatorId(state) {
+    return state.user.creatorId;
+  },
   idCard: function idCard(state) {
     return state.user.idCard;
   },
@@ -10867,22 +10879,12 @@ var getDefaultState = function getDefaultState() {
   return {
     token: '',
     user: '',
+    creatorId: '',
     avatar: _avatarwx.default,
     idCard: '',
     weChartName: '',
-    mobile: '',
-    mapCenter: {
-      shanqian: {
-        Long: '121.588323',
-        Lat: '29.136859',
-        scale: 16.5
-      },
-      shangwang: {
-        Long: '120.742127',
-        Lat: '29.942235',
-        scale: 15.7
-      }
-    }
+    lat: '',
+    mobile: ''
   };
 };
 var state = getDefaultState();
@@ -10899,9 +10901,20 @@ var mutations = {
   SET_IDCARD: function SET_IDCARD(state, idCard) {
     state.idCard = idCard;
   },
+  SET_CREATORID: function SET_CREATORID(state, creatorId) {
+    state.creatorId = creatorId;
+  },
   SET_USER: function SET_USER(state, user) {
-    console.log(user, 'user');
     state.user = user;
+  },
+  SET_LAT: function SET_LAT(state, lat) {
+    state.lat = lat;
+  },
+  SET_LNG: function SET_LNG(state, lng) {
+    state.lng = lng;
+  },
+  SET_RULE: function SET_RULE(state, rule) {
+    state.rule = rule;
   },
   SET_WECHART: function SET_WECHART(state, weChartName) {
     state.weChartName = weChartName;
@@ -10927,37 +10940,57 @@ var actions = {
       state = _ref2.state;
     return new Promise(function (resolve, reject) {
       (0, _login.userInfo)().then(function (response) {
-        commit('SET_MOBILE', response.data.phone);
-        commit('SET_USER', response.data.name);
-        commit('SET_IDCARD', response.data.idCard);
+        console.log(response);
         commit('SET_WECHART', response.data.nickname);
         commit('SET_AVATAR', response.data.iconUrl);
+        commit('SET_CREATORID', response.data.id);
+        commit('SET_MOBILE', response.data.phone);
+        commit('SET_RULE', response.data.userType.key);
         resolve(response);
       }).catch(function (error) {
         reject(error);
       });
     });
   },
-  setToken: function setToken(_ref3, token) {
+  // 预登陆
+  preLogin: function preLogin(_ref3, data) {
     var commit = _ref3.commit;
-    commit('SET_TOKEN', token);
+    return new Promise(function (resolve, reject) {
+      console.log('预登陆陆');
+      (0, _login.preLogin)(data).then(function (response) {
+        (0, _auth.setToken)(response.data.tokenValue);
+        commit('SET_TOKEN', response.data.tokenValue);
+        resolve(response);
+      }).catch(function (error) {
+        reject(error);
+      });
+    });
   },
-  setUserName: function setUserName(_ref4, user) {
+  setLat: function setLat(_ref4, lat) {
     var commit = _ref4.commit;
-    commit('SET_USER', user);
+    commit('SET_LAT', lat);
   },
-  setIdCard: function setIdCard(_ref5, idCard) {
+  setLng: function setLng(_ref5, lng) {
     var commit = _ref5.commit;
-    commit('SET_IDCARD', idCard);
-  },
-  setAvatar: function setAvatar(_ref6, avatar) {
-    var commit = _ref6.commit;
-    commit('SET_AVATAR', avatar);
-  },
-  setMobile: function setMobile(_ref7, mobile) {
-    var commit = _ref7.commit;
-    commit('SET_MOBILE', mobile);
-  }
+    commit('SET_LNG', lng);
+  } // setToken({ commit }, token) {
+  // 	commit('SET_TOKEN', token)
+  // },
+  // // setCreatorId({ commit }, creatorId) {
+  // // 	commit('SET_CREATORID', creatorId)
+  // // },
+  // setUserName({ commit }, user) {
+  // 	commit('SET_USER', user)
+  // },
+  // setIdCard({ commit }, idCard) {
+  // 	commit('SET_IDCARD', idCard)
+  // },
+  // setAvatar({ commit }, avatar) {
+  // 	commit('SET_AVATAR', avatar)
+  // },
+  // setMobile({ commit }, mobile) {
+  // 	commit('SET_MOBILE', mobile)
+  // }
 };
 var _default = {
   namespaced: true,
@@ -10986,6 +11019,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.preLogin = preLogin;
 exports.userInfo = userInfo;
 exports.userLogin = userLogin;
+exports.userLoginOut = userLoginOut;
 var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 38));
 // 预登录
 function preLogin(data) {
@@ -11010,6 +11044,14 @@ function userInfo() {
   return (0, _request.default)({
     url: '/api/wechat/getUserInfo',
     method: 'GET'
+  });
+}
+
+// 退出登录
+function userLoginOut() {
+  return (0, _request.default)({
+    url: '/api/user/logout',
+    method: 'POST'
   });
 }
 
@@ -11044,6 +11086,7 @@ function request() {
       if (res.data.success) {
         resolved(res.data);
       } else {
+        console.log('草拟寄');
         switch (res.data.code) {
           case 'P0001':
             (0, _auth.removeToken)();
@@ -11055,6 +11098,12 @@ function request() {
             uni.navigateTo({
               url: "/pages/myInfo/myInfo"
             });
+            break;
+          case 'V0002':
+            resolved(res.data);
+            break;
+          case 'VHA000':
+            resolved(res.data);
             break;
           default:
             rejected(res.data);
@@ -11088,8 +11137,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.name = exports.host = void 0;
-var host = 'http://192.168.0.12:7877';
-// export const host = 'http://192.168.0.83:7877'
+// export const host = 'http://192.168.0.12:7877'
+var host = 'http://192.168.0.83:7877';
 // export const host = 'http://47.98.174.163:7001'
 // export const host = 'https://api-beituan.zz-tech.cn'
 // export const host = 'https://api-qkv2.zz-tech.cn'
@@ -11180,7 +11229,7 @@ uni.addInterceptor({
 
 /***/ }),
 
-/***/ 445:
+/***/ 464:
 /*!****************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/nav-bar/index.js ***!
   \****************************************************************************************/
@@ -11190,8 +11239,8 @@ uni.addInterceptor({
 "use strict";
 /* WEBPACK VAR INJECTION */(function(wx) {
 
-var _component = __webpack_require__(/*! ../common/component */ 446);
-var _utils = __webpack_require__(/*! ../common/utils */ 448);
+var _component = __webpack_require__(/*! ../common/component */ 465);
+var _utils = __webpack_require__(/*! ../common/utils */ 467);
 (0, _component.VantComponent)({
   classes: ['title-class'],
   props: {
@@ -11263,7 +11312,7 @@ var _utils = __webpack_require__(/*! ../common/utils */ 448);
 
 /***/ }),
 
-/***/ 446:
+/***/ 465:
 /*!*******************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/common/component.js ***!
   \*******************************************************************************************/
@@ -11277,7 +11326,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.VantComponent = VantComponent;
-var _basic = __webpack_require__(/*! ../mixins/basic */ 447);
+var _basic = __webpack_require__(/*! ../mixins/basic */ 466);
 function mapKeys(source, target, map) {
   Object.keys(map).forEach(function (key) {
     if (source[key]) {
@@ -11325,7 +11374,7 @@ function VantComponent(vantOptions) {
 
 /***/ }),
 
-/***/ 447:
+/***/ 466:
 /*!***************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/mixins/basic.js ***!
   \***************************************************************************************/
@@ -11357,7 +11406,7 @@ exports.basic = basic;
 
 /***/ }),
 
-/***/ 448:
+/***/ 467:
 /*!***************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/common/utils.js ***!
   \***************************************************************************************/
@@ -11392,8 +11441,8 @@ exports.pickExclude = pickExclude;
 exports.range = range;
 exports.requestAnimationFrame = requestAnimationFrame;
 exports.toPromise = toPromise;
-var _validator = __webpack_require__(/*! ./validator */ 76);
-var _version = __webpack_require__(/*! ./version */ 449);
+var _validator = __webpack_require__(/*! ./validator */ 81);
+var _version = __webpack_require__(/*! ./version */ 468);
 function range(num, min, max) {
   return Math.min(Math.max(num, min), max);
 }
@@ -11466,7 +11515,7 @@ function getCurrentPage() {
 
 /***/ }),
 
-/***/ 449:
+/***/ 468:
 /*!*****************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/common/version.js ***!
   \*****************************************************************************************/
@@ -11549,7 +11598,7 @@ function canIUseGetUserProfile() {
 
 /***/ }),
 
-/***/ 450:
+/***/ 469:
 /*!*************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/icon/index.js ***!
   \*************************************************************************************/
@@ -11559,7 +11608,7 @@ function canIUseGetUserProfile() {
 "use strict";
 
 
-var _component = __webpack_require__(/*! ../common/component */ 446);
+var _component = __webpack_require__(/*! ../common/component */ 465);
 (0, _component.VantComponent)({
   props: {
     dot: Boolean,
@@ -11582,7 +11631,7 @@ var _component = __webpack_require__(/*! ../common/component */ 446);
 
 /***/ }),
 
-/***/ 451:
+/***/ 470:
 /*!***************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/sticky/index.js ***!
   \***************************************************************************************/
@@ -11594,10 +11643,10 @@ var _component = __webpack_require__(/*! ../common/component */ 446);
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
-var _utils = __webpack_require__(/*! ../common/utils */ 448);
-var _component = __webpack_require__(/*! ../common/component */ 446);
-var _validator = __webpack_require__(/*! ../common/validator */ 76);
-var _pageScroll = __webpack_require__(/*! ../mixins/page-scroll */ 452);
+var _utils = __webpack_require__(/*! ../common/utils */ 467);
+var _component = __webpack_require__(/*! ../common/component */ 465);
+var _validator = __webpack_require__(/*! ../common/validator */ 81);
+var _pageScroll = __webpack_require__(/*! ../mixins/page-scroll */ 471);
 var ROOT_ELEMENT = '.van-sticky';
 (0, _component.VantComponent)({
   props: {
@@ -11730,7 +11779,7 @@ var ROOT_ELEMENT = '.van-sticky';
 
 /***/ }),
 
-/***/ 452:
+/***/ 471:
 /*!*********************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/mixins/page-scroll.js ***!
   \*********************************************************************************************/
@@ -11744,8 +11793,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.pageScrollMixin = pageScrollMixin;
-var _validator = __webpack_require__(/*! ../common/validator */ 76);
-var _utils = __webpack_require__(/*! ../common/utils */ 448);
+var _validator = __webpack_require__(/*! ../common/validator */ 81);
+var _utils = __webpack_require__(/*! ../common/utils */ 467);
 function onPageScroll(event) {
   var _getCurrentPage = (0, _utils.getCurrentPage)(),
     _getCurrentPage$vanPa = _getCurrentPage.vanPageScroller,
@@ -11795,6 +11844,45 @@ function pageScrollMixin(scroller) {
 
 /***/ }),
 
+/***/ 49:
+/*!*************************************************************!*\
+  !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/api/index.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getBannerList = getBannerList;
+exports.getWeater = getWeater;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 38));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+// 获取轮播
+function getBannerList() {
+  return (0, _request.default)({
+    url: '/api/banner/getBannerList',
+    method: 'GET'
+  });
+}
+
+// 获取天气
+function getWeater(data) {
+  return (0, _request.default)({
+    url: '/api/common/getWeather',
+    method: 'GET',
+    data: _objectSpread({}, data)
+  });
+}
+
+/***/ }),
+
 /***/ 5:
 /*!**************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
@@ -11810,6 +11898,214 @@ function _slicedToArray(arr, i) {
   return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
 }
 module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 50:
+/*!*********************************************************************!*\
+  !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/api/beautifulYard.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addLike = addLike;
+exports.addRectify = addRectify;
+exports.addYard = addYard;
+exports.cancel = cancel;
+exports.cancelShow = cancelShow;
+exports.getShowlist = getShowlist;
+exports.getremediationList = getremediationList;
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 38));
+// 添加美丽庭院
+function addYard(data) {
+  return (0, _request.default)({
+    url: '/api/appearance/addBeautyHome',
+    method: 'POST',
+    data: data
+  });
+}
+
+// 添加整改信息
+function addRectify(data) {
+  return (0, _request.default)({
+    url: '/api/appearance/addRemediation',
+    method: 'POST',
+    data: data
+  });
+}
+
+// 获取秀出来列表
+function getShowlist(data) {
+  return (0, _request.default)({
+    url: '/api/appearance/getBeautyHomePaged',
+    method: 'POST',
+    data: data
+  });
+}
+
+// 获取整出来列表
+function getremediationList(data) {
+  return (0, _request.default)({
+    url: '/api/appearance/getRemediationPaged',
+    method: 'POST',
+    data: data
+  });
+}
+
+// 点赞
+function addLike(id) {
+  return (0, _request.default)({
+    url: "/api/appearance/likeOrUnlikeBeautyHome?id=".concat(id),
+    method: 'POST'
+  });
+}
+
+// 取消上传整改
+function cancel(id) {
+  return (0, _request.default)({
+    url: "/api/appearance/cancelAddRemediation?id=".concat(id),
+    method: 'DELETE'
+  });
+}
+
+// 取消上传美丽庭院
+function cancelShow(id) {
+  return (0, _request.default)({
+    url: "/api/appearance/cancelAddBeautyHome?id=".concat(id),
+    method: 'DELETE'
+  });
+}
+
+/***/ }),
+
+/***/ 51:
+/*!***************************************************************!*\
+  !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/api/message.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getMessage = getMessage;
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 38));
+// 获取公告
+function getMessage() {
+  return (0, _request.default)({
+    url: '/api/message/getAnnouncementList',
+    method: 'GET'
+  });
+}
+
+/***/ }),
+
+/***/ 52:
+/*!***************************************************************!*\
+  !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/api/jingkou.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addlike = addlike;
+exports.getHomestayList = getHomestayList;
+exports.getRecreationList = getRecreationList;
+exports.getRestaurantList = getRestaurantList;
+exports.getScenicSpotsDetail = getScenicSpotsDetail;
+exports.getScenicSpotsList = getScenicSpotsList;
+exports.getServier = getServier;
+exports.getSpecialityList = getSpecialityList;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 38));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+// 获取周边饭店
+function getRestaurantList(data) {
+  return (0, _request.default)({
+    url: '/api/periphery/getRestaurantList',
+    method: 'POST',
+    data: data
+  });
+}
+
+// 获取特产介绍
+function getSpecialityList() {
+  return (0, _request.default)({
+    url: '/api/periphery/getSpecialityList',
+    method: 'GET'
+  });
+}
+
+// 点赞
+function addlike(data) {
+  return (0, _request.default)({
+    url: '/api/periphery/addLike',
+    method: 'GET',
+    data: _objectSpread({}, data)
+  });
+}
+
+// 获取景点列表
+function getScenicSpotsList() {
+  return (0, _request.default)({
+    url: '/api/periphery/getScenicSpotsList',
+    method: 'GET'
+  });
+}
+
+// 获取景点详情
+function getScenicSpotsDetail(data) {
+  return (0, _request.default)({
+    url: '/api/periphery/getScenicSpotsDetail',
+    method: 'GET',
+    data: _objectSpread({}, data)
+  });
+}
+
+// 获取住宿列表
+function getHomestayList(data) {
+  return (0, _request.default)({
+    url: '/api/periphery/getHomestayList',
+    method: 'POST',
+    data: data
+  });
+}
+
+// 获取休闲娱乐列表
+function getRecreationList(data) {
+  return (0, _request.default)({
+    url: '/api/periphery/getRecreationList',
+    method: 'POST',
+    data: data
+  });
+}
+
+// 获取周边服务
+function getServier(data) {
+  return (0, _request.default)({
+    url: '/api/periphery/getPeripheryList',
+    method: 'POST',
+    data: data
+  });
+}
 
 /***/ }),
 
@@ -11867,7 +12163,54 @@ module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module
 
 /***/ }),
 
-/***/ 75:
+/***/ 71:
+/*!****************************************************************!*\
+  !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/api/personal.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.changeInfo = changeInfo;
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 38));
+// 修改用户信息
+function changeInfo(data) {
+  return (0, _request.default)({
+    url: '/api/user/updateUser',
+    method: 'PUT',
+    data: data
+  });
+}
+
+/***/ }),
+
+/***/ 8:
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 80:
 /*!**************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/toast/toast.js ***!
   \**************************************************************************************/
@@ -11881,7 +12224,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _validator = __webpack_require__(/*! ../common/validator */ 76);
+var _validator = __webpack_require__(/*! ../common/validator */ 81);
 var defaultOptions = {
   type: 'text',
   mask: false,
@@ -11963,7 +12306,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 76:
+/***/ 81:
 /*!*******************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/common/validator.js ***!
   \*******************************************************************************************/
@@ -12021,23 +12364,30 @@ function isVideoUrl(url) {
 
 /***/ }),
 
-/***/ 8:
-/*!***************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
-  \***************************************************************************/
+/***/ 82:
+/*!*******************************************************************!*\
+  !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/api/attestation.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.postVillager = postVillager;
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 38));
+// 村名认证
+function postVillager(data) {
+  return (0, _request.default)({
+    url: '/api/user/postVillagerAuthInfo',
+    method: 'POST',
+    data: data
+  });
 }
-module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 

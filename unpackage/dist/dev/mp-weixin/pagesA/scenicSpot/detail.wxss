@@ -25,7 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .sceni-spot-detail .content .img.data-v-4be99aa7 {
-  height: 464rpx;
+  height: 422rpx;
 }
 .sceni-spot-detail .content .title.data-v-4be99aa7 {
   height: 66rpx;

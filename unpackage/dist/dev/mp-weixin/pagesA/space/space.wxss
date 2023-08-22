@@ -33,7 +33,7 @@
   border-bottom: 12rpx solid #F6F6F6;
 }
 .space .content .item .img.data-v-24ff1139 {
-  height: 434rpx;
+  height: 394rpx;
   background: black;
   border-radius: 8rpx;
 }

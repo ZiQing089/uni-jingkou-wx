@@ -8,12 +8,12 @@
 					  width="100%"
 					  height="100%"
 					  fit="cover"
-					  :src="detail.img"
+					  :src="detail.pics"
 					/>
 				</view>
 				<view class="info">
 					<view class="title">
-						{{ detail.title }}
+						{{ detail.name }}
 					</view>
 					<view class="phone" @click="takePhone(detail)">
 						<view class="left">
@@ -34,7 +34,7 @@
 				</view>
 			</view>
 			<view class="bottom">
-				{{ detail.text }}
+				{{ detail.description }}
 			</view>
 		</view>
 	</view>
@@ -48,21 +48,18 @@
 		},
 		data() {
 			return {
-				detail: {
-					img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-					title: '老年活动中心',
-					phone: '0575-82049777',
-					address: '浙江省绍兴市上虞区泾肖南路30号',
-					text: '老年活动中心集休闲、娱乐、健身、文化、学习于一体，突出文化休动场所。中心一直坚持以为老年人服务为宗旨性化服务赢得了老年朋友的好口碑，也吸引越来越多的人参与进来。2006年，中心被命名为我省首批四星级老年活动中心，被誉为老年人的“温馨家园”。中心内部设计充分体现了浓重的“文化气息、体育色彩”，设有书画室、茶室、健身房等娱乐、教学活动场所。'
-				}
+				detail: {}
 			}
+		},
+		onLoad(option) {
+			this.detail = JSON.parse(decodeURIComponent(option.data))
 		},
 		methods: {
 			// 跳转导航
 			navigation(item) {
 				wx.openLocation({
-					 latitude: parseFloat(item.point.lat), //目标经纬度
-					 longitude: parseFloat(item.point.lng),
+					 latitude: parseFloat(item.mapPoint.lat), //目标经纬度
+					 longitude: parseFloat(item.mapPoint.lng),
 					 scale: 18,
 					 name: item.address
 				})
@@ -89,7 +86,7 @@
 		.top {
 			border-bottom: 12rpx solid #F6F6F6;
 			.img {
-				height: 464rpx;
+				height: 422rpx;
 				margin-top: 4rpx;
 			}
 			.info {

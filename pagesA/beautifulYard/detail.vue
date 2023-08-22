@@ -10,10 +10,10 @@
 					<view class="val">
 						{{ detail.title }}
 					</view>
-					<icon v-if="detail.status === '已处理'" class="iconfont">&#xe65f;</icon>
-					<icon v-if="detail.status === '待处理'" class="iconfont warning-icon">&#xe65d;</icon>
-					<icon v-if="detail.status === '待审核'" class="iconfont warning-icon">&#xe660;</icon>
-					<icon v-if="detail.status === '已驳回'" class="iconfont error-icon">&#xe65e;</icon>
+					<icon v-if="detail.status.description === '已处理'" class="iconfont">&#xe65f;</icon>
+					<icon v-if="detail.status.description === '待处理'" class="iconfont warning-icon">&#xe65d;</icon>
+					<icon v-if="detail.status.description === '待审核'" class="iconfont warning-icon">&#xe660;</icon>
+					<icon v-if="detail.status.description === '已驳回'" class="iconfont error-icon">&#xe65e;</icon>
 				</view>
 			</view>
 			<view class="info">
@@ -22,7 +22,7 @@
 						上传人员：
 					</view>
 					<view class="val">
-						{{ detail.name }}
+						{{ detail.uploader }}
 					</view>
 				</view>
 				<view class="inline">
@@ -30,7 +30,7 @@
 						上传时间：
 					</view>
 					<view class="val">
-						{{ detail.time | formatDate }}
+						{{ detail.createTime | formatDate }}
 					</view>
 				</view>
 				<view class="block">
@@ -46,7 +46,7 @@
 						照片：
 					</view>
 					<view class="img-box">
-						<view v-for="(item, index) in detail.pic" :key="index" class="img">
+						<view v-for="(item, index) in detail.pics" :key="index" class="img">
 							<van-image
 							  width="100%"
 							  height="100%"
@@ -58,13 +58,13 @@
 					</view>
 				</view>
 			</view>
-			<view v-if="detail.status === '已处理'" class="success">
+			<view v-if="detail.status.description === '已处理'" class="success">
 				<view class="inline">
 					<view class="label">
 						整改人员：
 					</view>
 					<view class="val">
-						{{ detail.name }}
+						{{ detail.feedback.userName }}
 					</view>
 				</view>
 				<view class="inline">
@@ -72,7 +72,7 @@
 						整改时间：
 					</view>
 					<view class="val">
-						{{ detail.time | formatDate }}
+						{{ detail.feedback.time | formatDate }}
 					</view>
 				</view>
 				<view class="block">
@@ -80,7 +80,7 @@
 						回复内容：
 					</view>
 					<view class="val">
-						{{ detail.content }}
+						{{ detail.feedback.content }}
 					</view>
 				</view>
 				<view class="block">
@@ -88,7 +88,7 @@
 						照片：
 					</view>
 					<view class="img-box">
-						<view v-for="(item, index) in detail.pic" :key="index" class="img">
+						<view v-for="(item, index) in detail.feedback.pics" :key="index" class="img">
 							<van-image
 							  width="100%"
 							  height="100%"
@@ -100,13 +100,13 @@
 					</view>
 				</view>
 			</view>
-			<view v-if="detail.status === '已驳回'" class="error">
+			<view v-if="detail.status.description === '已驳回'" class="error">
 				<view class="block">
 					<view class="label">
 						驳回原因：
 					</view>
 					<view class="val">
-						{{ detail.content }}
+						{{ detail.refuseReason }}
 					</view>
 				</view>
 			</view>
@@ -123,23 +123,14 @@
 		data() {
 			return {
 				detail: {
-					status: '待审核',
-					title: '村口的垃圾堆需要整理',
-					name: '广工',
-					time: 1690253914941,
-					content: '村口的垃圾堆已经有三天了，夏天快到了，需要尽快处理！',
-					pic: [
-						'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684'
-					]
+					status: {},
+					feedback: {}
 				}
 			}
 		},
 		onLoad(option) {
-			// this.detail = JSON.parse(decodeURIComponent(option.data))
+			this.detail = JSON.parse(decodeURIComponent(option.data))
 		},
-		onShow() {},
 		methods: {
 			
 		}

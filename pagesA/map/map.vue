@@ -4,9 +4,11 @@
 		<movable-area scale-area class="movable-area">
 			<movable-view :x="x" :y="0" direction="all" scale="true" scale-min="1" scale-max="4" :scale-value="scale" class="movable-view" @change="onChange" @scale="onScale">
 				<view style="width: 100vh;height: 100vh; position: relative; z-index: 12;">
-					<image style="width: 100%; height: 100%;" src="https://files.zz-tech.cn/app-files/images/jingkou/mapjingkou.jpg" mode="scaleToFill"></image>
-					<image src="../../static/1000px.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1;" mode="scaleToFill"></image>
-					<!-- <view v-for="(item, index) in list" :key="index" :class="item.itemClass" @click="toClick(item)"></view> -->
+					<image style="width: 100%; height: 100%;" src="https://files.zz-tech.cn/app-files/images/jingkou/mapjingkouditu.jpg" mode="scaleToFill"></image>
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/dayan.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 6;" mode="scaleToFill"></image>
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/yun.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 9;" mode="scaleToFill"></image>
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/luxian.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 3;" mode="scaleToFill"></image>
+					<view v-for="(item, index) in list" :key="index" :class="item.itemClass" @click="toClick(item)">{{ item.name }}</view>
 				</view>
 			</movable-view>
 		</movable-area>
@@ -15,6 +17,7 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { mapList } from '@/api/map.js'
 	export default {
 		components: {
 			NavBar
@@ -23,81 +26,119 @@
 			return {
 				scale: 1,
 				x: 0,
-				list: [
+				mock: [
 					{
-						itemClass: 'laoyuchang'
+						itemClass: 'laoyuchang',
+						name: '老鱼场'
 					},
 					{
-						itemClass: 'canting'
+						itemClass: 'canting',
+						name: '餐厅(食堂)'
 					},
 					{
-						itemClass: 'youchuanmatou1'
+						itemClass: 'youchuanmatou1',
+						name: '游船码头'
 					},
 					{
-						itemClass: 'youchuanmatou2'
+						itemClass: 'youchuanmatou2',
+						name: '游船码头'
 					},
 					{
-						itemClass: 'huahai1'
+						itemClass: 'huahai1',
+						name: '花海'
+						
 					},
 					{
-						itemClass: 'huahai2'
+						itemClass: 'huahai2',
+						name: '花海'
 					},
 					{
-						itemClass: 'yebaozhongxin'
+						itemClass: 'yebaozhongxin',
+						name: '野保中心-萌宠互动区'
 					},
 					{
-						itemClass: 'mifenggongfang'
+						itemClass: 'mifenggongfang',
+						name: '蜜蜂工坊'
 					},
 					{
-						itemClass: 'luyingjidi'
+						itemClass: 'luyingjidi',
+						name: '露营基地'
 					},
 					{
-						itemClass: 'diaoyuqu'
+						itemClass: 'diaoyuqu',
+						name: '钓鱼区'
 					},
 					{
-						itemClass: 'liaowangtai'
+						itemClass: 'liaowangtai',
+						name: '瞭望台'
 					},
 					{
-						itemClass: 'wenhualitang'
+						itemClass: 'wenhualitang',
+						name: '文化礼堂'
 					},
 					{
-						itemClass: 'shucaicaizhai'
+						itemClass: 'shucaicaizhai',
+						name: '蔬菜采摘基地'
 					},
 					{
-						itemClass: 'minsu' 
+						itemClass: 'minsu',
+						name: '泾口民宿'
 					},
 					{
-						itemClass: 'gongfushangdian'
+						itemClass: 'gongfushangdian',
+						name: '共富商店'
 					},
 					{
-						itemClass: 'jingkouguqiao'
+						itemClass: 'jingkouguqiao',
+						name: '泾口古桥'
 					},
 					{
-						itemClass: 'wudigumiao'
+						itemClass: 'wudigumiao',
+						name: '关帝古庙'
 					},
 					{
-						itemClass: 'cunwei'
+						itemClass: 'cunwei',
+						name: '村委'
 					},
 					{
-						itemClass: 'qixingyizhan'
+						itemClass: 'qixingyizhan',
+						name: '骑行驿站'
 					},
 					{
-						itemClass: 'hulianwangyiyuan'
+						itemClass: 'hulianwangyiyuan',
+						name: '互联网医院'
 					},
 					{
-						itemClass: 'fuwuzhongxin'
+						itemClass: 'fuwuzhongxin',
+						name: '服务中心'
 					},
 					{
-						itemClass: 'cunrukoupaifang'
+						itemClass: 'cunrukoupaifang',
+						name: '村入口牌坊'
 					}
-				]
+				],
+				list: []
 			}
 		},
 		onShow() {
 			let getWindowInfo = uni.getWindowInfo()
 			this.x = -getWindowInfo.windowHeight/2/2
+			this.init()
 		},
 		methods: {
+			init() {
+				mapList().then(res => {
+					const self = this
+					self.list = res.data
+					self.list.forEach((item, index) => {
+						self.mock.forEach((e, i) => {
+							if(item.name == e.name) {
+								item.itemClass = e.itemClass
+							}
+						})
+					})
+				})
+			},
 			onChange(e) {
 				// console.log(e.detail)
 			},
@@ -105,7 +146,9 @@
 				// console.log(e.detail)
 			},
 			toClick(item) {
-				console.log(item.itemClass)
+				uni.navigateTo({
+					url: `/pagesA/map/detail?data=${encodeURIComponent(JSON.stringify(item))}`
+				})
 			}
 		}
 	}
@@ -126,159 +169,126 @@
 			display: -webkit-flex;
 			justify-content: center;
 			align-items: center;
-			.laoyuchang {
+			.laoyuchang, .canting, .youchuanmatou1, .youchuanmatou2, .huahai1, .huahai2, .yebaozhongxin, .mifenggongfang, .luyingjidi, .diaoyuqu, .liaowangtai, .wenhualitang, .shucaicaizhai, .minsu, .gongfushangdian, .jingkouguqiao, .wudigumiao, .cunwei, .qixingyizhan, .hulianwangyiyuan, .fuwuzhongxin, .cunrukoupaifang {
 				position: absolute;
 				top: 6%;
 				left: 53.6%;
-				width: 60rpx;
-				height: 20rpx;
+				background: #9E4645;
+				box-shadow: 0rpx 2rpx 4rpx 0rpx rgba(0,0,0,0.1);
+				border-radius: 15rpx;
+				font-size: 16rpx;
+				z-index: 20;
+				color: #FFFFFF;
+				line-height: 24rpx;
+				letter-spacing: 2px;
+				padding: 2rpx 12rpx;
+				box-sizing: border-box;
+				border: 1rpx solid #F4EEC3;
 			}
 			.canting {
 				position: absolute;
 				top: 15%;
 				left: 46.4%;
-				width: 110rpx;
-				height: 20rpx;
 			}
 			.youchuanmatou1 {
 				position: absolute;
 				top: 18.9%;
 				left: 51.3%;
-				width: 80rpx;
-				height: 20rpx;
 			}
 			.youchuanmatou2 {
 				position: absolute;
 				top: 29.4%;
 				left: 50%;
-				width: 80rpx;
-				height: 20rpx;
 			}
 			.huahai1 {
 				position: absolute;
 				top: 31%;
 				left: 46.8%;
-				width: 40rpx;
-				height: 20rpx;
 			}
 			.huahai2 {
 				position: absolute;
 				top: 49.8%;
 				left: 51.2%;
-				width: 40rpx;
-				height: 20rpx;
 			}
 			.yebaozhongxin {
 				position: absolute;
 				top: 30.9%;
 				left: 33.8%;
-				width: 180rpx;
-				height: 20rpx;
 			}
 			.mifenggongfang {
 				position: absolute;
 				top: 34.7%;
 				left: 34%;
-				width: 80rpx;
-				height: 20rpx;
 			}
 			.luyingjidi {
 				position: absolute;
 				top: 35%;
 				left: 47%;
-				width: 85rpx;
-				height: 20rpx;
 			}
 			.diaoyuqu {
 				position: absolute;
 				top: 42.8%;
 				left: 53%;
-				width: 65rpx;
-				height: 20rpx;
 			}
 			.liaowangtai {
 				position: absolute;
 				top: 47.5%;
 				left: 50.5%;
-				width: 68rpx;
-				height: 20rpx;
 			}
 			.wenhualitang {
 				position: absolute;
 				top: 53.9%;
 				left: 36%;
-				width: 80rpx;
-				height: 20rpx;
 			}
 			.shucaicaizhai {
 				position: absolute;
 				top: 50.9%;
 				left: 27.9%;
-				width: 120rpx;
-				height: 20rpx;
 			}
 			.minsu {
 				position: absolute;
 				top: 47.8%;
 				left: 39%;
-				width: 80rpx;
-				height: 20rpx;
 			}
 			.gongfushangdian {
 				position: absolute;
 				top: 61.9%;
 				left: 45.2%;
-				width: 80rpx;
-				height: 20rpx;
 			}
 			.jingkouguqiao {
 				position: absolute;
 				top: 63%;
 				left: 50.9%;
-				width: 85rpx;
-				height: 20rpx;
 			}
 			.wudigumiao {
 				position: absolute;
 				top: 62.5%;
 				left: 56.9%;
-				width: 85rpx;
-				height: 20rpx;
 			}
 			.cunwei {
 				position: absolute;
 				top: 54.7%;
 				left: 83.9%;
-				width: 50rpx;
-				height: 20rpx;
 			}
 			.qixingyizhan {
 				position: absolute;
 				top: 56.7%;
 				left: 83%;
-				width: 80rpx;
-				height: 20rpx;
 			}
 			.hulianwangyiyuan {
 				position: absolute;
 				top: 58.5%;
 				left: 82.3%;
-				width: 100rpx;
-				height: 20rpx;
 			}
 			.fuwuzhongxin {
 				position: absolute;
 				top: 60.3%;
 				left: 82%;
-				width: 115rpx;
-				height: 20rpx;
 			}
 			.cunrukoupaifang {
 				position: absolute;
 				top: 67.7%;
 				left: 87%;
-				width: 99rpx;
-				height: 20rpx;
 			}
 		}
 	}

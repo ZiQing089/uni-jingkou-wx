@@ -24,7 +24,7 @@
 			</view>
 			<view class="item">
 				<span class="label">电话：</span>
-				<span class="val">{{ form.mobile }}</span>
+				<span class="val">{{ form.phone }}</span>
 			</view>
 			<view class="tips">
 				暂不支持修改手机号
@@ -40,22 +40,40 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { userInfo } from '@/api/login.js'
+	import * as API from '@/config.js'
+	import { getToken } from '@/utils/auth'
+	import { changeInfo } from '@/api/personal.js'
 	export default {
 		components: {
 			NavBar
 		},
 		data() {
 			return {
+				token: getToken(),
+				uploadAPI: API.host + '/api/file/pc/upload',
 				form: {
 					nickname: '张三',
-					mobile: '15656567759'
+					iconUrl: '',
+					phone: '15656567759'
 				}
 			}
 		},
+		onShow() {
+			this.getUserInfo()
+		},
 		methods: {
 			bindblur(e) {
-				console.log(e)
 				this.form.nickname = e.detail.value
+			},
+			// 获取用户信息
+			getUserInfo() {
+				const self = this
+				self.$store.dispatch('user/userInfo', {}).then(res => {
+					this.form.nickname = res.data.nickname
+					this.form.phone = res.data.phone
+					this.form.iconUrl = res.data.iconUrl
+				})
 			},
 			// 获取微信头像
 			onChooseAvatar(e) {
@@ -77,6 +95,24 @@
 					complete: () => {
 						uni.hideLoading();
 					},
+				})
+			},
+			safe() {
+				changeInfo(this.form).then(res => {
+					if(res.success) {
+						uni.showToast({
+							title: res.message,
+							icon: 'success',
+							duration: 2000
+						})
+						uni.navigateBack()
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
 				})
 			}
 		}

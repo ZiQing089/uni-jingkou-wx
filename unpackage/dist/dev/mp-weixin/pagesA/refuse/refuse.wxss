@@ -49,9 +49,13 @@
   line-height: 92rpx;
   letter-spacing: 1rpx;
 }
+.refuse .content .card-box .item .active-text.data-v-569e122a {
+  color: #FFFFFF;
+}
 .refuse .content .card-box .active.data-v-569e122a {
   background: #B94333;
   color: #ffffff;
+  border-color: transparent;
 }
 .refuse .content .card-box .item.data-v-569e122a:last-child {
   margin-right: 0;

@@ -60,4 +60,19 @@
   line-height: 40rpx;
   letter-spacing: 1px;
 }
+.record .no-data.data-v-0eeb784b {
+  padding-top: 400rpx;
+}
+.record .no-data .img.data-v-0eeb784b {
+  width: 374rpx;
+  height: 288rpx;
+  margin: 0 auto 32rpx;
+}
+.record .no-data .text.data-v-0eeb784b {
+  font-size: 28rpx;
+  text-align: center;
+  color: #999999;
+  line-height: 40rpx;
+  letter-spacing: 1px;
+}
 

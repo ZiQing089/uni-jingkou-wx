@@ -85,7 +85,8 @@
 			"style": {
 				"navigationStyle": "custom",
 				"usingComponents": {
-					"van-image": "/wxcomponents/vant/dist/image/index"
+					"van-image": "/wxcomponents/vant/dist/image/index",
+					"van-dialog": "/wxcomponents/vant/dist/dialog/index"
 				}
 			}
 		},
@@ -127,6 +128,16 @@
 				    
 				},
 				{
+				    "path" : "map/detail",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
+				    }
+				    
+				},
+				{
 				    "path" : "record/record",
 				    "style": {
 				    	"navigationStyle": "custom",
@@ -139,7 +150,8 @@
 				    "style": {
 				    	"navigationStyle": "custom",
 				    	"usingComponents": {
-							"van-image": "/wxcomponents/vant/dist/image/index"
+							"van-image": "/wxcomponents/vant/dist/image/index",
+							"van-divider": "/wxcomponents/vant/dist/divider/index"
 						}
 				    }
 				    
@@ -157,7 +169,8 @@
 				    "style": {
 				    	"navigationStyle": "custom",
 				    	"usingComponents": {
-							"van-image": "/wxcomponents/vant/dist/image/index"
+							"van-image": "/wxcomponents/vant/dist/image/index",
+							"van-divider": "/wxcomponents/vant/dist/divider/index"
 						}
 				    }
 				    
@@ -273,7 +286,8 @@
 				    	"navigationStyle": "custom",
 				    	"usingComponents": {
 							"van-icon": "/wxcomponents/vant/dist/icon/index",
-							"van-image": "/wxcomponents/vant/dist/image/index"
+							"van-image": "/wxcomponents/vant/dist/image/index",
+							"van-divider": "/wxcomponents/vant/dist/divider/index"
 						}
 				    }
 				    
@@ -352,7 +366,9 @@
 				    "path" : "activity/activity",
 				    "style": {
 				    	"navigationStyle": "custom",
-				    	"usingComponents": {}
+				    	"usingComponents": {
+							"van-divider": "/wxcomponents/vant/dist/divider/index"
+						}
 				    }
 				    
 				},
@@ -361,7 +377,8 @@
 				    "style": {
 				    	"navigationStyle": "custom",
 				    	"usingComponents": {
-							"van-image": "/wxcomponents/vant/dist/image/index"
+							"van-image": "/wxcomponents/vant/dist/image/index",
+							"van-divider": "/wxcomponents/vant/dist/divider/index"
 						}
 				    }
 				    
@@ -381,7 +398,8 @@
 				    "style": {
 				    	"navigationStyle": "custom",
 				    	"usingComponents": {
-							"van-image": "/wxcomponents/vant/dist/image/index"
+							"van-image": "/wxcomponents/vant/dist/image/index",
+							"van-divider": "/wxcomponents/vant/dist/divider/index"
 						}
 				    }
 				    
@@ -411,7 +429,8 @@
 				    "style": {
 				    	"navigationStyle": "custom",
 				    	"usingComponents": {
-							"van-image": "/wxcomponents/vant/dist/image/index"
+							"van-image": "/wxcomponents/vant/dist/image/index",
+							"van-toast": "/wxcomponents/vant/dist/toast/index"
 						}
 				    }
 				    

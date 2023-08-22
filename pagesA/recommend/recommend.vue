@@ -10,34 +10,34 @@
 						  height="100%"
 						  fit="cover"
 						  radius="4"
-						  :src="item.bg"
+						  :src="item.pics[0]"
 						/>
 					</view>
 					<view class="right">
 						<view class="header">
 							<view class="title">
-								{{ item.title }}
+								{{ item.name }}
 							</view>
 							<view class="num">
-								<icon class="iconfont">&#xe65c;</icon>{{ item.num }}
+								<icon class="iconfont">&#xe65c;</icon>{{ item.viewCount }}
 							</view>
 						</view>
 						<view class="time">
-							{{ item.time | formatDate }}
+							{{ item.createTime | formatDate }}
 						</view>
 						<view class="sub-title">
-							{{ item.subtitle }}
+							{{ item.referee }}
 						</view>
 						<view class="info">
-							{{ item.content }}
+							{{ item.introduce }}
 						</view>
 					</view>
 				</view>
 				<view class="bottom">
-					共计得票：{{ item.piao }}票
+					共计得票：{{ item.voteCount }}票
 				</view>
-				<view :class="item.toupiao ? 'btn ytp' : 'btn'">
-					{{ item.toupiao ? '已投票' : '投票' }}
+				<view :class="item.vote ? 'btn ytp' : 'btn'">
+					{{ item.vote ? '已投票' : '投票' }}
 				</view>
 			</view>
 		</view>
@@ -46,37 +46,30 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getMyRecomend } from "@/api/promote.js"
 	export default {
 		components: {
 			NavBar
 		},
 		data() {
 			return {
-				list: [
-					{
-						title: '身边好人',
-						pic: '',
-						time: '1690526795927',
-						num: '1983',
-						subtitle: '本次推荐好人（广工）',
-						content: '男，环卫工人。他钟爱环卫事业，兢兢业业，一心扑男，环卫工人。他钟爱环卫事业，兢兢业业，一心扑...',
-						toupiao: false,
-						piao: '123'
-					},
-					{
-						title: '身边色人',
-						pic: '',
-						time: '1690526795927',
-						num: '1983',
-						subtitle: '本次推荐色狼（广工）',
-						content: '男，环卫工人。他钟爱环卫事业，兢兢业业，一心扑男，环卫工人。他钟爱环卫事业，兢兢业业，一心扑...',
-						toupiao: true,
-						piao: '9999+'
-					}
-				]
+				list: []
 			}
 		},
+		onShow() {
+			this.init()
+		},
 		methods: {
+			// 初始化页面
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getMyRecomend().then(res => {
+					uni.hideLoading()
+					this.list = res.data
+				})
+			},
 			toDetail(item) {
 				uni.navigateTo({
 					url: `/pagesA/recommend/detail?data=${encodeURIComponent(JSON.stringify(item))}`
@@ -94,6 +87,8 @@
 			border-radius: 12rpx;
 			padding: 40rpx 32rpx 50rpx;
 			margin-bottom: 24rpx;
+			height: 425rpx;
+			box-sizing: border-box;
 			background-color: #F6F6F6;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/wtjbg.png') no-repeat;
 			background-size: 100%;
@@ -172,7 +167,7 @@
 				width: 140rpx;
 				height: 60rpx;
 				right: 32rpx;
-				bottom: 40rpx;
+				bottom: 45rpx;
 				background: #B94333;
 				border-radius: 30rpx;
 				text-align: center;

@@ -10,41 +10,41 @@
 			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
 				<view class="header">
 					<view class="title">
-						{{ item.title }}
+						{{ item.name }}
 					</view>
 					<view class="enroll">
-						({{ item.enroll }}人已报名)
+						({{ item.signUpCount }}人已报名)
 					</view>
 				</view>
 				<view class="time">
-					开课时间：{{ item.time }}
+					开课时间：{{ item.startTime | formatMin }}
 				</view>
 				<view class="address">
 					课程地点：{{ item.address }}
 				</view>
 				<view class="enroll-time">
-					截止时间：{{ item.address }}
+					截止时间：{{ item.signUpEndTime | formatMin }}
 				</view>
 				<view class="people-num">
-					计划人数：{{ item.people }}
+					计划人数：{{ item.totalCount }}
 				</view>
-				<view v-if="item.status === '报名中'" :class="item.isman ? 'btn ybm' : 'btn'">
-					{{ item.isman ? '已报名' : '立即报名' }}
+				<view v-if="item.status.description === '报名中'" :class="item.signUp ? 'btn ybm' : 'btn'">
+					{{ item.signUp ? '已报名' : '立即报名' }}
 				</view>
-				<view v-if="item.status === '已报满'" :class="item.isman ? 'btn ybm' : 'btn ybman'">
-					{{ item.isman ? '已报名' : '立即报名' }}
+				<view v-if="item.status.description === '已报满'" :class="item.signUp ? 'btn ybm' : 'btn ybman'">
+					{{ item.signUp ? '已报名' : '立即报名' }}
 				</view>
-				<view v-if="item.status === '已结束'" class="nav">
+				<view v-if="item.status.description === '已结束'" class="nav">
 					查看<icon class="iconfont">&#xe647;</icon>
 				</view>
-				<view v-if="item.status === '已结束'" class="status warning">
-					{{ item.status }}
+				<view v-if="item.status.description === '已结束'" class="status warning">
+					{{ item.status.description }}
 				</view>
-				<view v-else-if="item.status === '已报满'" class="status error">
-					{{ item.status }}
+				<view v-else-if="item.status.description === '已报满'" class="status error">
+					{{ item.status.description }}
 				</view>
 				<view v-else class="status">
-					{{ item.status }}
+					{{ item.status.description }}
 				</view>
 			</view>
 		</view>
@@ -53,6 +53,7 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getSchoolList } from "@/api/promote.js"
 	export default {
 		components: {
 			NavBar
@@ -62,91 +63,34 @@
 				show: 0,
 				hotNav: [
 					{
-						title: '报名中',
-						active: true
+						title: '进行中',
+						active: true,
+						type: 'IN_SIGNUP'
 					},
 					{
-						title: '已结束',
-						active: false
+						title: '已截止',
+						active: false,
+						type: 'SIGNUP_END'
 					}
 				],
-				list: [
-					{
-						status: '报名中',
-						title: '老年人课堂',
-						enroll: '12',
-						isman: false,
-						time: '2022-02-02',
-						address: '老年活动中心',
-						time1: '2023-7-30 18:00:00',
-						time2: '2023-8-1 9:00:00',
-						people: '20',
-						content: '广工很色广工很色广工很色广工很色广工很色广工很色广工很色'
-					},
-					{
-						status: '报名中',
-						title: '老年人课堂',
-						enroll: '12',
-						isman: true,
-						time: '2022-02-02',
-						address: '老年活动中心',
-						time1: '2023-7-30 18:00:00',
-						time2: '2023-8-1 9:00:00',
-						people: '20',
-						content: '广工很色广工很色广工很色广工很色广工很色广工很色广工很色'
-					},
-					{
-						status: '已报满',
-						title: '老年人课堂',
-						enroll: '12',
-						time: '2022-02-02',
-						isman: true,
-						address: '老年活动中心',
-						time1: '2023-7-30 18:00:00',
-						time2: '2023-8-1 9:00:00',
-						people: '20',
-						content: '广工很色广工很色广工很色广工很色广工很色广工很色广工很色'
-					},
-					{
-						status: '已报满',
-						title: '老年人课堂',
-						enroll: '12',
-						time: '2022-02-02',
-						isman: false,
-						address: '老年活动中心',
-						time1: '2023-7-30 18:00:00',
-						time2: '2023-8-1 9:00:00',
-						people: '20',
-						content: '广工很色广工很色广工很色广工很色广工很色广工很色广工很色'
-					},
-					{
-						status: '已结束',
-						title: '老年人课堂',
-						enroll: '12',
-						time: '2022-02-02',
-						isman: true,
-						address: '老年活动中心',
-						time1: '2023-7-30 18:00:00',
-						time2: '2023-8-1 9:00:00',
-						people: '20',
-						content: '广工很色广工很色广工很色广工很色广工很色广工很色广工很色'
-					},
-					{
-						status: '已结束',
-						title: '老年人课堂',
-						enroll: '12',
-						time: '2022-02-02',
-						isman: false,
-						address: '老年活动中心',
-						time1: '2023-7-30 18:00:00',
-						time2: '2023-8-1 9:00:00',
-						people: '20',
-						content: '广工很色广工很色广工很色广工很色广工很色广工很色广工很色'
-					}
-				]
+				status: 'IN_SIGNUP',
+				list: []
 			}
 		},
+		onShow() {
+			this.init()
+		},
 		methods: {
+			// 初始化页面
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getSchoolList({ status: this.status }).then(res => {
+					uni.hideLoading()
+					this.list = res.data
+				})
+			},
 			// tab切换
 			changeHotNav(e, i) {
 				this.show = i
@@ -154,9 +98,8 @@
 					item.active = false
 				})
 				e.active = !e.active
-			},
-			enroll() {
-				console.log('你好')
+				this.status = e.type
+				this.init()
 			},
 			toDetail(item) {
 				uni.navigateTo({
@@ -214,6 +157,8 @@
 		.item {
 			border-radius: 12rpx;
 			padding: 40rpx 32rpx;
+			height: 349rpx;
+			box-sizing: border-box;
 			margin-bottom: 24rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/whxtbg.png') no-repeat;
 			background-size: 100%;
@@ -264,7 +209,7 @@
 				width: 140rpx;
 				height: 60rpx;
 				right: 32rpx;
-				bottom: 40rpx;
+				bottom: 45rpx;
 				background: #B94333;
 				border-radius: 30rpx;
 				text-align: center;
@@ -276,7 +221,7 @@
 			.nav {
 				position: absolute;
 				right: 32rpx;
-				bottom: 40rpx;
+				bottom: 45rpx;
 			    height: 36rpx;
 			    font-size: 24rpx;
 				display: flex;

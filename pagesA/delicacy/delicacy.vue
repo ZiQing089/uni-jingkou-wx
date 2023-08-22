@@ -1,6 +1,6 @@
 <template>
 	<view class="delicacy page-container">
-		<NavBar :title="title" :use-bg="true" />
+		<NavBar :title="'特色美食'" :use-bg="true" />
 		<view class="hot-nav">
 			<view v-for="(item, index) in hotNav" :key="index" :class="item.active ? 'nav-item active' : 'nav-item'" @click="changeHotNav(item, index)">
 				<span>{{ item.title }}</span>
@@ -14,15 +14,15 @@
 					  height="100%"
 					  fit="cover"
 					  radius="4"
-					  :src="item.img"
+					  :src="item.pic"
 					/>
 				</view>
 				<view class="info">
 					<view class="title">
-						{{ item.title }}
+						{{ item.name }}
 					</view>
 					<view class="distance">
-						{{ item.distance }}
+						约{{ Number(item.distance).toFixed(1) }}km
 					</view>
 				</view>
 				<view class="phone" @click="takePhone(item)">
@@ -52,20 +52,20 @@
 						  height="100%"
 						  fit="cover"
 						  radius="12rpx 12rpx 0 0"
-						  :src="item.img"
+						  :src="item.pic"
 						/>
 					</view>
 					<view class="title">
-						{{ item.title }}
+						{{ item.name }}
 					</view>
 					<view class="text">
-						{{ item.text }}
+						{{ item.introduce }}
 					</view>
 					<view class="like">
 						<view class="left">
-							<icon v-if="item.like" class="iconfont islike">&#xe65b;</icon>
-							<icon v-else class="iconfont">&#xe659;</icon>
-							<span>{{ item.num }}</span>
+							<icon v-if="item.like" class="iconfont islike" @click.native.stop="addlike(item)">&#xe65b;</icon>
+							<icon v-else class="iconfont" @click.native.stop="addlike(item)">&#xe659;</icon>
+							<span>{{ item.likeCount }}</span>
 						</view>
 						<view class="right">
 							<icon class="iconfont">&#xe647;</icon>
@@ -74,92 +74,32 @@
 				</view>
 			</grid-view>
 		</view>
+		<van-toast id="van-toast" />
 	</view>
 </template>
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import Toast from '@/wxcomponents/vant/dist/toast/toast';
+	import { getRestaurantList, getSpecialityList, addlike } from '@/api/jingkou.js'
+	import { mapState } from 'vuex'
 	export default {
 		components: {
 			NavBar
+		},
+		computed: {
+			...mapState({
+				lat: (state) => state.user.lat,
+				lng: (state) => state.user.lng
+			})
 		},
 		data() {
 			return {
 				bgHeight: '',
 				title: '',
 				show: 0,
-				list: [
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						address: '浙江省绍兴市越城区陶堰镇泾口村1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						address: '浙江省绍兴市越城区陶堰镇泾口村1号'
-					}
-				],
-				toneList: [
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: true,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: false,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: false,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: false,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: true,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					},
-					{
-						img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-						distance: '1.2km',
-						title: '麻辣兔头',
-						phone: '0575-82049777',
-						like: true,
-						num: 1232,
-						text: '八道陶堰特色美食：咸菜笋片胖头鱼、葱烤鲫1号'
-					}
-				],
+				list: [],
+				toneList: [],
 				hotNav: [
 					{
 						title: '周边饭店',
@@ -172,17 +112,9 @@
 				]
 			}
 		},
-		onLoad(option) {
-			console.log(option)
-			this.title = option.title
-		},
-		onShow() {
-			const {
-				top,
-				height,
-				width
-			} = wx.getMenuButtonBoundingClientRect();
-			this.bgHeight = 46 + top + 'px'
+		onLoad() {
+			this.initOne()
+			this.initTwo()
 		},
 		methods: {
 			// 热门切换
@@ -193,14 +125,42 @@
 				})
 				e.active = !e.active
 			},
+			initOne() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getRestaurantList({ lat: this.lat, lng: this.lng, mapType: 'gaode'}).then(res => {
+					uni.hideLoading()
+					this.list = res.data
+				})
+			},
+			initTwo() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getSpecialityList().then(res => {
+					uni.hideLoading()
+					this.toneList = res.data
+				})
+			},
 			// 跳转导航
 			navigation(item) {
 				wx.openLocation({
-					 latitude: parseFloat(item.point.lat), //目标经纬度
-					 longitude: parseFloat(item.point.lng),
+					 latitude: parseFloat(item.mapPoint.lat), //目标经纬度
+					 longitude: parseFloat(item.mapPoint.lng),
 					 scale: 18,
 					 name: item.address
 				})
+			},
+			addlike(item) {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				addlike({ id: item.id }).then(res => {
+					uni.hideLoading()
+					this.initTwo()
+					console.log(res)
+				}) 
 			},
 			// 联系电话
 			takePhone(item) {
@@ -215,9 +175,9 @@
 				})
 			},
 			// 跳转详情
-			toDetail() {
+			toDetail(item) {
 				uni.navigateTo({
-					url: `/pagesA/delicacy/detail`
+					url: `/pagesA/delicacy/detail?data=${encodeURIComponent(JSON.stringify(item))}`
 				})
 			}
 		}
@@ -278,7 +238,7 @@ page {
 		padding: 24rpx 24rpx 0;
 		margin-bottom: 12rpx;
 		.img {
-			height: 434rpx;
+			height: 394rpx;
 			background: #F6F6F6;
 			border-radius: 8rpx;
 		}
@@ -331,7 +291,7 @@ page {
 		}
 	}
 	.other-content {
-		padding: 0 12rpx;
+		padding: 0 12rpx 60rpx;
 		.tone-item {
 			width: 358rpx;
 			margin-top: 12rpx;

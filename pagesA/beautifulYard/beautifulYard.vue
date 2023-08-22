@@ -1,37 +1,38 @@
 <template>
 	<view class="page-container beautiful-yard">
 		<NavBar :title="'美丽庭院'" :use-bg="true" />
-		<view class="hot-nav">
+		<view class="hot-nav" :style="{ top: total }">
 			<view v-for="(item, index) in hotNav" :key="index" :class="item.active ? 'nav-item active' : 'nav-item'" @click="changeHotNav(item, index)">
 				<span>{{ item.title }}</span>
 			</view>
 		</view>
 		<view v-if="show === 0" class="show-content">
-			<view v-for="(item, index) in list" :key="index" class="show-item">
+			<view v-for="(item, index) in showList" :key="index" class="show-item">
 				<view class="name">
-					户主：{{ item.name }}
+					户主：{{ item.houseHolder }}
 				</view>
 				<view class="banner">
-					<swiper class="swiper" circular :indicator-dots="true" :autoplay="true" :interval="5000" :duration="500"
+					<swiper class="swiper" circular :indicator-dots="true"
 						indicator-active-color="#FFFFFF" indicator-color="rgba(255, 255, 255, 0.58)">
-						<swiper-item v-for="(e, i) in item.swiperList" :key="i">
+						<swiper-item v-for="(e, i) in item.pics" :key="i">
 							<van-image width="100%" height="100%" fit="cover"
 								:src="e" />
 						</swiper-item>
 					</swiper>
 				</view>
 				<view class="bottom">
-					<view class="left" @click="addlike">
-						<icon v-if="item.islike" class="iconfont">&#xe659;</icon><icon v-else class="iconfont islike">&#xe65b;</icon>{{ item.like }}
+					<view class="left" @click="addlike(item)">
+						<icon v-if="item.liked" class="iconfont islike">&#xe65b;</icon><icon v-else class="iconfont">&#xe659;</icon>{{ item.likeCount }}
 					</view>
-					<view class="right">
-						<icon class="iconfont">&#xe65a;</icon>转发
-					</view>
+					<button class="share-btn" type="default" open-type="share">
+						<icon class="iconfont">&#xe65a;</icon><span>转发</span>
+					</button>
 				</view>
 			</view>
-			<view class="add" @click="addShow">
+			<view v-if="rule === 'VILLAGER'" class="add" @click="addShow">
 				<van-icon name="plus" color="white" size="40px" />
 			</view>
+			<van-divider v-if="isShowNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
 		<view v-if="show === 1" class="content">
 			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
@@ -39,33 +40,36 @@
 					{{ item.title }}
 				</view>
 				<view class="time">
-					上传时间：{{ item.time }}
+					上传时间：{{ item.createTime | formatDate }}
 				</view>
 				<view class="name">
-					上传人：{{ item.name }}
+					上传人：{{ item.uploader }}
 				</view>
 				<view class="nav">
 					查看<icon class="iconfont">&#xe647;</icon>
 				</view>
-				<view v-if="item.status === '待审核' || item.status === '待处理'" class="status warning">
-					{{ item.status }}
+				<view v-if="item.status.description === '待审核' || item.status.description === '待处理'" class="status warning">
+					{{ item.status.description }}
 				</view>
-				<view v-else-if="item.status === '已驳回'" class="status error">
-					{{ item.status }}
+				<view v-else-if="item.status.description === '已驳回'" class="status error">
+					{{ item.status.description }}
 				</view>
 				<view v-else class="status">
-					{{ item.status }}
+					{{ item.status.description }}
 				</view>
-				<view class="add" @click="addNet">
+				<view v-if="rule === 'VILLAGER'" class="add" @click="addNet">
 					<van-icon name="plus" color="white" size="40px" />
 				</view>
 			</view>
+			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
 	</view>
 </template>
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getShowlist, getremediationList, addLike } from '@/api/beautifulYard.js'
+	import { userInfo } from '@/api/login.js'
 	export default {
 		components: {
 			NavBar
@@ -73,6 +77,7 @@
 		data() {
 			return {
 				show: 0,
+				rule: '',
 				hotNav: [
 					{
 						title: '秀出来',
@@ -83,63 +88,101 @@
 						active: false
 					}
 				],
-				list: [
-					{
-						title: '村口的垃圾堆需要处理',
-						time: '2022-02-02',
-						name: '广工',
-						islike: true,
-						like: '2232',
-						swiperList: [
-							'https://files.zz-tech.cn/app-files/images/banner1.png',
-							'https://files.zz-tech.cn/app-files/images/banner2.png',
-							'https://files.zz-tech.cn/app-files/images/banner3.png'
-						],
-						status: '待审核'
-					},
-					{
-						title: '村口的垃圾堆需要处理',
-						time: '2022-02-02',
-						name: '广工',
-						islike: true,
-						like: '2232',
-						status: '待处理',
-						swiperList: [
-							'https://files.zz-tech.cn/app-files/images/banner1.png',
-							'https://files.zz-tech.cn/app-files/images/banner2.png',
-							'https://files.zz-tech.cn/app-files/images/banner3.png'
-						]
-					},
-					{
-						title: '村口的垃圾堆需要处理',
-						time: '2022-02-02',
-						name: '广工',
-						islike: false,
-						like: '2232',
-						status: '已驳回',
-						swiperList: [
-							'https://files.zz-tech.cn/app-files/images/banner1.png',
-							'https://files.zz-tech.cn/app-files/images/banner2.png',
-							'https://files.zz-tech.cn/app-files/images/banner3.png'
-						]
-					},
-					{
-						title: '村口的垃圾堆需要处理',
-						time: '2022-02-02',
-						name: '广工',
-						islike: false,
-						like: '2232',
-						swiperList: [
-							'https://files.zz-tech.cn/app-files/images/banner1.png',
-							'https://files.zz-tech.cn/app-files/images/banner2.png',
-							'https://files.zz-tech.cn/app-files/images/banner3.png'
-						],
-						status: '已处理'
-					}
-				]
+				active: '秀出来',
+				isLoadMore:false,
+				currentPage: 1,
+				pageSize: 10,
+				total: 0,
+				isNoMore: false,
+				isShowLoadMore:false,
+				showCurrentPage: 1,
+				showPageSize: 10,
+				isShowNoMore: false,
+				conditions: [],
+				showList: [],
+				list: []
+			}
+		},
+		onShow() {
+			// 获取胶囊位置 { top, height, width }
+			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
+			this.total = top + height + 2 + 5+ 'px'
+			this.list = []
+			this.showList = []
+			this.getUserInfo()
+			this.getShowList()
+			this.getList()
+		},
+		onReachBottom() {
+			console.log(this.active)
+			if(this.active === '秀出来') {
+				if(!this.isShowLoadMore && !this.isShowNoMore){  //此处判断，上锁，防止重复请求
+					this.isShowLoadMore = true
+					this.showCurrentPage += 1  //每次上拉请求新的一页
+					this.getShowList()
+				}
+			} else {
+				if(!this.isLoadMore && !this.isNoMore){  //此处判断，上锁，防止重复请求
+					this.isLoadMore = true
+					this.currentPage += 1  //每次上拉请求新的一页
+					this.getList()
+				}
 			}
 		},
 		methods: {
+			// 获取用户信息
+			getUserInfo() {
+				const self = this
+				userInfo().then(res => {
+					if(res.success) {
+						this.rule = res.data.userType.key
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
+				})
+			},
+			// 获取整出来列表
+			getList() {
+				getremediationList({currentPage: this.currentPage, pageSize: this.pageSize, conditions: this.conditions}).then(res => {
+					if(res.success && res.data.list.length !== 0) {
+						this.isLoadMore = false
+						this.list = this.list.concat(res.data.list)
+						if(res.data.list.length < this.pageSize) {
+							this.isNoMore = true
+						} 
+					} else {
+						// uni.hideLoading()
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
+				})
+			},
+			// 获取秀出来列表
+			getShowList() {
+				getShowlist({currentPage: this.showCurrentPage, pageSize: this.showPageSize, conditions: this.conditions}).then(res => {
+					if(res.success && res.data.list.length !== 0) {
+						this.isShowLoadMore = false
+						this.showList = this.showList.concat(res.data.list)
+						if(res.data.list.length < this.pageSize) {
+							this.isShowNoMore = true
+						}
+					} else {
+						// uni.hideLoading()
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
+				}) 
+			},
 			// tab切换
 			changeHotNav(e, i) {
 				this.show = i
@@ -147,6 +190,17 @@
 					item.active = false
 				})
 				e.active = !e.active
+				this.active = e.title
+				this.currentPage = 1
+				this.showCurrentPage = 1
+				this.list = []
+				this.showList = []
+				this.isShowLoadMore = false
+				this.isLoadMore = false
+				this.isNoMore = false
+				this.isShowNoMore = false
+				this.getShowList()
+				this.getList()
 			},
 			addNet() {
 				uni.navigateTo({
@@ -158,8 +212,26 @@
 					url: '/pagesA/beautifulYard/showAdd'
 				})
 			},
-			addlike() {
-				console.log('你好')
+			onShareAppMessage(res) {
+				return{
+				      title:'转发分享',    // 转发标题
+				      path: '/pagesA/beautifulYard/beautifulYard',
+				      imageUrl:''   
+				}
+			},
+			addlike(item) {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				addLike(item.id).then(res => {
+					uni.hideLoading()
+					item.liked = !item.liked
+					if(item.liked) {
+						item.likeCount ++
+					} else {
+						item.likeCount --
+					}
+				}) 
 			},
 			toDetail(item) {
 				uni.navigateTo({
@@ -174,7 +246,9 @@
 .beautiful-yard {
 	.hot-nav {
 		display: flex;
+		position: sticky;
 		padding: 0 56rpx;
+		z-index: 99;
 		height: 86rpx;
 		background-color: #ffffff;
 		margin-bottom: 4rpx;
@@ -218,6 +292,8 @@
 			border-radius: 12rpx;
 			padding: 40rpx 32rpx;
 			margin-bottom: 24rpx;
+			height: 245rpx;
+			box-sizing: border-box;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/mltybg.png') no-repeat;
 			background-size: 100%;
 			position: relative;
@@ -228,7 +304,7 @@
 				letter-spacing: 1px;
 			}
 			.time, .name {
-				margin-top: 24rpx;
+				margin-top: 26rpx;
 				font-size: 24rpx;
 				color: #333333;
 				line-height: 36rpx;
@@ -255,7 +331,7 @@
 			.nav {
 				position: absolute;
 				right: 40rpx;
-				bottom: 40rpx;
+				bottom: 45rpx;
 			    height: 36rpx;
 			    font-size: 24rpx;
 				display: flex;
@@ -285,6 +361,7 @@
 	}
 	.show-content {
 		border-top: 4rpx solid #F6F6F6;
+		padding-bottom: 190rpx;
 		.show-item {
 			border-bottom: 12rpx solid #F6F6F6;
 			padding: 32rpx 24rpx 27rpx;
@@ -311,7 +388,7 @@
 				margin-top: 27rpx;
 				display: flex;
 				justify-content: space-between;
-				.left, .right {
+				.left, .share-btn {
 					display: flex;
 					font-size: 24rpx;
 					color: #666666;
@@ -326,6 +403,15 @@
 					.islike {
 						color: #F4474B;
 					}
+				}
+				.share-btn {
+					border: none;
+					background: none;
+					padding: 0;
+					margin: 0;
+				}
+				.share-btn::after {
+					border: 0;
 				}
 			}
 		}

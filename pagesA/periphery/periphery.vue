@@ -2,13 +2,13 @@
 	<view class="page-container periphery">
 		<NavBar :title="'周边服务'" :use-bg="true" :border="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item">
+			<view v-for="(item, index) in list" :key="index" class="item" @click="navigation(item)">
 				<view class="header">
 					<view class="left">
-						{{ item.title }}
+						{{ item.name }}
 					</view>
 					<view class="right">
-						{{ item.number }}
+						约{{ Number(item.distance).toFixed(1) }}km
 					</view>
 				</view>
 				<view class="address">
@@ -24,33 +24,45 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { getServier } from '@/api/jingkou.js'
+	import { mapState } from 'vuex'
 	export default {
 		components: {
 			NavBar
 		},
+		computed: {
+			...mapState({
+				lat: (state) => state.user.lat,
+				lng: (state) => state.user.lng
+			})
+		},
 		data() {
 			return {
-				list: [
-					{
-						title: '游客停车场',
-						number: '1.3km',
-						address: '浙江省绍兴市越城区陶堰镇泾口村3号'
-					},
-					{
-						title: '游客停车场',
-						number: '1.3km',
-						address: '浙江省绍兴市越城区陶堰镇泾口村3号'
-					},
-					{
-						title: '游客停车场',
-						number: '1.3km',
-						address: '浙江省绍兴市越城区陶堰镇泾口村3号'
-					}
-				]
+				list: []
 			}
 		},
+		onShow() {
+			this.init()
+		},
 		methods: {
-			
+			init() {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				getServier({ lat: this.lat, lng: this.lng, mapType: 'gaode'}).then(res => {
+					uni.hideLoading()
+					this.list = res.data
+				})
+			},
+			// 跳转导航
+			navigation(item) {
+				wx.openLocation({
+					 latitude: parseFloat(item.mapPoint.lat), //目标经纬度
+					 longitude: parseFloat(item.mapPoint.lng),
+					 scale: 18,
+					 name: item.address
+				})
+			}
 		}
 	}
 </script>
@@ -63,6 +75,8 @@
 			border-radius: 12rpx;
 			margin-bottom: 24rpx;
 			padding: 40rpx 32rpx;
+			box-sizing: border-box;
+			height: 178rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/ggxxbg.png') no-repeat;
 			background-size: 100%;
 			position: relative;

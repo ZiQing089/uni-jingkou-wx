@@ -2,43 +2,43 @@
 	<view class="page-container school-detail">
 		<NavBar :title="'文化学堂'" :border="true" />
 		<view class="top">
-			<icon v-if="detail.status === '报名中'" class="iconfont">&#xe666;</icon>
-			<icon v-if="detail.status === '已结束'" class="iconfont end-icon">&#xe665;</icon>
-			<icon v-if="detail.status === '已报满'" class="iconfont finish-icon">&#xe664;</icon>
+			<icon v-if="detail.status.description === '报名中'" class="iconfont">&#xe666;</icon>
+			<icon v-if="detail.status.description === '已结束'" class="iconfont end-icon">&#xe665;</icon>
+			<icon v-if="detail.status.description === '已报满'" class="iconfont finish-icon">&#xe664;</icon>
 			<view class="title">
-				{{ detail.title }}
+				{{ detail.name }}
 			</view>
 			<view class="val">
-				开课时间：{{ detail.time1 }}
+				开课时间：{{ detail.startTime | formatMin }}
 			</view>
 			<view class="val">
-				截止时间：{{ detail.time2 }}
+				截止时间：{{ detail.signUpEndTime | formatMin }}
 			</view>
 			<view class="val">
 				课程地点：{{ detail.address }}
 			</view>
 			<view class="val">
-				计划人数：{{ detail.people }}
+				计划人数：{{ detail.totalCount }}
 			</view>
 			<view class="val" style="margin: 0; color: #B94333;">
-				参加人数：{{ detail.enroll }}
+				参加人数：{{ detail.signUpCount }}
 			</view>
 		</view>
 		<view class="bottom">
-			{{ detail.content }}
+			{{ detail.introduce }}
 		</view>
 		<view class="btn-box">
-			<view v-if="detail.status === '报名中'" :class="detail.isman ? 'btn-border enroll' : 'btn-border'" @click="!detail.isman && enroll()">
-				<view :class="detail.isman ? 'btn enroll' : 'btn'">
-					{{ detail.isman ? '已报名' : '立即报名' }}
+			<view v-if="detail.status.description === '报名中'" :class="detail.signUp ? 'btn-border enroll' : 'btn-border'" @click="!detail.signUp && enroll(detail.id)">
+				<view :class="detail.signUp ? 'btn enroll' : 'btn'">
+					{{ detail.signUp ? '已报名' : '立即报名' }}
 				</view>
 			</view>
-			<view v-if="detail.status === '已报满'" :class="detail.isman ? 'btn-border enroll' : 'btn-border finish'">
-				<view :class="detail.isman ? 'btn enroll' : 'btn finish'">
-					{{ detail.isman ? '已报名' : '立即报名' }}
+			<view v-if="detail.status.description === '已报满'" :class="detail.signUp ? 'btn-border enroll' : 'btn-border finish'">
+				<view :class="detail.signUp ? 'btn enroll' : 'btn finish'">
+					{{ detail.signUp ? '已报名' : '立即报名' }}
 				</view>
 			</view>
-			<view v-if="detail.status === '已结束'" class="btn-border finish">
+			<view v-if="detail.status.description === '已结束'" class="btn-border finish">
 				<view class="btn finish">
 					已结束
 				</view>
@@ -51,6 +51,7 @@
 <script>
 	import NavBar from "@/components/NavBar.vue"
 	import Toast from '@/wxcomponents/vant/dist/toast/toast'
+	import { signUp } from '@/api/promote.js'
 	export default {
 		components: {
 			NavBar
@@ -62,12 +63,17 @@
 		},
 		onLoad(option) {
 			this.detail = JSON.parse(decodeURIComponent(option.data))
-			console.log(this.detail)
 		},
 		methods: {
 			// 报名
-			enroll() {
-				Toast('报名成功！可在“我的-我的报名”中进行管理');
+			enroll(id) {
+				console.log(id)
+				signUp({ id: id }).then(res => {
+					Toast('报名成功！可在“我的-我的报名”中进行管理');
+					setTimeout(() => {
+						uni.navigateBack()
+					}, 2000)
+				})
 			}
 		}
 	}

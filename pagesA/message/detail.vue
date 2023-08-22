@@ -14,10 +14,10 @@
 			{{ detail.title }}
 		</view>
 		<view class="time">
-			发布时间：{{ detail.time }}
+			发布时间：{{ detail.createTime | formatDate }}
 		</view>
 		<view class="content">
-			{{ detail.content }}
+			<rich-text :nodes="detail.message"></rich-text>
 		</view>
 	</view>
 </template>
@@ -30,13 +30,11 @@
 		},
 		data() {
 			return {
-				detail: {
-					pic: '',
-					title: '特色沿河餐厅即将开业 请大家尽情期待！',
-					time: '2023-04-23',
-					content: '特色沿河餐厅即将开业，请大家尽情期待！特色沿河餐厅即将开业，请大家尽情期待！特色沿河餐厅即将开业，请大家尽情期待！特色沿河餐厅即将开业，请大家尽情期待！特色沿河餐厅即将开业，请大家尽情期待！特色沿河餐厅即将开业，请大家尽情期待！特色沿河餐厅即将开业，请大家尽情期待！特色沿河餐厅即将开业，请大家尽情期待！'
-				}
+				detail: {}
 			}
+		},
+		onLoad(option) {
+			this.detail = JSON.parse(decodeURIComponent(option.data))
 		},
 		methods: {
 			
@@ -48,7 +46,7 @@
 .message-detail {
 	.banner-img {
 		width: 100%;
-		height: 464rpx;
+		height: 422rpx;
 	}
 	.title {
 		font-size: 44rpx;

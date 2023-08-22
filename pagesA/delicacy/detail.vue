@@ -7,23 +7,24 @@
 				  width="100%"
 				  height="100%"
 				  fit="cover"
-				  :src="detail.img"
+				  :src="detail.pic"
 				/>
 			</view>
 			<view class="title">
-				{{ detail.title }}
+				{{ detail.name }}
 			</view>
 			<view class="info">
 				<view class="left">
-					发布时间：{{ detail.time }}
+					发布时间：{{ detail.createTime | formatDate }}
 				</view>
 				<view class="right">
-					<image src="../../static/img/jingkou/grayNormal.png" class="img-icon" mode="scaleToFill"></image>
-					{{ detail.num }}
+					<icon v-if="detail.like" class="iconfont islike">&#xe65b;</icon>
+					<icon v-else class="iconfont">&#xe65b;</icon>
+					<span>{{ detail.likeCount }}</span>
 				</view>
 			</view>
 			<view class="text">
-				{{ detail.text }}
+				{{ detail.introduce }}
 			</view>
 		</view>
 	</view>
@@ -37,16 +38,11 @@
 		},
 		data() {
 			return {
-				detail: {
-					img: 'https://img2.baidu.com/it/u=378814620,2758073542&fm=253&fmt=auto&app=120&f=JPEG?w=1216&h=684',
-					title: '老年活动中心',
-					phone: '0575-82049777',
-					num: '1244',
-					time: '2023-04-23',
-					address: '浙江省绍兴市上虞区泾肖南路30号',
-					text: '老年活动中心集休闲、娱乐、健身、文化、学习于一体，突出文化休动场所。中心一直坚持以为老年人服务为宗旨性化服务赢得了老年朋友的好口碑，也吸引越来越多的人参与进来。2006年，中心被命名为我省首批四星级老年活动中心，被誉为老年人的“温馨家园”。中心内部设计充分体现了浓重的“文化气息、体育色彩”，设有书画室、茶室、健身房等娱乐、教学活动场所。'
-				}
+				detail: {}
 			}
+		},
+		onLoad(option) {
+			this.detail = JSON.parse(decodeURIComponent(option.data))
 		},
 		methods: {
 			
@@ -58,7 +54,7 @@
 .delicacy-detail {
 	.content {
 		.img {
-			height: 464rpx;
+			height: 422rpx;
 		}
 		.title {
 			height: 66rpx;
@@ -74,6 +70,9 @@
 		.info {
 			display: flex;
 			justify-content: center;
+			align-items: center;
+			padding: 0 138rpx;
+			justify-content: space-between;
 			.left {
 				font-size: 26rpx;
 				color: #999999;
@@ -82,16 +81,18 @@
 			}
 			.right {
 				display: flex;
-				align-items: center;
 				font-size: 24rpx;
 				color: #999999;
 				line-height: 36rpx;
 				letter-spacing: 4px;
-				.img-icon {
-					width: 32rpx;
-					height: 32rpx;
+				.iconfont {
+					display: flex;
+					align-items: center;
+					font-size: 32rpx;
 					margin-right: 12rpx;
-					margin-left: 60rpx;
+				}
+				.islike {
+					color: #F4474B;
 				}
 			}
 		}

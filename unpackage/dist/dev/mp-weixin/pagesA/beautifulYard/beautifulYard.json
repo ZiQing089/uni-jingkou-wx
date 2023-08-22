@@ -3,6 +3,7 @@
   "usingComponents": {
     "van-icon": "/wxcomponents/vant/dist/icon/index",
     "van-image": "/wxcomponents/vant/dist/image/index",
+    "van-divider": "/wxcomponents/vant/dist/divider/index",
     "nav-bar": "/components/NavBar"
   }
 }
