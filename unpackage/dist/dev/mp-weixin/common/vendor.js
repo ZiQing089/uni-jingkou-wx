@@ -11138,10 +11138,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.name = exports.host = void 0;
 // export const host = 'http://192.168.0.12:7877'
-var host = 'http://192.168.0.83:7877';
+// export const host = 'http://192.168.0.83:7877'
 // export const host = 'http://47.98.174.163:7001'
 // export const host = 'https://api-beituan.zz-tech.cn'
-// export const host = 'https://api-qkv2.zz-tech.cn'
+var host = 'https://api-jk.zz-tech.cn';
 exports.host = host;
 var name = '泾口村';
 exports.name = name;

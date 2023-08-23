@@ -150,11 +150,6 @@
 							this.showError = true
 							this.showForm = false
 						} else {
-							uni.showToast({
-								title: '请重新登录',
-								icon: 'success',
-								duration: 2000
-							})
 							this.showSuccess = true
 							this.showForm = false
 							this.preLogin()

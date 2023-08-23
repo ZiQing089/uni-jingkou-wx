@@ -1,6 +1,6 @@
 // export const host = 'http://192.168.0.12:7877'
-export const host = 'http://192.168.0.83:7877'
+// export const host = 'http://192.168.0.83:7877'
 // export const host = 'http://47.98.174.163:7001'
 // export const host = 'https://api-beituan.zz-tech.cn'
-// export const host = 'https://api-qkv2.zz-tech.cn'
+export const host = 'https://api-jk.zz-tech.cn'
 export const name = '泾口村'

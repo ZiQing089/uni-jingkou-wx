@@ -220,11 +220,6 @@ var _default = {
             _this2.showError = true;
             _this2.showForm = false;
           } else {
-            uni.showToast({
-              title: '请重新登录',
-              icon: 'success',
-              duration: 2000
-            });
             _this2.showSuccess = true;
             _this2.showForm = false;
             _this2.preLogin();
