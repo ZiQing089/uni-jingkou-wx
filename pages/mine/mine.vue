@@ -175,7 +175,7 @@
 		height: 302rpx;
 		box-sizing: border-box;
 		background: url('https://files.zz-tech.cn/app-files/images/jingkou/mine-bg.png') no-repeat;
-		background-size: 100%;
+		background-size: 100% 100%;
 		padding: 180rpx 32rpx 0 40rpx;
 		.mine-detail {
 			display: flex;

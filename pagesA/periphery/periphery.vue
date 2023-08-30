@@ -78,7 +78,7 @@
 			box-sizing: border-box;
 			height: 178rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/ggxxbg.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			position: relative;
 			.header {
 				display: flex;

@@ -172,7 +172,7 @@ var _default = {
       list: []
     };
   },
-  onLoad: function onLoad() {
+  onShow: function onShow() {
     this.init();
   },
   methods: {

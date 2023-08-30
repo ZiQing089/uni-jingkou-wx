@@ -54,7 +54,7 @@
   font-size: 24rpx;
   color: #999999;
   line-height: 36rpx;
-  letter-spacing: 4px;
+  letter-spacing: 1px;
 }
 .sceni-spot-detail .content .info .right .img-icon.data-v-4be99aa7 {
   width: 32rpx;

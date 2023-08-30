@@ -144,12 +144,13 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _jingkou = __webpack_require__(/*! @/api/jingkou.js */ 52);
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
     return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 457));
@@ -167,9 +168,27 @@ var _default = {
   onLoad: function onLoad(option) {
     this.detail = JSON.parse(decodeURIComponent(option.data));
   },
-  methods: {}
+  methods: {
+    addlike: function addlike(item) {
+      uni.showLoading({
+        title: '正在加载'
+      });
+      (0, _jingkou.addlike)({
+        id: item.id
+      }).then(function (res) {
+        uni.hideLoading();
+        item.like = !item.like;
+        if (item.like) {
+          item.likeCount++;
+        } else {
+          item.likeCount--;
+        }
+      });
+    }
+  }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

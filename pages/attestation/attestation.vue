@@ -2,7 +2,7 @@
 	<view class="page-container" :class="showForm ? 'attestation' : 'attestation attestation-status'">
 		<template v-if="showForm">
 			<view class="attestation-header">
-				<NavBar :title="'村名认证'" :use-transparent="true" :is-white="true" />
+				<NavBar :title="'村民认证'" :use-transparent="true" :is-white="true" />
 				<view class="title">
 					实名认证
 				</view>
@@ -15,7 +15,7 @@
 					</view>
 					<view class="inline">
 						<view class="label">
-							<view class="icon">*</view><view class="text">村名姓名：</view>
+							<view class="icon">*</view><view class="text">村民姓名：</view>
 						</view>
 						<view class="field">
 							<van-field
@@ -153,6 +153,7 @@
 							this.showSuccess = true
 							this.showForm = false
 							this.preLogin()
+							this.getUserInfo()
 						}
 					})
 				} else {
@@ -181,7 +182,7 @@
 	.attestation-header {
 		position: relative;
 		background: url('https://files.zz-tech.cn/app-files/images/jingkou/realname-bg.png') no-repeat;
-		background-size: 100%;
+		background-size: 100% 100%;
 		height: 420rpx;
 		box-sizing: border-box;
 		.title {
@@ -281,14 +282,14 @@
 		margin: 130rpx auto 0;
 		height: 246rpx;
 		background: url('https://files.zz-tech.cn/app-files/images/jingkou/success.png') no-repeat;
-		background-size: 100%;
+		background-size: 100% 100%;
 	}
 	.error-img {
 		width: 226rpx;
 		margin: 202rpx auto 0;
 		height: 226rpx;
 		background: url('https://files.zz-tech.cn/app-files/images/jingkou/error.png') no-repeat;
-		background-size: 100%;
+		background-size: 100% 100%;
 	}
 	.error-tips {
 		height: 56rpx;

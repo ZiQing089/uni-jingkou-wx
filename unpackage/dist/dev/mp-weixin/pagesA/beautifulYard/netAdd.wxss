@@ -107,6 +107,9 @@
 .net-add .content .form-block .upload.data-v-0f93189c .van-uploader__preview:nth-child(3n) {
   margin: 0 0 0 0;
 }
+.net-add .content .form-block .upload.data-v-0f93189c .van-icon {
+  color: #B94333;
+}
 .net-add .content .form-block .upload .tips.data-v-0f93189c {
   margin-top: 12rpx;
   font-size: 24rpx;

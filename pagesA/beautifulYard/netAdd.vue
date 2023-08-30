@@ -247,6 +247,9 @@
 					.van-uploader__preview:nth-child(3n) {
 						margin: 0 0 0 0;
 					}
+					.van-icon {
+						color: #B94333;
+					}
 				}
 				.tips {
 					margin-top: 12rpx;

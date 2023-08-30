@@ -60,8 +60,9 @@
 			border-radius: 12rpx;
 			position: relative;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/ggxxbg.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			padding: 40rpx 32rpx;
+			box-sizing: border-box;
 			margin-bottom: 24rpx;
 			.header {
 				font-size: 28rpx;

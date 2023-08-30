@@ -1,3 +1,8 @@
+
+page {
+	background-color: #F6F6F6;
+}
+
 @charset "UTF-8";
 /**
  * 这里是uni-app内置的常用样式变量
@@ -79,7 +84,7 @@
   height: 245rpx;
   box-sizing: border-box;
   background: url("https://files.zz-tech.cn/app-files/images/jingkou/mltybg.png") no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
   position: relative;
 }
 .beautiful-yard .content .item .title.data-v-1713ff43 {
@@ -147,8 +152,9 @@
   padding-bottom: 190rpx;
 }
 .beautiful-yard .show-content .show-item.data-v-1713ff43 {
-  border-bottom: 12rpx solid #F6F6F6;
+  margin-bottom: 12px;
   padding: 32rpx 24rpx 27rpx;
+  background-color: #ffffff;
 }
 .beautiful-yard .show-content .show-item .name.data-v-1713ff43 {
   font-size: 28rpx;

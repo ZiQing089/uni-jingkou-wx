@@ -14,7 +14,7 @@
 					  height="100%"
 					  fit="cover"
 					  radius="4"
-					  :src="item.pic"
+					  :src="item.pics[0]"
 					/>
 				</view>
 				<view class="info">
@@ -42,6 +42,7 @@
 					</view>
 				</view>
 			</view>
+			<van-divider contentPosition="center">没有更多了！</van-divider>
 		</view>
 		<view v-if="show === 1" class="other-content">
 			<grid-view :cross-axis-gap="6" :main-axis-gap="6" type="masonry">
@@ -52,7 +53,7 @@
 						  height="100%"
 						  fit="cover"
 						  radius="12rpx 12rpx 0 0"
-						  :src="item.pic"
+						  :src="item.pics[0]"
 						/>
 					</view>
 					<view class="title">
@@ -73,6 +74,7 @@
 					</view>
 				</view>
 			</grid-view>
+			<van-divider contentPosition="center">没有更多了！</van-divider>
 		</view>
 		<van-toast id="van-toast" />
 	</view>
@@ -106,7 +108,7 @@
 						active: true
 					},
 					{
-						title: '特色介绍',
+						title: '特产介绍',
 						active: false
 					}
 				]

@@ -128,8 +128,8 @@
 			<view class="see-box">
 				<view v-for="(item, index) in seeList.slice(0, 3)" :key="index" @click="toDetail(item)" class="see-item">
 					<view class="left">
-						<van-image width="100%" height="100%" fit="cover"
-							:src="item.pic" />
+						<van-image width="100%" height="100%" fit="cover" radius="4"
+							:src="item.pics[0]" />
 					</view>
 					<view class="right">
 						<view class="title">
@@ -160,7 +160,7 @@
 				<view  v-for="(item, index) in blowList.slice(0, 1)" :key="index" class="blow-item">
 					<view class="blow-img">
 						<van-image width="100%" height="100%" radius="4" fit="cover"
-							:src="item.pic" />
+							:src="item.pics[0]" />
 					</view>
 					<view class="blow-info">
 						<view class="title">
@@ -193,7 +193,7 @@
 				<view v-for="(item, index) in liveList.slice(0, 1)" :key="index" class="live-item">
 					<view class="live-img">
 						<van-image width="100%" height="100%" radius="4" fit="cover"
-							:src="item.pic" />
+							:src="item.pics[0]" />
 					</view>
 				</view>
 			</view>
@@ -579,7 +579,7 @@ page {
 		.title-bg {
 			height: 264rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/indexTop.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			.menu-title {
 				display: flex;
 				align-items: center;
@@ -652,7 +652,7 @@ page {
 			border-radius: 12rpx;
 			box-sizing: border-box;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/gonggao.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			.top {
 				height: 84rpx;
 				padding: 0 26rpx;
@@ -749,15 +749,16 @@ page {
 		}
 		.see-box, .blow-box, .stroll-box, .live-box {
 			border-radius: 12rpx;
-			height: 751rpx;
+			height: 746rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/kan.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			box-sizing: border-box;
-			padding: 40rpx 32rpx 40rpx;
+			padding: 40rpx 32rpx;
 			.see-item {
 				display: flex;
 				justify-content: space-between;
 				margin-bottom: 20rpx;
+				box-sizing: border-box;
 				padding-bottom: 20rpx;
 				border-bottom: 2rpx solid #F0F0F2;
 				.left {
@@ -801,6 +802,7 @@ page {
 			.see-item:nth-child(3n) {
 				border-bottom: none;
 				margin-bottom: 0;
+				padding-bottom: 0;
 			}
 			.blow-item {
 				.blow-img {
@@ -912,17 +914,17 @@ page {
 		.blow-box {
 			height: 612rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/pin.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 		}
 		.stroll-box {
 			height: 568rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/guang.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 		}
 		.live-box {
 			height: 445rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/zhu.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 		}
 	}
 }

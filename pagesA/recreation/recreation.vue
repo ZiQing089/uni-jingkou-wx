@@ -9,7 +9,7 @@
 					  height="100%"
 					  fit="cover"
 					  radius="4"
-					  :src="item.pic"
+					  :src="item.pics[0]"
 					/>
 				</view>
 				<view class="info">
@@ -37,6 +37,7 @@
 					</view>
 				</view>
 			</view>
+			<van-divider contentPosition="center">没有更多了！</van-divider>
 		</view>
 	</view>
 </template>

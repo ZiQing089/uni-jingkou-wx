@@ -7,7 +7,7 @@
 				  width="100%"
 				  height="100%"
 				  fit="cover"
-				  :src="detail.pic"
+				  :src="detail.pics[0]"
 				/>
 			</view>
 			<view class="title">
@@ -92,7 +92,7 @@
 				font-size: 24rpx;
 				color: #999999;
 				line-height: 36rpx;
-				letter-spacing: 4px;
+				letter-spacing: 1px;
 				.img-icon {
 					width: 32rpx;
 					height: 32rpx;

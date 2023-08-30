@@ -55,6 +55,7 @@
 		line-height: 66rpx;
 		letter-spacing: 1px;
 		padding: 46rpx 50rpx 0;
+		text-align: center;
 	}
 	.info {
 		margin-top: 40rpx;

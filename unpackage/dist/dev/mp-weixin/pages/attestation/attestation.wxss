@@ -32,7 +32,7 @@ page {
 .attestation .attestation-header.data-v-41a6eb28, .attestation-status .attestation-header.data-v-41a6eb28 {
   position: relative;
   background: url("https://files.zz-tech.cn/app-files/images/jingkou/realname-bg.png") no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
   height: 420rpx;
   box-sizing: border-box;
 }
@@ -126,14 +126,14 @@ page {
   margin: 130rpx auto 0;
   height: 246rpx;
   background: url("https://files.zz-tech.cn/app-files/images/jingkou/success.png") no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
 }
 .attestation-status .error-img.data-v-41a6eb28 {
   width: 226rpx;
   margin: 202rpx auto 0;
   height: 226rpx;
   background: url("https://files.zz-tech.cn/app-files/images/jingkou/error.png") no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
 }
 .attestation-status .error-tips.data-v-41a6eb28 {
   height: 56rpx;

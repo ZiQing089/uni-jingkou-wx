@@ -108,6 +108,9 @@
 .show-add .content .form-block .upload.data-v-73ab3ebc .van-uploader__preview:nth-child(3n) {
   margin: 0 0 0 0;
 }
+.show-add .content .form-block .upload.data-v-73ab3ebc .van-icon {
+  color: #B94333;
+}
 .show-add .content .form-block .upload .tips.data-v-73ab3ebc {
   margin-top: 12rpx;
   font-size: 24rpx;

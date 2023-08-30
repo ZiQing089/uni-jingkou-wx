@@ -419,7 +419,8 @@
 				    "style": {
 				    	"navigationStyle": "custom",
 				    	"usingComponents": {
-							"van-image": "/wxcomponents/vant/dist/image/index"
+							"van-image": "/wxcomponents/vant/dist/image/index",
+							"van-divider": "/wxcomponents/vant/dist/divider/index"
 						}
 				    }
 				    
@@ -430,7 +431,8 @@
 				    	"navigationStyle": "custom",
 				    	"usingComponents": {
 							"van-image": "/wxcomponents/vant/dist/image/index",
-							"van-toast": "/wxcomponents/vant/dist/toast/index"
+							"van-toast": "/wxcomponents/vant/dist/toast/index",
+							"van-divider": "/wxcomponents/vant/dist/divider/index"
 						}
 				    }
 				    
@@ -450,7 +452,8 @@
 				    "style": {
 				    	"navigationStyle": "custom",
 				    	"usingComponents": {
-							"van-image": "/wxcomponents/vant/dist/image/index"
+							"van-image": "/wxcomponents/vant/dist/image/index",
+							"van-divider": "/wxcomponents/vant/dist/divider/index"
 						}
 				    }
 				    
@@ -470,7 +473,8 @@
 				    "style": {
 				    	"navigationStyle": "custom",
 				    	"usingComponents": {
-							"van-image": "/wxcomponents/vant/dist/image/index"
+							"van-image": "/wxcomponents/vant/dist/image/index",
+							"van-divider": "/wxcomponents/vant/dist/divider/index"
 						}
 				    }
 				    

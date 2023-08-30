@@ -1,6 +1,6 @@
 <template>
 	<view class="page-container recommend-detail">
-		<NavBar :title="'文化振兴'" :border="true" />
+		<NavBar :title="'我推荐'" :border="true" />
 		<view class="banner">
 			<van-image
 			  width="100%"
@@ -11,17 +11,17 @@
 		</view>
 		<view class="title">
 			{{ detail.name }}
-			<view class="num">
-				<icon class="iconfont">&#xe65c;</icon>{{ detail.viewCount }}
-			</view>
 		</view>
 		<view class="info">
 			<view class="left">
 				发布时间：{{ detail.createTime | formatDate }}
 			</view>
-			<view class="right">
-				共计得票：{{ detail.voteCount }}票
+			<view class="num">
+				<icon class="iconfont">&#xe65c;</icon>{{ detail.viewCount }}
 			</view>
+		</view>
+		<view class="voteCount">
+			共计得票：{{ detail.voteCount }}票
 		</view>
 		<view class="content">
 			{{ detail.introduce }}
@@ -163,22 +163,27 @@
 		height: 422rpx;
 	}
 	.title {
-		width: 184rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		margin-top: 40rpx;
+		padding: 0 60rpx;
 		font-size: 44rpx;
 		font-weight: bold;
 		color: #333333;
 		line-height: 66rpx;
 		letter-spacing: 1px;
-		margin: 40rpx auto 0;
 		text-align: center;
-		position: relative;
+	}
+	.info {
+		display: flex;
+		justify-content: space-between;
+		padding: 32rpx 148rpx 24rpx;
+		.left {
+			font-size: 26rpx;
+			color: #999999;
+			line-height: 44rpx;
+			letter-spacing: 1px;
+		}
 		.num {
 			display: flex;
-			position: absolute;
-			right: -120rpx;
 			font-size: 26rpx;
 			margin-left: 12rpx;
 			color: #999999;
@@ -192,26 +197,15 @@
 			}
 		}
 	}
-	.info {
-		display: flex;
-		justify-content: space-between;
-		padding: 40rpx 89rpx 0;
-		.left {
-			font-size: 26rpx;
-			color: #999999;
-			line-height: 44rpx;
-			letter-spacing: 1px;
-		}
-		.right {
-			font-size: 26rpx;
-			color: #3DB62F;
-			line-height: 44rpx;
-			letter-spacing: 1px;
-
-		}
+	.voteCount {
+		font-size: 26rpx;
+		color: #3DB62F;
+		line-height: 44rpx;
+		letter-spacing: 1px;
+		text-align: center;
 	}
 	.content {
-		padding: 32rpx 24rpx 190rpx;
+		padding: 32rpx 24rpx 30rpx;
 		font-size: 28rpx;
 		color: #666666;
 		line-height: 44rpx;

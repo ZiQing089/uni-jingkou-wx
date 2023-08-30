@@ -95,7 +95,7 @@
 		.card {
 			border-radius: 12rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/lihdbg.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			margin-bottom: 24rpx;
 			height: 305rpx;
 			box-sizing: border-box;

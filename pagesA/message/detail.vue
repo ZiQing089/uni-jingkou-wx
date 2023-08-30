@@ -1,15 +1,6 @@
 <template>
 	<view class="page-container message-detail">
 		<NavBar :title="'公告信息'" :use-bg="true" :border="true" />
-		<view class="banner-img">
-			<van-image
-			  width="100%"
-			  height="100%"
-			  fit="cover"
-			  :src="detail.pic
-			  "
-			/>
-		</view>
 		<view class="title">
 			{{ detail.title }}
 		</view>

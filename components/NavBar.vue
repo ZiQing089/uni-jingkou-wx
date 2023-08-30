@@ -3,7 +3,7 @@
 		<van-nav-bar
 			:z-index="99"
 			:border="border"
-			:custom-style="useTransparent && 'background-color: transparent;' || useBg && 'background-color: #ffffff; background-image: url(https://files.zz-tech.cn/app-files/images/jingkou/navbg.png); background-repeat: no-repeat; background-size: 100%;'">
+			:custom-style="useTransparent && 'background-color: transparent;' || useBg && 'background-color: #ffffff; background-image: url(https://files.zz-tech.cn/app-files/images/jingkou/navbg.png); background-repeat: no-repeat; background-size: 100% 100%;'">
 			<view v-if="showEmit" slot="left" :class="isWhite ? 'isWhite' : ''" style="display: flex; align-items: center;" @click="clickLeft">
 				<slot name="default">
 					<van-icon name="arrow-left" size="28rpx" /><span :class="isWhite ? 'back isWhite' : 'back'">返回</span>
@@ -67,9 +67,15 @@ export default {
 		},
 		// 返回上一页
 		back() {
-			uni.navigateBack({
-				delta: 1
-			})
+			if (getCurrentPages().length > 1) {
+				uni.navigateBack({
+					delta: 1
+				})
+			} else {
+				uni.redirectTo({
+					url: '/pages/index/index'
+				})
+			}
 		}
 	}
 }

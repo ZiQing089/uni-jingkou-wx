@@ -7,7 +7,7 @@
 				  width="100%"
 				  height="100%"
 				  fit="cover"
-				  :src="detail.pic"
+				  :src="detail.pics[0]"
 				/>
 			</view>
 			<view class="title">
@@ -18,8 +18,8 @@
 					发布时间：{{ detail.createTime | formatDate }}
 				</view>
 				<view class="right">
-					<icon v-if="detail.like" class="iconfont islike">&#xe65b;</icon>
-					<icon v-else class="iconfont">&#xe65b;</icon>
+					<icon v-if="detail.like" class="iconfont islike" @click="addlike(detail)">&#xe65b;</icon>
+					<icon v-else class="iconfont" @click="addlike(detail)">&#xe65b;</icon>
 					<span>{{ detail.likeCount }}</span>
 				</view>
 			</view>
@@ -32,6 +32,7 @@
 
 <script>
 	import NavBar from "@/components/NavBar.vue"
+	import { addlike } from '@/api/jingkou.js'
 	export default {
 		components: {
 			NavBar
@@ -45,7 +46,20 @@
 			this.detail = JSON.parse(decodeURIComponent(option.data))
 		},
 		methods: {
-			
+			addlike(item) {
+				uni.showLoading({
+					title: '正在加载'
+				})
+				addlike({ id: item.id }).then(res => {
+					uni.hideLoading()
+					item.like = !item.like
+					if(item.like) {
+						item.likeCount ++
+					} else {
+						item.likeCount --
+					}
+				}) 
+			}
 		}
 	}
 </script>

@@ -35,7 +35,7 @@
   height: 276rpx;
   background-color: #F6F6F6;
   background: url("https://files.zz-tech.cn/app-files/images/jingkou/whdabg.png") no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
   position: relative;
   display: flex;
   justify-content: space-between;

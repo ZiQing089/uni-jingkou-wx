@@ -57,9 +57,9 @@
 				<view v-else class="status">
 					{{ item.status.description }}
 				</view>
-				<view v-if="rule === 'VILLAGER'" class="add" @click="addNet">
-					<van-icon name="plus" color="white" size="40px" />
-				</view>
+			</view>
+			<view v-if="rule === 'VILLAGER'" class="add" @click="addNet">
+				<van-icon name="plus" color="white" size="40px" />
 			</view>
 			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
@@ -98,7 +98,11 @@
 				showCurrentPage: 1,
 				showPageSize: 10,
 				isShowNoMore: false,
-				conditions: [],
+				conditions: [{
+					"column": "status",
+					"mode": "eq",
+					"value": 'PASS'
+				}],
 				showList: [],
 				list: []
 			}
@@ -106,7 +110,7 @@
 		onShow() {
 			// 获取胶囊位置 { top, height, width }
 			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
-			this.total = top + height + 2 + 5+ 'px'
+			this.total = top + height + 5 + 'px'
 			this.list = []
 			this.showList = []
 			this.getUserInfo()
@@ -154,14 +158,7 @@
 						if(res.data.list.length < this.pageSize) {
 							this.isNoMore = true
 						} 
-					} else {
-						// uni.hideLoading()
-						uni.showToast({
-							title: res.message,
-							icon: 'error',
-							duration: 2000
-						})
-					}
+					} 
 				})
 			},
 			// 获取秀出来列表
@@ -173,13 +170,6 @@
 						if(res.data.list.length < this.pageSize) {
 							this.isShowNoMore = true
 						}
-					} else {
-						// uni.hideLoading()
-						uni.showToast({
-							title: res.message,
-							icon: 'error',
-							duration: 2000
-						})
 					}
 				}) 
 			},
@@ -241,6 +231,11 @@
 		}
 	}
 </script>
+<style>
+	page {
+		background-color: #F6F6F6;
+	}
+</style>
 
 <style lang="scss" scoped>
 .beautiful-yard {
@@ -295,7 +290,7 @@
 			height: 245rpx;
 			box-sizing: border-box;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/mltybg.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			position: relative;
 			.title {
 				font-size: 28rpx;
@@ -363,8 +358,9 @@
 		border-top: 4rpx solid #F6F6F6;
 		padding-bottom: 190rpx;
 		.show-item {
-			border-bottom: 12rpx solid #F6F6F6;
+			margin-bottom: 12px;
 			padding: 32rpx 24rpx 27rpx;
+			background-color: #ffffff;
 			.name {
 				font-size: 28rpx;
 				color: #000000;

@@ -189,9 +189,15 @@ var _default = {
     },
     // 返回上一页
     back: function back() {
-      uni.navigateBack({
-        delta: 1
-      });
+      if (getCurrentPages().length > 1) {
+        uni.navigateBack({
+          delta: 1
+        });
+      } else {
+        uni.redirectTo({
+          url: '/pages/index/index'
+        });
+      }
     }
   }
 };

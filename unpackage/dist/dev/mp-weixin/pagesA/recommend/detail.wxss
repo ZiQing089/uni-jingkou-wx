@@ -61,39 +61,19 @@
   height: 422rpx;
 }
 .recommend-detail .title.data-v-e83cdc90 {
-  width: 184rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 40rpx;
+  padding: 0 60rpx;
   font-size: 44rpx;
   font-weight: bold;
   color: #333333;
   line-height: 66rpx;
   letter-spacing: 1px;
-  margin: 40rpx auto 0;
   text-align: center;
-  position: relative;
-}
-.recommend-detail .title .num.data-v-e83cdc90 {
-  display: flex;
-  position: absolute;
-  right: -120rpx;
-  font-size: 26rpx;
-  margin-left: 12rpx;
-  color: #999999;
-  line-height: 44rpx;
-  letter-spacing: 1px;
-}
-.recommend-detail .title .num .iconfont.data-v-e83cdc90 {
-  display: flex;
-  align-items: center;
-  font-size: 32rpx;
-  margin-right: 12rpx;
 }
 .recommend-detail .info.data-v-e83cdc90 {
   display: flex;
   justify-content: space-between;
-  padding: 40rpx 89rpx 0;
+  padding: 32rpx 148rpx 24rpx;
 }
 .recommend-detail .info .left.data-v-e83cdc90 {
   font-size: 26rpx;
@@ -101,14 +81,29 @@
   line-height: 44rpx;
   letter-spacing: 1px;
 }
-.recommend-detail .info .right.data-v-e83cdc90 {
+.recommend-detail .info .num.data-v-e83cdc90 {
+  display: flex;
+  font-size: 26rpx;
+  margin-left: 12rpx;
+  color: #999999;
+  line-height: 44rpx;
+  letter-spacing: 1px;
+}
+.recommend-detail .info .num .iconfont.data-v-e83cdc90 {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+.recommend-detail .voteCount.data-v-e83cdc90 {
   font-size: 26rpx;
   color: #3DB62F;
   line-height: 44rpx;
   letter-spacing: 1px;
+  text-align: center;
 }
 .recommend-detail .content.data-v-e83cdc90 {
-  padding: 32rpx 24rpx 190rpx;
+  padding: 32rpx 24rpx 30rpx;
   font-size: 28rpx;
   color: #666666;
   line-height: 44rpx;

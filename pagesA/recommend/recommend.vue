@@ -87,11 +87,11 @@
 			border-radius: 12rpx;
 			padding: 40rpx 32rpx 50rpx;
 			margin-bottom: 24rpx;
-			height: 425rpx;
+			height: 420rpx;
 			box-sizing: border-box;
 			background-color: #F6F6F6;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/wtjbg.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			position: relative;
 			.top {
 				display: flex;
@@ -100,7 +100,6 @@
 					width: 260rpx;
 					height: 260rpx;
 					border-radius: 8rpx;
-
 				}
 				.right {
 					width: calc(100% - 282rpx);
@@ -109,6 +108,10 @@
 						justify-content: space-between;
 						align-items: center;
 						.title {
+							width: 218rpx;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
 							font-size: 32rpx;
 							font-weight: bold;
 							color: #B94333;
@@ -129,13 +132,13 @@
 						}
 					}
 					.time {
-						margin-top: 12rpx;
+						margin-top: 8rpx;
 						font-size: 24rpx;
 						color: #666666;
 						line-height: 36rpx;
 					}
 					.sub-title {
-						margin-top: 20rpx;
+						margin-top: 32rpx;
 						font-size: 28rpx;
 						color: #000000;
 						line-height: 40rpx;

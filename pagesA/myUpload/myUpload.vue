@@ -265,7 +265,7 @@
 			padding: 45rpx 32rpx;
 			margin-bottom: 24rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/mltybg.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			position: relative;
 			.title {
 				font-size: 28rpx;
@@ -338,7 +338,7 @@
 			margin-bottom: 24rpx;
 			padding: 45rpx 32rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/mysc.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			position: relative;
 			.name {
 				font-size: 28rpx;

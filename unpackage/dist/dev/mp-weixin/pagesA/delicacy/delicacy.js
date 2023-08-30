@@ -197,7 +197,7 @@ var _default = {
         title: '周边饭店',
         active: true
       }, {
-        title: '特色介绍',
+        title: '特产介绍',
         active: false
       }]
     };

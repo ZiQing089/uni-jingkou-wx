@@ -10,7 +10,7 @@
 						  height="100%"
 						  fit="cover"
 						  radius="12rpx 12rpx 0 0"
-						  :src="item.pic"
+						  :src="item.pics[0]"
 						/>
 					</view>
 					<view class="title">

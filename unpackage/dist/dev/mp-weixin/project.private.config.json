@@ -9,6 +9,13 @@
         "miniprogram": {
             "list": [
                 {
+                    "name": "",
+                    "pathName": "pagesA/beautifulYard/beautifulYard",
+                    "query": "title=%E7%BE%8E%E4%B8%BD%E5%BA%AD%E9%99%A2",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
                     "name": "我推荐",
                     "pathName": "pagesA/recommend/recommend",
                     "query": "title=%E6%88%91%E6%8E%A8%E8%8D%90",

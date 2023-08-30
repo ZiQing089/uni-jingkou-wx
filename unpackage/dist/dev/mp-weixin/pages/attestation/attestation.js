@@ -223,6 +223,7 @@ var _default = {
             _this2.showSuccess = true;
             _this2.showForm = false;
             _this2.preLogin();
+            _this2.getUserInfo();
           }
         });
       } else {

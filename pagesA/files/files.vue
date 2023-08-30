@@ -20,10 +20,12 @@
 						{{ item.introduce }}
 					</view>
 					<view class="time">
-						{{ item.createTime | formatDate }}
-					</view>
-					<view class="nav">
-						查看详情<icon class="iconfont">&#xe647;</icon>
+						<view class="times">
+							{{ item.createTime | formatDate }}
+						</view>
+						<view class="nav">
+							查看详情<icon class="iconfont">&#xe647;</icon>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -43,7 +45,7 @@
 				list: []
 			}
 		},
-		onLoad() {
+		onShow() {
 			this.init()
 		},
 		methods: {
@@ -76,28 +78,12 @@
 			margin-bottom: 24rpx;
 			background-color: #F6F6F6;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/whdabg.png') no-repeat;
-			background-size: 100%;
+			background-size: 100% 100%;
 			position: relative;
-			height: 279rpx;
+			height: 274rpx;
 			box-sizing: border-box;
 			display: flex;
 			justify-content: space-between;
-			.nav {
-				position: absolute;
-				right: 32rpx;
-				bottom: 45rpx;
-			    height: 36rpx;
-			    font-size: 24rpx;
-				display: flex;
-			    color: #B94333;
-			    line-height: 36rpx;
-			   .iconfont {
-				   display: flex;
-				   align-items: center;
-				   font-size: 20rpx;
-				   margin-left: 12rpx;
-			   }
-			}
 			.left {
 				width: 260rpx;
 				height: 194rpx;
@@ -124,7 +110,7 @@
 						font-size: 24rpx;
 						color: #666666;
 						line-height: 36rpx;
-						letter-spacing: 4px;
+						letter-spacing: 1px;
 						.iconfont {
 							display: flex;
 							align-items: center;
@@ -146,10 +132,28 @@
 					-webkit-line-clamp: 2;
 				}
 				.time {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
 					margin-top: 22rpx;
-					font-size: 24rpx;
-					color: #666666;
-					line-height: 36rpx;
+					.times {
+						font-size: 24rpx;
+						color: #666666;
+						line-height: 36rpx;
+					}
+					.nav {
+						display: flex;
+					    font-size: 24rpx;
+						display: flex;
+					    color: #B94333;
+					    line-height: 36rpx;
+					   .iconfont {
+						   display: flex;
+						   align-items: center;
+						   font-size: 20rpx;
+						   margin-left: 12rpx;
+					   }
+					}
 				}
 			}
 		}

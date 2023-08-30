@@ -8,7 +8,7 @@
 					  width="100%"
 					  height="100%"
 					  fit="cover"
-					  :src="detail.pics"
+					  :src="detail.pics[0]"
 					/>
 				</view>
 				<view class="info">
@@ -110,7 +110,6 @@
 					color: #000000;
 					line-height: 92rpx;
 					box-sizing: border-box;
-					padding-left: 18rpx;
 					.left {
 						.iconfont {
 							font-size: 28rpx;
