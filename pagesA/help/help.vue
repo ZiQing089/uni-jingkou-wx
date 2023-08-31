@@ -2,42 +2,47 @@
 	<view class="page-container help">
 		<NavBar :title="title" :use-bg="true" :border="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
-				<view class="img">
-					<van-image
-					  width="100%"
-					  height="100%"
-					  fit="cover"
-					  radius="4"
-					  :src="item.pics[0]"
-					/>
-				</view>
-				<view class="title">
-					{{ item.name }}
-				</view>
-				<view class="info">
-					<view class="time">
-						时间：{{ item.time | formatDate }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+					<view class="img">
+						<van-image
+						  width="100%"
+						  height="100%"
+						  fit="cover"
+						  radius="4"
+						  :src="item.pics[0]"
+						/>
 					</view>
-					<view class="address">
-						地点：{{ item.address }}
+					<view class="title">
+						{{ item.name }}
+					</view>
+					<view class="info">
+						<view class="time">
+							时间：{{ item.time | formatDate }}
+						</view>
+						<view class="address">
+							地点：{{ item.address }}
+						</view>
+					</view>
+					<view class="text-box">
+						<view class="text">
+							{{ item.description }}
+						</view>
+					</view>
+					<view class="bottom">
+						<view class="num">
+							参与人数：{{ item.number }}人
+						</view>
+						<view class="btn">
+							查看详情<icon class="iconfont">&#xe647;</icon>
+						</view>
 					</view>
 				</view>
-				<view class="text-box">
-					<view class="text">
-						{{ item.description }}
-					</view>
-				</view>
-				<view class="bottom">
-					<view class="num">
-						参与人数：{{ item.number }}人
-					</view>
-					<view class="btn">
-						查看详情<icon class="iconfont">&#xe647;</icon>
-					</view>
-				</view>
-			</view>
-			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+				<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+			</template>
 		</view>
 	</view>
 </template>
@@ -113,6 +118,13 @@
 .help {
 	padding-bottom: 98rpx;
 	.content {
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			padding: 24rpx 24rpx 0;
 			border-bottom: 12rpx solid #F6F6F6;

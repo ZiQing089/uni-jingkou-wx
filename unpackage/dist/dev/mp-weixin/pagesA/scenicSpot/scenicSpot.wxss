@@ -32,6 +32,13 @@ page {
 .scenic-spot .content.data-v-9753726a {
   padding: 0 12rpx;
 }
+.scenic-spot .content .noData.data-v-9753726a {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
+}
 .scenic-spot .content .item.data-v-9753726a {
   width: 358rpx;
   margin-top: 12rpx;

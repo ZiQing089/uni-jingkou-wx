@@ -1,7 +1,7 @@
 <template>
 	<view class="page-container qinglian">
 		<NavBar :title="'清廉泾口'" :use-bg="true" />
-		<view class="hot-nav">
+		<view class="hot-nav" :style="{ top: total }">
 			<view v-for="(item, index) in hotNav" :key="index" :class="item.active ? 'nav-item active' : 'nav-item'" @click="changeHotNav(item, index)">
 				<span>{{ item.title }}</span>
 			</view>
@@ -90,11 +90,14 @@
 				currentPage: 1,
 				pageSize: 500,
 				isNoMore: false,
+				total: '',
 				conditions: [],
 				list: []
 			}
 		},
 		onShow() {
+			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
+			this.total = top + height + 5 + 'px'
 			this.init()
 		},
 		methods: {
@@ -162,6 +165,7 @@
 .qinglian {
 	.hot-nav {
 		display: flex;
+		position: sticky;
 		justify-content: space-between;
 		padding: 0 69rpx;
 		height: 86rpx;

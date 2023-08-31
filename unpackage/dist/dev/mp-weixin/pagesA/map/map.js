@@ -144,7 +144,7 @@ exports.default = void 0;
 var _map = __webpack_require__(/*! @/api/map.js */ 161);
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
-    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 457));
+    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 459));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -157,70 +157,92 @@ var _default = {
       x: 0,
       mock: [{
         itemClass: 'laoyuchang',
-        name: '老鱼场'
+        name: '',
+        nickName: '老鱼场'
       }, {
         itemClass: 'canting',
-        name: '餐厅(食堂)'
+        name: '',
+        nickName: '餐厅(食堂)'
       }, {
         itemClass: 'youchuanmatou1',
-        name: '游船码头'
+        name: '',
+        nickName: '游船码头'
       }, {
         itemClass: 'youchuanmatou2',
-        name: '游船码头'
+        name: '',
+        nickName: '游船码头'
       }, {
         itemClass: 'huahai1',
-        name: '花海'
+        name: '',
+        nickName: '花海'
       }, {
         itemClass: 'huahai2',
-        name: '花海'
+        name: '',
+        nickName: '花海'
       }, {
         itemClass: 'yebaozhongxin',
-        name: '野保中心-萌宠互动区'
+        name: '',
+        nickName: '野保中心-萌宠互动区'
       }, {
         itemClass: 'mifenggongfang',
-        name: '蜜蜂工坊'
+        name: '',
+        nickName: '蜜蜂工坊'
       }, {
         itemClass: 'luyingjidi',
-        name: '露营基地'
+        name: '',
+        nickName: '露营基地'
       }, {
         itemClass: 'diaoyuqu',
-        name: '钓鱼区'
+        name: '',
+        nickName: '钓鱼区'
       }, {
         itemClass: 'liaowangtai',
-        name: '瞭望台'
+        name: '',
+        nickName: '瞭望台'
       }, {
         itemClass: 'wenhualitang',
-        name: '文化礼堂'
+        name: '',
+        nickName: '文化礼堂'
       }, {
         itemClass: 'shucaicaizhai',
-        name: '蔬菜采摘基地'
+        name: '',
+        nickName: '蔬菜采摘基地'
       }, {
         itemClass: 'minsu',
-        name: '泾口民宿'
+        name: '',
+        nickName: '泾口民宿'
       }, {
         itemClass: 'gongfushangdian',
-        name: '共富商店'
+        name: '',
+        nickName: '共富商店'
       }, {
         itemClass: 'jingkouguqiao',
-        name: '泾口古桥'
+        name: '',
+        nickName: '泾口古桥'
       }, {
         itemClass: 'wudigumiao',
-        name: '关帝古庙'
+        name: '',
+        nickName: '关帝古庙'
       }, {
         itemClass: 'cunwei',
-        name: '村委'
+        name: '',
+        nickName: '村委'
       }, {
         itemClass: 'qixingyizhan',
-        name: '骑行驿站'
+        name: '',
+        nickName: '骑行驿站'
       }, {
         itemClass: 'hulianwangyiyuan',
-        name: '互联网医院'
+        name: '',
+        nickName: '互联网医院'
       }, {
         itemClass: 'fuwuzhongxin',
-        name: '服务中心'
+        name: '',
+        nickName: '服务中心'
       }, {
         itemClass: 'cunrukoupaifang',
-        name: '村入口牌坊'
+        name: '',
+        nickName: '村入口牌坊'
       }],
       list: []
     };
@@ -236,10 +258,12 @@ var _default = {
       (0, _map.mapList)().then(function (res) {
         var self = _this;
         self.list = res.data;
-        self.list.forEach(function (item, index) {
-          self.mock.forEach(function (e, i) {
-            if (item.name == e.name) {
-              item.itemClass = e.itemClass;
+        self.mock.forEach(function (item, index) {
+          self.list.forEach(function (e, i) {
+            if (item.nickName == e.name) {
+              item.name = e.name;
+              item.introduce = e.introduce;
+              item.pics = e.pics;
             }
           });
         });

@@ -27,6 +27,13 @@
 .space.data-v-24ff1139 {
   padding-bottom: 98rpx;
 }
+.space .content .noData.data-v-24ff1139 {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
+}
 .space .content .item.data-v-24ff1139 {
   padding: 24rpx 24rpx 0;
   background: #ffffff;

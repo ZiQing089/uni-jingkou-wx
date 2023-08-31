@@ -7,67 +7,77 @@
 			</view>
 		</view>
 		<view v-if="show === 0" class="show-content">
-			<view v-for="(item, index) in showList" :key="index" class="show-item">
-				<view class="inside-border">
-					<view class="banner">
-						<swiper class="swiper" circular :indicator-dots="true"
-							indicator-active-color="#FFFFFF" indicator-color="rgba(255, 255, 255, 0.58)">
-							<swiper-item v-for="(e, i) in item.pics" :key="i">
-								<view class="img">
-									<van-image width="100%" height="100%" fit="cover"
-										:src="e" />
-										<view v-if="item.status.description === '已驳回'" class="status error">
-											{{ item.status.description }}
-										</view>
-										<view v-else-if="item.status.description === '待审核' || item.status.description === '待处理'" class="status warning">
-											{{ item.status.description }}
-										</view>
-										<view v-else class="status">
-											{{ item.status.description }}
-										</view>
-								</view>
-							</swiper-item>
-						</swiper>
-					</view>
-					<view class="name">
-						户主：{{ item.houseHolder }}
-					</view>
-					<view v-if="item.status.description === '已驳回'" class="reject">
-						驳回原因：{{ item.reject }}
-					</view>
-					<view v-if="item.status.description === '待审核'" class="cancel" @click.native.stop="cancelShow(item)">
-						取消
+			<template v-if="showList.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in showList" :key="index" class="show-item">
+					<view class="inside-border">
+						<view class="banner">
+							<swiper class="swiper" circular :indicator-dots="true"
+								indicator-active-color="#FFFFFF" indicator-color="rgba(255, 255, 255, 0.58)">
+								<swiper-item v-for="(e, i) in item.pics" :key="i">
+									<view class="img">
+										<van-image width="100%" height="100%" fit="cover"
+											:src="e" />
+											<view v-if="item.status.description === '已驳回'" class="status error">
+												{{ item.status.description }}
+											</view>
+											<view v-else-if="item.status.description === '待审核' || item.status.description === '待处理'" class="status warning">
+												{{ item.status.description }}
+											</view>
+											<view v-else class="status">
+												{{ item.status.description }}
+											</view>
+									</view>
+								</swiper-item>
+							</swiper>
+						</view>
+						<view class="name">
+							户主：{{ item.houseHolder }}
+						</view>
+						<view v-if="item.status.description === '已驳回'" class="reject">
+							驳回原因：{{ item.reject }}
+						</view>
+						<view v-if="item.status.description === '待审核'" class="cancel" @click.native.stop="cancelShow(item)">
+							取消
+						</view>
 					</view>
 				</view>
-			</view>
+			</template>
 		</view>
 		<view v-if="show === 1" class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
-				<view class="title">
-					{{ item.title }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+					<view class="title">
+						{{ item.title }}
+					</view>
+					<view class="time">
+						上传时间：{{ item.createTime | formatDate }}
+					</view>
+					<view class="name">
+						上传人：{{ item.uploader }}
+					</view>
+					<view v-if="item.status.description !== '待审核'" class="nav">
+						查看<icon class="iconfont">&#xe647;</icon>
+					</view>
+					<view v-if="item.status.description === '待审核'" class="cancel" @click.native.stop="cancel(item)">
+						取消
+					</view>
+					<view v-if="item.status.description === '待审核' || item.status.description === '待处理'" class="status warning">
+						{{ item.status.description }}
+					</view>
+					<view v-else-if="item.status.description === '已驳回'" class="status error">
+						{{ item.status.description }}
+					</view>
+					<view v-else class="status">
+						{{ item.status.description }}
+					</view>
 				</view>
-				<view class="time">
-					上传时间：{{ item.createTime | formatDate }}
-				</view>
-				<view class="name">
-					上传人：{{ item.uploader }}
-				</view>
-				<view v-if="item.status.description !== '待审核'" class="nav">
-					查看<icon class="iconfont">&#xe647;</icon>
-				</view>
-				<view v-if="item.status.description === '待审核'" class="cancel" @click.native.stop="cancel(item)">
-					取消
-				</view>
-				<view v-if="item.status.description === '待审核' || item.status.description === '待处理'" class="status warning">
-					{{ item.status.description }}
-				</view>
-				<view v-else-if="item.status.description === '已驳回'" class="status error">
-					{{ item.status.description }}
-				</view>
-				<view v-else class="status">
-					{{ item.status.description }}
-				</view>
-			</view>
+			</template>
 		</view>
 	</view>
 </template>
@@ -120,7 +130,7 @@
 		},
 		onShow() {
 			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
-			this.total = top + height + 2 + 7+ 'px'
+			this.total = top + height + 5 + 'px'
 			this.showList = []
 			this.list = []
 			this.getList()
@@ -141,6 +151,8 @@
 						if(res.data.list.length < this.pageSize) {
 							this.isNoMore = true
 						}
+					} else if(res.success && res.data.list.length === 0){
+						this.isNoMore = true
 					}
 				})
 			},
@@ -158,6 +170,8 @@
 						if(res.data.list.length < this.pageSize) {
 							this.isShowNoMore = true
 						}
+					} else if(res.success && res.data.list.length === 0){
+						this.isShowNoMore = true
 					}
 				}) 
 			},
@@ -260,6 +274,13 @@
 	.content {
 		border-top: 4rpx solid #F6F6F6;
 		padding: 32rpx 24rpx 90rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: auto auto 0;
+		}
 		.item {
 			border-radius: 12rpx;
 			padding: 45rpx 32rpx;
@@ -333,6 +354,13 @@
 	.show-content {
 		border-top: 4rpx solid #F6F6F6;
 		padding: 32rpx 24rpx 90rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: auto auto 0;
+		}
 		.show-item {
 			border-radius: 12rpx;
 			margin-bottom: 24rpx;

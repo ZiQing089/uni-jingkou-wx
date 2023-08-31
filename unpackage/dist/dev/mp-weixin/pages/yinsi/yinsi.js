@@ -145,7 +145,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
-    return resolve(__webpack_require__(/*! @/components/NavBar */ 457));
+    return resolve(__webpack_require__(/*! @/components/NavBar */ 459));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {

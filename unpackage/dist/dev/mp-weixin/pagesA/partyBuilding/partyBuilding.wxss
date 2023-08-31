@@ -68,8 +68,14 @@
   background: #F4E3E0;
 }
 .partyBuilding .content.data-v-d597cebe {
-  border-top: 4rpx solid #F6F6F6;
   padding: 32rpx 24rpx 90rpx;
+}
+.partyBuilding .content .noData.data-v-d597cebe {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
 }
 .partyBuilding .content .item.data-v-d597cebe {
   border-radius: 12rpx;
@@ -107,8 +113,12 @@
   font-size: 20rpx;
   margin-left: 12rpx;
 }
-.partyBuilding .content-member.data-v-d597cebe {
-  border-top: 4rpx solid #F6F6F6;
+.partyBuilding .content-member .noData.data-v-d597cebe {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
 }
 .partyBuilding .content-member .list-item.data-v-d597cebe {
   background: #ffffff;

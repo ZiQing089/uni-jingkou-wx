@@ -36,6 +36,8 @@ page {
 .delicacy .hot-nav.data-v-5eaf17eb {
   display: flex;
   padding: 0 56rpx;
+  position: -webkit-sticky;
+  position: sticky;
   height: 86rpx;
   background-color: #ffffff;
   margin-bottom: 4rpx;
@@ -74,17 +76,24 @@ page {
   z-index: 0;
   background: #F4E3E0;
 }
-.delicacy .item.data-v-5eaf17eb {
+.delicacy .content .noData.data-v-5eaf17eb {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
+}
+.delicacy .content .item.data-v-5eaf17eb {
   background-color: #fff;
   padding: 24rpx 24rpx 0;
   margin-bottom: 12rpx;
 }
-.delicacy .item .img.data-v-5eaf17eb {
+.delicacy .content .item .img.data-v-5eaf17eb {
   height: 394rpx;
   background: #F6F6F6;
   border-radius: 8rpx;
 }
-.delicacy .item .phone.data-v-5eaf17eb, .delicacy .item .address.data-v-5eaf17eb {
+.delicacy .content .item .phone.data-v-5eaf17eb, .delicacy .content .item .address.data-v-5eaf17eb {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -95,18 +104,18 @@ page {
   box-sizing: border-box;
   padding: 0 12rpx;
 }
-.delicacy .item .phone .left .iconfont.data-v-5eaf17eb, .delicacy .item .address .left .iconfont.data-v-5eaf17eb {
+.delicacy .content .item .phone .left .iconfont.data-v-5eaf17eb, .delicacy .content .item .address .left .iconfont.data-v-5eaf17eb {
   font-size: 28rpx;
   margin-right: 20rpx;
 }
-.delicacy .item .phone .right .iconfont.data-v-5eaf17eb, .delicacy .item .address .right .iconfont.data-v-5eaf17eb {
+.delicacy .content .item .phone .right .iconfont.data-v-5eaf17eb, .delicacy .content .item .address .right .iconfont.data-v-5eaf17eb {
   font-size: 20rpx;
   color: #B94333;
 }
-.delicacy .item .phone.data-v-5eaf17eb {
+.delicacy .content .item .phone.data-v-5eaf17eb {
   border-bottom: 2rpx solid #F6F6F6;
 }
-.delicacy .item .info.data-v-5eaf17eb {
+.delicacy .content .item .info.data-v-5eaf17eb {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -115,20 +124,27 @@ page {
   padding: 0 12rpx;
   border-bottom: 2rpx solid #F6F6F6;
 }
-.delicacy .item .info .title.data-v-5eaf17eb {
+.delicacy .content .item .info .title.data-v-5eaf17eb {
   font-size: 28rpx;
   font-weight: bold;
   color: #333333;
   line-height: 40rpx;
   letter-spacing: 1px;
 }
-.delicacy .item .info .distance.data-v-5eaf17eb {
+.delicacy .content .item .info .distance.data-v-5eaf17eb {
   font-size: 24rpx;
   color: #666666;
   line-height: 36rpx;
 }
 .delicacy .other-content.data-v-5eaf17eb {
   padding: 0 12rpx 60rpx;
+}
+.delicacy .other-content .noData.data-v-5eaf17eb {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
 }
 .delicacy .other-content .tone-item.data-v-5eaf17eb {
   width: 358rpx;

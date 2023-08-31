@@ -29,6 +29,13 @@ page {
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.recreation .noData.data-v-86597aaa {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
+}
 .recreation .item.data-v-86597aaa {
   background-color: #fff;
   padding: 24rpx 24rpx 0;

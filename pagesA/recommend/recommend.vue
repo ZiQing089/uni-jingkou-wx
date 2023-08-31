@@ -2,44 +2,49 @@
 	<view class="page-container recommend">
 		<NavBar :title="'我推荐'" :border="true" :use-bg="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
-				<view class="top">
-					<view class="left">
-						<van-image
-						  width="100%"
-						  height="100%"
-						  fit="cover"
-						  radius="4"
-						  :src="item.pics[0]"
-						/>
-					</view>
-					<view class="right">
-						<view class="header">
-							<view class="title">
-								{{ item.name }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+					<view class="top">
+						<view class="left">
+							<van-image
+							  width="100%"
+							  height="100%"
+							  fit="cover"
+							  radius="4"
+							  :src="item.pics[0]"
+							/>
+						</view>
+						<view class="right">
+							<view class="header">
+								<view class="title">
+									{{ item.name }}
+								</view>
+								<view class="num">
+									<icon class="iconfont">&#xe65c;</icon>{{ item.viewCount }}
+								</view>
 							</view>
-							<view class="num">
-								<icon class="iconfont">&#xe65c;</icon>{{ item.viewCount }}
+							<view class="time">
+								{{ item.createTime | formatDate }}
+							</view>
+							<view class="sub-title">
+								{{ item.referee }}
+							</view>
+							<view class="info">
+								{{ item.introduce }}
 							</view>
 						</view>
-						<view class="time">
-							{{ item.createTime | formatDate }}
-						</view>
-						<view class="sub-title">
-							{{ item.referee }}
-						</view>
-						<view class="info">
-							{{ item.introduce }}
-						</view>
+					</view>
+					<view class="bottom">
+						共计得票：{{ item.voteCount }}票
+					</view>
+					<view :class="item.vote ? 'btn ytp' : 'btn'">
+						{{ item.vote ? '已投票' : '投票' }}
 					</view>
 				</view>
-				<view class="bottom">
-					共计得票：{{ item.voteCount }}票
-				</view>
-				<view :class="item.vote ? 'btn ytp' : 'btn'">
-					{{ item.vote ? '已投票' : '投票' }}
-				</view>
-			</view>
+			</template>
 		</view>
 	</view>
 </template>
@@ -83,6 +88,13 @@
 .recommend {
 	.content {
 		padding: 32rpx 24rpx 90rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			border-radius: 12rpx;
 			padding: 40rpx 32rpx 50rpx;

@@ -26,6 +26,8 @@
 /* 文章场景相关 */
 .qinglian .hot-nav.data-v-21a1d3ea {
   display: flex;
+  position: -webkit-sticky;
+  position: sticky;
   justify-content: space-between;
   padding: 0 69rpx;
   height: 86rpx;

@@ -7,61 +7,73 @@
 			</view>
 		</view>
 		<view v-if="show === 0" class="show-content">
-			<view v-for="(item, index) in showList" :key="index" class="show-item">
-				<view class="name">
-					户主：{{ item.houseHolder }}
-				</view>
-				<view class="banner">
-					<swiper class="swiper" circular :indicator-dots="true"
-						indicator-active-color="#FFFFFF" indicator-color="rgba(255, 255, 255, 0.58)">
-						<swiper-item v-for="(e, i) in item.pics" :key="i">
-							<van-image width="100%" height="100%" fit="cover"
-								:src="e" />
-						</swiper-item>
-					</swiper>
-				</view>
-				<view class="bottom">
-					<view class="left" @click="addlike(item)">
-						<icon v-if="item.liked" class="iconfont islike">&#xe65b;</icon><icon v-else class="iconfont">&#xe659;</icon>{{ item.likeCount }}
+			<template v-if="showList.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in showList" :key="index" class="show-item">
+					<view class="name">
+						户主：{{ item.houseHolder }}
 					</view>
-					<button class="share-btn" type="default" open-type="share">
-						<icon class="iconfont">&#xe65a;</icon><span>转发</span>
-					</button>
+					<view class="banner">
+						<swiper class="swiper" circular :indicator-dots="true"
+							indicator-active-color="#FFFFFF" indicator-color="rgba(255, 255, 255, 0.58)">
+							<swiper-item v-for="(e, i) in item.pics" :key="i">
+								<van-image width="100%" height="100%" fit="cover"
+									:src="e" />
+							</swiper-item>
+						</swiper>
+					</view>
+					<view class="bottom">
+						<view class="left" @click="addlike(item)">
+							<icon v-if="item.liked" class="iconfont islike">&#xe65b;</icon><icon v-else class="iconfont">&#xe659;</icon>{{ item.likeCount }}
+						</view>
+						<button class="share-btn" type="default" open-type="share">
+							<icon class="iconfont">&#xe65a;</icon><span>转发</span>
+						</button>
+					</view>
 				</view>
-			</view>
+				<van-divider v-if="isShowNoMore" contentPosition="center">没有更多了！</van-divider>
+			</template>
 			<view v-if="rule === 'VILLAGER'" class="add" @click="addShow">
 				<van-icon name="plus" color="white" size="40px" />
 			</view>
-			<van-divider v-if="isShowNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
 		<view v-if="show === 1" class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
-				<view class="title">
-					{{ item.title }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item-bg" @click="toDetail(item)">
+					<view class="item">
+						<view class="title">
+							{{ item.title }}
+						</view>
+						<view class="time">
+							上传时间：{{ item.createTime | formatDate }}
+						</view>
+						<view class="name">
+							上传人：{{ item.uploader }}
+						</view>
+						<view class="nav">
+							查看<icon class="iconfont">&#xe647;</icon>
+						</view>
+						<view v-if="item.status.description === '待审核' || item.status.description === '待处理'" class="status warning">
+							{{ item.status.description }}
+						</view>
+						<view v-else-if="item.status.description === '已驳回'" class="status error">
+							{{ item.status.description }}
+						</view>
+						<view v-else class="status">
+							{{ item.status.description }}
+						</view>
+					</view>
 				</view>
-				<view class="time">
-					上传时间：{{ item.createTime | formatDate }}
-				</view>
-				<view class="name">
-					上传人：{{ item.uploader }}
-				</view>
-				<view class="nav">
-					查看<icon class="iconfont">&#xe647;</icon>
-				</view>
-				<view v-if="item.status.description === '待审核' || item.status.description === '待处理'" class="status warning">
-					{{ item.status.description }}
-				</view>
-				<view v-else-if="item.status.description === '已驳回'" class="status error">
-					{{ item.status.description }}
-				</view>
-				<view v-else class="status">
-					{{ item.status.description }}
-				</view>
-			</view>
+				<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+			</template>
 			<view v-if="rule === 'VILLAGER'" class="add" @click="addNet">
 				<van-icon name="plus" color="white" size="40px" />
 			</view>
-			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
 		</view>
 	</view>
 </template>
@@ -98,10 +110,15 @@
 				showCurrentPage: 1,
 				showPageSize: 10,
 				isShowNoMore: false,
-				conditions: [{
+				showconditions: [{
 					"column": "status",
 					"mode": "eq",
 					"value": 'PASS'
+				}],
+				conditions: [{
+					"column": "status",
+					"mode": "in",
+					"value": ['WAITING', 'DONE']
 				}],
 				showList: [],
 				list: []
@@ -163,7 +180,7 @@
 			},
 			// 获取秀出来列表
 			getShowList() {
-				getShowlist({currentPage: this.showCurrentPage, pageSize: this.showPageSize, conditions: this.conditions}).then(res => {
+				getShowlist({currentPage: this.showCurrentPage, pageSize: this.showPageSize, conditions: this.showconditions}).then(res => {
 					if(res.success && res.data.list.length !== 0) {
 						this.isShowLoadMore = false
 						this.showList = this.showList.concat(res.data.list)
@@ -281,63 +298,72 @@
 		}
 	}
 	.content {
-		border-top: 4rpx solid #F6F6F6;
-		padding: 32rpx 24rpx 90rpx;
-		.item {
-			border-radius: 12rpx;
-			padding: 40rpx 32rpx;
-			margin-bottom: 24rpx;
-			height: 245rpx;
-			box-sizing: border-box;
-			background: url('https://files.zz-tech.cn/app-files/images/jingkou/mltybg.png') no-repeat;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
 			background-size: 100% 100%;
-			position: relative;
-			.title {
-				font-size: 28rpx;
-				color: #000000;
-				line-height: 40rpx;
-				letter-spacing: 1px;
-			}
-			.time, .name {
-				margin-top: 26rpx;
-				font-size: 24rpx;
-				color: #333333;
-				line-height: 36rpx;
-			}
-			.status {
-				position: absolute;
-				right: 32rpx;
-				top: 40rpx;
-				padding: 6rpx 14rpx;
-				font-size: 24rpx;
-				color: #3DB62F;
-				line-height: 34rpx;
-				background: #E6F8E4;
-				border-radius: 4rpx;
-			}
-			.warning {
-				background: #FEF4EA;
-				color: #FA7E2A;
-			}
-			.error {
-				color: #F4474B;
-				background: #FDECEC;
-			}
-			.nav {
-				position: absolute;
-				right: 40rpx;
-				bottom: 45rpx;
-			    height: 36rpx;
-			    font-size: 24rpx;
-				display: flex;
-			    color: #B94333;
-			    line-height: 36rpx;
-			   .iconfont {
-				   display: flex;
-				   align-items: center;
-				   font-size: 20rpx;
-				   margin-left: 12rpx;
-			   }
+			margin: 0 auto;
+		}
+		.item-bg {
+			background-color: #ffffff;
+			padding: 24rpx;
+			margin-bottom: 4rpx;
+			.item {
+				border-radius: 12rpx;
+				padding: 40rpx 32rpx;
+				height: 240rpx;
+				box-sizing: border-box;
+				background: url('https://files.zz-tech.cn/app-files/images/jingkou/mltybg.png') no-repeat;
+				background-size: 100% 100%;
+				position: relative;
+				.title {
+					font-size: 28rpx;
+					color: #000000;
+					line-height: 40rpx;
+					letter-spacing: 1px;
+				}
+				.time, .name {
+					margin-top: 26rpx;
+					font-size: 24rpx;
+					color: #333333;
+					line-height: 36rpx;
+				}
+				.status {
+					position: absolute;
+					right: 32rpx;
+					top: 40rpx;
+					padding: 6rpx 14rpx;
+					font-size: 24rpx;
+					color: #3DB62F;
+					line-height: 34rpx;
+					background: #E6F8E4;
+					border-radius: 4rpx;
+				}
+				.warning {
+					background: #FEF4EA;
+					color: #FA7E2A;
+				}
+				.error {
+					color: #F4474B;
+					background: #FDECEC;
+				}
+				.nav {
+					position: absolute;
+					right: 32rpx;
+					bottom: 40rpx;
+				    height: 36rpx;
+				    font-size: 24rpx;
+					display: flex;
+				    color: #B94333;
+				    line-height: 36rpx;
+				   .iconfont {
+					   display: flex;
+					   align-items: center;
+					   font-size: 20rpx;
+					   margin-left: 12rpx;
+				   }
+				}
 			}
 		}
 		.add {
@@ -355,11 +381,16 @@
 		}
 	}
 	.show-content {
-		border-top: 4rpx solid #F6F6F6;
-		padding-bottom: 190rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.show-item {
 			margin-bottom: 12px;
-			padding: 32rpx 24rpx 27rpx;
+			padding: 32rpx 24rpx 24rpx;
 			background-color: #ffffff;
 			.name {
 				font-size: 28rpx;

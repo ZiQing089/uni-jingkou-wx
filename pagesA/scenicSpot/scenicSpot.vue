@@ -2,34 +2,39 @@
 	<view class="scenic-spot page-container">
 		<NavBar :title="'美丽景点'" :use-bg="true" />
 		<view class="content">
-			<grid-view :cross-axis-gap="6" :main-axis-gap="6" type="masonry">
-				<view v-for="(item, index) in toneList" :key="index" class="item" @click="toDetail(item)">
-					<view class="img">
-						<van-image
-						  width="100%"
-						  height="100%"
-						  fit="cover"
-						  radius="12rpx 12rpx 0 0"
-						  :src="item.pics[0]"
-						/>
-					</view>
-					<view class="title">
-						{{ item.name }}
-					</view>
-					<view class="text">
-						{{ item.introduce }}
-					</view>
-					<view class="like">
-						<view class="left">
-							<image src="../../static/img/jingkou/review.png" class="img-icon" mode="scaleToFill"></image>
-							<span>{{ item.viewCount }}</span>
+			<template v-if="toneList.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<grid-view :cross-axis-gap="6" :main-axis-gap="6" type="masonry">
+					<view v-for="(item, index) in toneList" :key="index" class="item" @click="toDetail(item)">
+						<view class="img">
+							<van-image
+							  width="100%"
+							  height="100%"
+							  fit="cover"
+							  radius="12rpx 12rpx 0 0"
+							  :src="item.pics[0]"
+							/>
 						</view>
-						<view class="right">
-							<icon class="iconfont">&#xe647;</icon>
+						<view class="title">
+							{{ item.name }}
+						</view>
+						<view class="text">
+							{{ item.introduce }}
+						</view>
+						<view class="like">
+							<view class="left">
+								<image src="../../static/img/jingkou/review.png" class="img-icon" mode="scaleToFill"></image>
+								<span>{{ item.viewCount }}</span>
+							</view>
+							<view class="right">
+								<icon class="iconfont">&#xe647;</icon>
+							</view>
 						</view>
 					</view>
-				</view>
-			</grid-view>
+				</grid-view>
+			</template>
 		</view>
 	</view>
 </template>
@@ -85,6 +90,13 @@ page {
 .scenic-spot {
 	.content {
 		padding: 0 12rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			width: 358rpx;
 			margin-top: 12rpx;

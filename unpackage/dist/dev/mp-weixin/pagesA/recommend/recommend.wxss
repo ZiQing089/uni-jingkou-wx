@@ -27,6 +27,13 @@
 .recommend .content.data-v-ab1190b6 {
   padding: 32rpx 24rpx 90rpx;
 }
+.recommend .content .noData.data-v-ab1190b6 {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
+}
 .recommend .content .item.data-v-ab1190b6 {
   border-radius: 12rpx;
   padding: 40rpx 32rpx 50rpx;

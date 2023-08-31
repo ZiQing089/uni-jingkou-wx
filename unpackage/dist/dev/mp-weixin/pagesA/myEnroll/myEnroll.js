@@ -102,20 +102,24 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.list, function (item, index) {
-    var $orig = _vm.__get_orig(item)
-    var f0 = _vm._f("formatDate")(item.startTime)
-    var f1 = _vm._f("formatDate")(item.signUpEndTime)
-    return {
-      $orig: $orig,
-      f0: f0,
-      f1: f1,
-    }
-  })
+  var g0 = _vm.list.length
+  var l0 = !(g0 === 0)
+    ? _vm.__map(_vm.list, function (item, index) {
+        var $orig = _vm.__get_orig(item)
+        var f0 = _vm._f("formatDate")(item.startTime)
+        var f1 = _vm._f("formatDate")(item.signUpEndTime)
+        return {
+          $orig: $orig,
+          f0: f0,
+          f1: f1,
+        }
+      })
+    : null
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
+        g0: g0,
         l0: l0,
       },
     }
@@ -162,7 +166,7 @@ exports.default = void 0;
 var _promote = __webpack_require__(/*! @/api/promote.js */ 236);
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
-    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 457));
+    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 459));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {

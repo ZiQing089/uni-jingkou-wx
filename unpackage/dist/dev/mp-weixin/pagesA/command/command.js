@@ -102,6 +102,15 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.list.length
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        g0: g0,
+      },
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -144,7 +153,7 @@ exports.default = void 0;
 var _health = __webpack_require__(/*! @/api/health.js */ 178);
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
-    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 457));
+    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 459));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {

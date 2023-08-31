@@ -2,33 +2,38 @@
 	<view class="page-container files">
 		<NavBar :title="'文化档案'" :border="true" :use-bg="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
-				<view class="left">
-					<van-image width="100%" height="100%" radius="4" fit="cover"
-						:src="item.pics[0]" />
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+					<view class="left">
+						<van-image width="100%" height="100%" radius="4" fit="cover"
+							:src="item.pics[0]" />
+					</view>
+					<view class="right">
+						<view class="header">
+							<view class="title">
+								{{ item.name }}
+							</view>
+							<view class="num">
+								<icon class="iconfont">&#xe65c;</icon>{{ item.viewCount }}
+							</view>
+						</view>
+						<view class="info">
+							{{ item.introduce }}
+						</view>
+						<view class="time">
+							<view class="times">
+								{{ item.createTime | formatDate }}
+							</view>
+							<view class="nav">
+								查看详情<icon class="iconfont">&#xe647;</icon>
+							</view>
+						</view>
+					</view>
 				</view>
-				<view class="right">
-					<view class="header">
-						<view class="title">
-							{{ item.name }}
-						</view>
-						<view class="num">
-							<icon class="iconfont">&#xe65c;</icon>{{ item.viewCount }}
-						</view>
-					</view>
-					<view class="info">
-						{{ item.introduce }}
-					</view>
-					<view class="time">
-						<view class="times">
-							{{ item.createTime | formatDate }}
-						</view>
-						<view class="nav">
-							查看详情<icon class="iconfont">&#xe647;</icon>
-						</view>
-					</view>
-				</view>
-			</view>
+			</template>
 		</view>
 	</view>
 </template>
@@ -72,6 +77,13 @@
 .files {
 	.content {
 		padding: 32rpx 24rpx 90rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			border-radius: 12rpx;
 			padding: 40rpx 32rpx;

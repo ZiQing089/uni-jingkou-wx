@@ -2,43 +2,48 @@
 	<view class="page-container space">
 		<NavBar :title="title" :use-bg="true" :border="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click.prevent.stop="toDetail(item)">
-				<view class="img">
-					<van-image
-					  width="100%"
-					  height="100%"
-					  fit="cover"
-					  radius="4"
-					  :src="item.pics"
-					/>
-				</view>
-				<view class="title">
-					{{ item.name }}
-				</view>
-				<view class="text">
-					{{ item.description }}
-				</view>
-				<view class="phone" @click.prevent.stop="takePhone(item)">
-					<view class="left">
-						<icon class="iconfont">&#xe649;</icon>{{ item.phone }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click.prevent.stop="toDetail(item)">
+					<view class="img">
+						<van-image
+						  width="100%"
+						  height="100%"
+						  fit="cover"
+						  radius="4"
+						  :src="item.pics"
+						/>
 					</view>
-					<view class="right">
-						<icon class="iconfont">&#xe647;</icon>
+					<view class="title">
+						{{ item.name }}
+					</view>
+					<view class="text">
+						{{ item.description }}
+					</view>
+					<view class="phone" @click.prevent.stop="takePhone(item)">
+						<view class="left">
+							<icon class="iconfont">&#xe649;</icon>{{ item.phone }}
+						</view>
+						<view class="right">
+							<icon class="iconfont">&#xe647;</icon>
+						</view>
+					</view>
+					<view class="address" @click.prevent.stop="navigation(item)">
+						<view class="left">
+							<icon class="iconfont">&#xe648;</icon>{{ item.address }}
+						</view>
+						<view class="right">
+							<icon class="iconfont">&#xe647;</icon>
+						</view>
+					</view>
+					<view class="btn">
+						查看详情<icon class="iconfont">&#xe647;</icon>
 					</view>
 				</view>
-				<view class="address" @click.prevent.stop="navigation(item)">
-					<view class="left">
-						<icon class="iconfont">&#xe648;</icon>{{ item.address }}
-					</view>
-					<view class="right">
-						<icon class="iconfont">&#xe647;</icon>
-					</view>
-				</view>
-				<view class="btn">
-					查看详情<icon class="iconfont">&#xe647;</icon>
-				</view>
-			</view>
-			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+				<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+			</template>
 		</view>
 	</view>
 </template>
@@ -129,6 +134,13 @@
 	// height: 100vh;
 	padding-bottom: 98rpx;
 	.content {
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			padding: 24rpx 24rpx 0;
 			background: #ffffff;

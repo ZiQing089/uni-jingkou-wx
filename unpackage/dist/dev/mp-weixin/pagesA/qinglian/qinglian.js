@@ -178,7 +178,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
+/* WEBPACK VAR INJECTION */(function(wx, uni) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -187,7 +187,7 @@ exports.default = void 0;
 var _village = __webpack_require__(/*! @/api/village.js */ 203);
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
-    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 457));
+    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 459));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -211,11 +211,17 @@ var _default = {
       currentPage: 1,
       pageSize: 500,
       isNoMore: false,
+      total: '',
       conditions: [],
       list: []
     };
   },
   onShow: function onShow() {
+    var _wx$getMenuButtonBoun = wx.getMenuButtonBoundingClientRect(),
+      top = _wx$getMenuButtonBoun.top,
+      height = _wx$getMenuButtonBoun.height,
+      width = _wx$getMenuButtonBoun.width;
+    this.total = top + height + 5 + 'px';
     this.init();
   },
   methods: {
@@ -283,7 +289,7 @@ var _default = {
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

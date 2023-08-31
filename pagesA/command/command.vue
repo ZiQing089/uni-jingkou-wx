@@ -2,24 +2,29 @@
 	<view class="page-container command">
 		<NavBar :title="'健康知识'" :border="true" :use-bg="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
-				<view class="left">
-					<van-image width="100%" height="100%" radius="4" fit="cover"
-						:src="item.pics[0]" />
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+					<view class="left">
+						<van-image width="100%" height="100%" radius="4" fit="cover"
+							:src="item.pics[0]" />
+					</view>
+					<view class="right">
+						<view class="title">
+							{{ item.title }}
+						</view>
+						<view class="info">
+							{{ item.description }}
+						</view>
+						<view class="nav">
+							查看详情<icon class="iconfont">&#xe647;</icon>
+						</view>
+					</view>
 				</view>
-				<view class="right">
-					<view class="title">
-						{{ item.title }}
-					</view>
-					<view class="info">
-						{{ item.description }}
-					</view>
-					<view class="nav">
-						查看详情<icon class="iconfont">&#xe647;</icon>
-					</view>
-				</view>
-			</view>
-			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+				<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+			</template>
 		</view>
 	</view>
 </template>
@@ -85,6 +90,13 @@
 .command {
 	.content {
 		padding: 32rpx 24rpx 90rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			border-radius: 12rpx;
 			padding: 40rpx 32rpx;

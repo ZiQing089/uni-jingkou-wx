@@ -160,7 +160,9 @@
 				    "path" : "command/detail",
 				    "style": {
 				    	"navigationStyle": "custom",
-				    	"usingComponents": {}
+				    	"usingComponents": {
+							"van-image": "/wxcomponents/vant/dist/image/index"
+						}
 				    }
 				    
 				},

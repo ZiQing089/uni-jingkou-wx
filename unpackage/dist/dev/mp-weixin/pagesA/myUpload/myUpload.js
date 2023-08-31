@@ -102,8 +102,10 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.show === 0 ? _vm.showList.length : null
+  var g1 = _vm.show === 1 ? _vm.list.length : null
   var l0 =
-    _vm.show === 1
+    _vm.show === 1 && !(g1 === 0)
       ? _vm.__map(_vm.list, function (item, index) {
           var $orig = _vm.__get_orig(item)
           var f0 = _vm._f("formatDate")(item.createTime)
@@ -117,6 +119,8 @@ var render = function () {
     {},
     {
       $root: {
+        g0: g0,
+        g1: g1,
         l0: l0,
       },
     }
@@ -169,7 +173,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
-    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 457));
+    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 459));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -215,7 +219,7 @@ var _default = {
       top = _wx$getMenuButtonBoun.top,
       height = _wx$getMenuButtonBoun.height,
       width = _wx$getMenuButtonBoun.width;
-    this.total = top + height + 2 + 7 + 'px';
+    this.total = top + height + 5 + 'px';
     this.showList = [];
     this.list = [];
     this.getList();
@@ -241,6 +245,8 @@ var _default = {
           if (res.data.list.length < _this.pageSize) {
             _this.isNoMore = true;
           }
+        } else if (res.success && res.data.list.length === 0) {
+          _this.isNoMore = true;
         }
       });
     },
@@ -263,6 +269,8 @@ var _default = {
           if (res.data.list.length < _this2.pageSize) {
             _this2.isShowNoMore = true;
           }
+        } else if (res.success && res.data.list.length === 0) {
+          _this2.isShowNoMore = true;
         }
       });
     },

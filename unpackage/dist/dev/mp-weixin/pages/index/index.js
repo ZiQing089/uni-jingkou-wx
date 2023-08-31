@@ -585,74 +585,50 @@ var _default = {
     // 景点
     showOne: function showOne() {
       var _this = this;
-      uni.showLoading({
-        title: '正在加载'
-      });
       (0, _jingkou.getScenicSpotsList)().then(function (res) {
-        uni.hideLoading();
         _this.seeList = res.data;
       });
     },
     // 住宿
     showTwo: function showTwo(lat, lng) {
       var _this2 = this;
-      uni.showLoading({
-        title: '正在加载'
-      });
       (0, _jingkou.getHomestayList)({
         lat: lat,
         lng: lng,
         mapType: 'gaode'
       }).then(function (res) {
-        uni.hideLoading();
         _this2.liveList = res.data;
       });
     },
     // 特产
     showThree: function showThree() {
       var _this3 = this;
-      uni.showLoading({
-        title: '正在加载'
-      });
       (0, _jingkou.getSpecialityList)().then(function (res) {
-        uni.hideLoading();
         _this3.blowList = res.data;
       });
     },
     // 逛一逛
     showFour: function showFour() {
       var _this4 = this;
-      uni.showLoading({
-        title: '正在加载'
-      });
       (0, _beautifulYard.getShowlist)({
         currentPage: 1,
         pageSize: 10,
         conditions: []
       }).then(function (res) {
-        uni.hideLoading();
         _this4.strollList = res.data.list;
       });
     },
     // 公告
     showFive: function showFive() {
       var _this5 = this;
-      uni.showLoading({
-        title: '正在加载'
-      });
       (0, _message.getMessage)().then(function (res) {
-        uni.hideLoading();
         _this5.messageList = res.data;
       });
     },
     // 天气
     getWeater: function getWeater() {
       var _this6 = this;
-      uni.showLoading({
-        title: '正在加载'
-      });
       (0, _index.getWeater)({}).then(function (res) {
-        uni.hideLoading();
         _this6.weather = res.data;
       });
     },
@@ -743,13 +719,9 @@ var _default = {
     addlike: function addlike(item) {
       var _this8 = this;
       if (this.token) {
-        uni.showLoading({
-          title: '正在加载'
-        });
         (0, _jingkou.addlike)({
           id: item.id
         }).then(function (res) {
-          uni.hideLoading();
           _this8.showThree();
         });
       } else {
@@ -761,11 +733,7 @@ var _default = {
     addtingyuanlike: function addtingyuanlike(item) {
       var _this9 = this;
       if (this.token) {
-        uni.showLoading({
-          title: '正在加载'
-        });
         (0, _beautifulYard.addLike)(item.id).then(function (res) {
-          uni.hideLoading();
           _this9.showFour();
         });
       } else {

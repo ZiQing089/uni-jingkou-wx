@@ -2,42 +2,47 @@
 	<view class="recreation page-container">
 		<NavBar :title="title" :use-bg="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item">
-				<view class="img">
-					<van-image
-					  width="100%"
-					  height="100%"
-					  fit="cover"
-					  radius="4"
-					  :src="item.pics[0]"
-					/>
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item">
+					<view class="img">
+						<van-image
+						  width="100%"
+						  height="100%"
+						  fit="cover"
+						  radius="4"
+						  :src="item.pics[0]"
+						/>
+					</view>
+					<view class="info">
+						<view class="title">
+							{{ item.name }}
+						</view>
+						<view class="distance">
+							约{{ Number(item.distance).toFixed(1) }}km
+						</view>
+					</view>
+					<view class="phone" @click="takePhone(item)">
+						<view class="left">
+							<icon class="iconfont">&#xe649;</icon>{{ item.phone }}
+						</view>
+						<view class="right">
+							<icon class="iconfont">&#xe647;</icon>
+						</view>
+					</view>
+					<view class="address" @click="navigation(item)">
+						<view class="left">
+							<icon class="iconfont">&#xe648;</icon>{{ item.address }}
+						</view>
+						<view class="right">
+							<icon class="iconfont">&#xe647;</icon>
+						</view>
+					</view>
 				</view>
-				<view class="info">
-					<view class="title">
-						{{ item.name }}
-					</view>
-					<view class="distance">
-						约{{ Number(item.distance).toFixed(1) }}km
-					</view>
-				</view>
-				<view class="phone" @click="takePhone(item)">
-					<view class="left">
-						<icon class="iconfont">&#xe649;</icon>{{ item.phone }}
-					</view>
-					<view class="right">
-						<icon class="iconfont">&#xe647;</icon>
-					</view>
-				</view>
-				<view class="address" @click="navigation(item)">
-					<view class="left">
-						<icon class="iconfont">&#xe648;</icon>{{ item.address }}
-					</view>
-					<view class="right">
-						<icon class="iconfont">&#xe647;</icon>
-					</view>
-				</view>
-			</view>
-			<van-divider contentPosition="center">没有更多了！</van-divider>
+				<van-divider contentPosition="center">没有更多了！</van-divider>
+			</template>
 		</view>
 	</view>
 </template>
@@ -110,6 +115,13 @@ page {
 
 <style lang="scss" scoped>
 .recreation {
+	.noData {
+		width: 374rpx;
+		height: 314rpx;
+		background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+		background-size: 100% 100%;
+		margin: 0 auto;
+	}
 	.item {
 		background-color: #fff;
 		padding: 24rpx 24rpx 0;

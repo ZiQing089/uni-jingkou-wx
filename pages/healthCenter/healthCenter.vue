@@ -81,13 +81,7 @@
 						url: `${path}?title=${title}`
 					})
 				} else {
-					if(title === '健康知识') {
-						this.show = true
-					} else {
-						uni.navigateTo({
-							url: `${path}?title=${title}`
-						})
-					}
+					this.show = true
 				}
 			},
 			confirm() {

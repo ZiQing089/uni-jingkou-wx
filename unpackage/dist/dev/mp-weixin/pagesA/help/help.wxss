@@ -27,6 +27,13 @@
 .help.data-v-085127cb {
   padding-bottom: 98rpx;
 }
+.help .content .noData.data-v-085127cb {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
+}
 .help .content .item.data-v-085127cb {
   padding: 24rpx 24rpx 0;
   border-bottom: 12rpx solid #F6F6F6;

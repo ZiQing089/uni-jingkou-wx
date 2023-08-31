@@ -389,61 +389,37 @@
 			},
 			// 景点
 			showOne() {
-				uni.showLoading({
-					title: '正在加载'
-				})
 				getScenicSpotsList().then(res => {
-					uni.hideLoading()
 					this.seeList = res.data
 				})
 			},
 			// 住宿
 			showTwo(lat, lng) {
-				uni.showLoading({
-					title: '正在加载'
-				})
 				getHomestayList({ lat: lat, lng: lng, mapType: 'gaode'}).then(res => {
-					uni.hideLoading()
 					this.liveList = res.data
 				})
 			},
 			// 特产
 			showThree() {
-				uni.showLoading({
-					title: '正在加载'
-				})
 				getSpecialityList().then(res => {
-					uni.hideLoading()
 					this.blowList = res.data
 				})
 			},
 			// 逛一逛
 			showFour() {
-				uni.showLoading({
-					title: '正在加载'
-				})
 				getShowlist({ currentPage: 1, pageSize: 10, conditions: [] }).then(res => {
-					uni.hideLoading()
 					this.strollList = res.data.list
 				})
 			},
 			// 公告
 			showFive() {
-				uni.showLoading({
-					title: '正在加载'
-				})
 				getMessage().then(res => {
-					uni.hideLoading()
 					this.messageList = res.data
 				})
 			},
 			// 天气
 			getWeater() {
-				uni.showLoading({
-					title: '正在加载'
-				})
 				getWeater({}).then(res => {
-					uni.hideLoading()
 					this.weather = res.data
 				})
 			},
@@ -531,11 +507,7 @@
 			},
 			addlike(item) {
 				if(this.token) {
-					uni.showLoading({
-						title: '正在加载'
-					})
 					addlike({ id: item.id }).then(res => {
-						uni.hideLoading()
 						this.showThree()
 					}) 
 				} else {
@@ -546,11 +518,7 @@
 			},
 			addtingyuanlike(item) {
 				if(this.token) {
-					uni.showLoading({
-						title: '正在加载'
-					})
 					addLike(item.id).then(res => {
-						uni.hideLoading()
 						this.showFour()
 					}) 
 				} else {

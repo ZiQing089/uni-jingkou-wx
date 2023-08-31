@@ -102,20 +102,24 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.list, function (item, index) {
-    var $orig = _vm.__get_orig(item)
-    var f0 = _vm._f("formatMin")(item.startTime)
-    var f1 = _vm._f("formatMin")(item.signUpEndTime)
-    return {
-      $orig: $orig,
-      f0: f0,
-      f1: f1,
-    }
-  })
+  var g0 = _vm.list.length
+  var l0 = !(g0 === 0)
+    ? _vm.__map(_vm.list, function (item, index) {
+        var $orig = _vm.__get_orig(item)
+        var f0 = _vm._f("formatMin")(item.startTime)
+        var f1 = _vm._f("formatMin")(item.signUpEndTime)
+        return {
+          $orig: $orig,
+          f0: f0,
+          f1: f1,
+        }
+      })
+    : null
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
+        g0: g0,
         l0: l0,
       },
     }
@@ -153,7 +157,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
+/* WEBPACK VAR INJECTION */(function(wx, uni) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -162,7 +166,7 @@ exports.default = void 0;
 var _promote = __webpack_require__(/*! @/api/promote.js */ 236);
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
-    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 457));
+    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 459));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -181,11 +185,17 @@ var _default = {
         active: false,
         type: 'SIGNUP_END'
       }],
+      total: '',
       status: 'IN_SIGNUP',
       list: []
     };
   },
   onShow: function onShow() {
+    var _wx$getMenuButtonBoun = wx.getMenuButtonBoundingClientRect(),
+      top = _wx$getMenuButtonBoun.top,
+      height = _wx$getMenuButtonBoun.height,
+      width = _wx$getMenuButtonBoun.width;
+    this.total = top + height + 5 + 'px';
     this.init();
   },
   methods: {
@@ -220,7 +230,7 @@ var _default = {
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

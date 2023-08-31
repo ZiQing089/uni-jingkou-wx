@@ -2,17 +2,22 @@
 	<view class="page-container message">
 		<NavBar :title="'公告信息'" :use-bg="true" :border="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
-				<view class="header">
-					{{ item.title }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+					<view class="header">
+						{{ item.title }}
+					</view>
+					<view class="time">
+						{{ item.createTime | formatDate }}
+					</view>
+					<view class="nav">
+						查看<icon class="iconfont">&#xe647;</icon>
+					</view>
 				</view>
-				<view class="time">
-					{{ item.createTime | formatDate }}
-				</view>
-				<view class="nav">
-					查看<icon class="iconfont">&#xe647;</icon>
-				</view>
-			</view>
+			</template>
 		</view>
 	</view>
 </template>
@@ -56,6 +61,13 @@
 .message {
 	.content {
 		padding: 32rpx 24rpx 90rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			border-radius: 12rpx;
 			position: relative;

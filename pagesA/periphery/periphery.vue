@@ -2,22 +2,27 @@
 	<view class="page-container periphery">
 		<NavBar :title="'周边服务'" :use-bg="true" :border="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="navigation(item)">
-				<view class="header">
-					<view class="left">
-						{{ item.name }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click="navigation(item)">
+					<view class="header">
+						<view class="left">
+							{{ item.name }}
+						</view>
+						<view class="right">
+							约{{ Number(item.distance).toFixed(1) }}km
+						</view>
 					</view>
-					<view class="right">
-						约{{ Number(item.distance).toFixed(1) }}km
+					<view class="address">
+						地址：{{ item.address }}
+					</view>
+					<view class="nav">
+						导航<icon class="iconfont">&#xe647;</icon>
 					</view>
 				</view>
-				<view class="address">
-					地址：{{ item.address }}
-				</view>
-				<view class="nav">
-					导航<icon class="iconfont">&#xe647;</icon>
-				</view>
-			</view>
+			</template>
 		</view>
 	</view>
 </template>
@@ -71,6 +76,13 @@
 .periphery {
 	.content {
 		padding: 32rpx 24rpx 90rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			border-radius: 12rpx;
 			margin-bottom: 24rpx;

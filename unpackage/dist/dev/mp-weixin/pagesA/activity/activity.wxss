@@ -30,6 +30,13 @@
 .activity .content.data-v-99f056ea {
   padding: 32rpx 24rpx;
 }
+.activity .content .noData.data-v-99f056ea {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
+}
 .activity .content .card.data-v-99f056ea {
   border-radius: 12rpx;
   background: url("https://files.zz-tech.cn/app-files/images/jingkou/lihdbg.png") no-repeat;

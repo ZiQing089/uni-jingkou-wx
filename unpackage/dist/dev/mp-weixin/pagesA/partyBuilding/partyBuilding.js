@@ -102,8 +102,9 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.show === 0 ? _vm.list.length : null
   var l0 =
-    _vm.show === 0
+    _vm.show === 0 && !(g0 === 0)
       ? _vm.__map(_vm.list, function (item, index) {
           var $orig = _vm.__get_orig(item)
           var f0 = _vm._f("formatDate")(item.time)
@@ -113,11 +114,14 @@ var render = function () {
           }
         })
       : null
+  var g1 = _vm.show === 1 ? _vm.memberList.length : null
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
+        g0: g0,
         l0: l0,
+        g1: g1,
       },
     }
   )
@@ -163,7 +167,7 @@ exports.default = void 0;
 var _village = __webpack_require__(/*! @/api/village.js */ 203);
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
-    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 457));
+    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 459));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -185,13 +189,11 @@ var _default = {
       currentPage: 1,
       pageSize: 10,
       isNoMore: false,
-      isMemberLoadMore: false,
       memberCurrentPage: 1,
       memberPageSize: 10,
-      isMemberNoMore: false,
       conditions: [],
       list: [],
-      memberList: []
+      memberList: {}
     };
   },
   onLoad: function onLoad() {
@@ -200,26 +202,16 @@ var _default = {
       top = _wx$getMenuButtonBoun.top,
       height = _wx$getMenuButtonBoun.height,
       width = _wx$getMenuButtonBoun.width;
-    this.total = top + height + 2 + 7 + 'px';
+    this.total = top + height + 5 + 'px';
     this.getMemberList();
     this.getList();
   },
   onReachBottom: function onReachBottom() {
-    console.log(this.active);
-    if (this.active === '党建活动') {
-      if (!this.isMemberLoadMore && !this.isMemberNoMore) {
-        //此处判断，上锁，防止重复请求
-        this.isMemberLoadMore = true;
-        this.memberCurrentPage += 1; //每次上拉请求新的一页
-        this.getMemberList();
-      }
-    } else {
-      if (!this.isLoadMore && !this.isNoMore) {
-        //此处判断，上锁，防止重复请求
-        this.isLoadMore = true;
-        this.currentPage += 1; //每次上拉请求新的一页
-        this.getList();
-      }
+    if (!this.isLoadMore && !this.isNoMore) {
+      //此处判断，上锁，防止重复请求
+      this.isLoadMore = true;
+      this.currentPage += 1; //每次上拉请求新的一页
+      this.getList();
     }
   },
   methods: {
@@ -248,13 +240,7 @@ var _default = {
         pageSize: this.memberPageSize,
         conditions: this.conditions
       }).then(function (res) {
-        if (res.success && res.data.list.length !== 0) {
-          _this2.isMemberLoadMore = false;
-          _this2.memberList = _this2.memberList.concat(res.data.list);
-          if (res.data.list.length < _this2.pageSize) {
-            _this2.isMemberNoMore = true;
-          }
-        }
+        _this2.memberList = res.data;
       });
     },
     // tab切换

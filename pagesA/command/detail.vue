@@ -19,6 +19,15 @@
 			</view>
 		</view>
 		<view class="content">
+			<view class="img">
+				<swiper class="swiper" circular :indicator-dots="true"
+					indicator-active-color="#FFFFFF" indicator-color="rgba(255, 255, 255, 0.58)">
+					<swiper-item v-for="(e, i) in detail.pics" :key="i">
+						<van-image width="100%" height="100%" fit="cover" radius="4"
+							:src="e" />
+					</swiper-item>
+				</swiper>
+			</view>
 			{{ detail.description }}
 		</view>
 	</view>
@@ -66,6 +75,17 @@
 		}
 	}
 	.content {
+		.img {
+			width: 100%;
+			height: 394rpx;
+			margin-bottom: 32rpx;
+			.swiper {
+				height: 100%;
+				-webkit-transform: translateY(0);
+				border-radius: 12rpx;
+				overflow: hidden;
+			}
+		}
 		padding: 32rpx 24rpx 90rpx;
 		font-size: 28rpx;
 		color: #666666;

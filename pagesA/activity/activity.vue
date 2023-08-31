@@ -2,26 +2,31 @@
 	<view class="page-container activity">
 		<NavBar :title="title" :use-bg="true" :border="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="card">
-				<view class="top">
-					<view class="title">
-						{{ item.name }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="card">
+					<view class="top">
+						<view class="title">
+							{{ item.name }}
+						</view>
+						<view class="tips">
+							{{ item.type.description }}
+						</view>
 					</view>
-					<view class="tips">
-						{{ item.type.description }}
+					<view class="address">
+						<span class="key">活动地点：</span><span>{{ item.address }}</span>
+					</view>
+					<view class="time">
+						<span class="key">活动时间：</span><span>{{ item.time | formatDate }}</span>
+					</view>
+					<view class="introduce">
+						<span class="key">活动介绍：</span><span class="val">{{ item.description }}</span>
 					</view>
 				</view>
-				<view class="address">
-					<span class="key">活动地点：</span><span>{{ item.address }}</span>
-				</view>
-				<view class="time">
-					<span class="key">活动时间：</span><span>{{ item.time | formatDate }}</span>
-				</view>
-				<view class="introduce">
-					<span class="key">活动介绍：</span><span class="val">{{ item.description }}</span>
-				</view>
-			</view>
-			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+				<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+			</template>
 		</view>
 	</view>
 </template>
@@ -92,6 +97,13 @@
 	padding-bottom: 98rpx;
 	.content {
 		padding: 32rpx 24rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.card {
 			border-radius: 12rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/lihdbg.png') no-repeat;

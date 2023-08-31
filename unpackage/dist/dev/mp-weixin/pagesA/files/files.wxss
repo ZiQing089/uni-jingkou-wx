@@ -27,6 +27,13 @@
 .files .content.data-v-727bab4a {
   padding: 32rpx 24rpx 90rpx;
 }
+.files .content .noData.data-v-727bab4a {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 0 auto;
+}
 .files .content .item.data-v-727bab4a {
   border-radius: 12rpx;
   padding: 40rpx 32rpx;

@@ -72,6 +72,13 @@
   border-top: 4rpx solid #F6F6F6;
   padding: 32rpx 24rpx 90rpx;
 }
+.my-upload .content .noData.data-v-48c04a4b {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: auto auto 0;
+}
 .my-upload .content .item.data-v-48c04a4b {
   border-radius: 12rpx;
   padding: 45rpx 32rpx;
@@ -144,6 +151,13 @@
 .my-upload .show-content.data-v-48c04a4b {
   border-top: 4rpx solid #F6F6F6;
   padding: 32rpx 24rpx 90rpx;
+}
+.my-upload .show-content .noData.data-v-48c04a4b {
+  width: 374rpx;
+  height: 314rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png") no-repeat;
+  background-size: 100% 100%;
+  margin: auto auto 0;
 }
 .my-upload .show-content .show-item.data-v-48c04a4b {
   border-radius: 12rpx;

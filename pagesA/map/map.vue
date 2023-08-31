@@ -4,11 +4,11 @@
 		<movable-area scale-area class="movable-area">
 			<movable-view :x="x" :y="0" direction="all" scale="true" scale-min="1" scale-max="4" :scale-value="scale" class="movable-view" @change="onChange" @scale="onScale">
 				<view style="width: 100vh;height: 100vh; position: relative; z-index: 12;">
-					<image style="width: 100%; height: 100%;" src="https://files.zz-tech.cn/app-files/images/jingkou/mapjingkouditu.jpg" mode="scaleToFill"></image>
-					<image src="https://files.zz-tech.cn/app-files/images/jingkou/dayan.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 6;" mode="scaleToFill"></image>
-					<image src="https://files.zz-tech.cn/app-files/images/jingkou/yun.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 9;" mode="scaleToFill"></image>
-					<image src="https://files.zz-tech.cn/app-files/images/jingkou/luxian.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 3;" mode="scaleToFill"></image>
-					<view v-for="(item, index) in list" :key="index" :class="item.itemClass" @click="toClick(item)">{{ item.name }}</view>
+					<image style="width: 100%; height: 100%;" src="https://files.zz-tech.cn/app-files/images/jingkou/mapditu.jpg" mode="scaleToFill"></image>
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mapyanzi.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 6;" mode="scaleToFill"></image>
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mapyun.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 9;" mode="scaleToFill"></image>
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mapluxian.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 3;" mode="scaleToFill"></image>
+					<view v-for="(item, index) in mock" :key="index" :class="item.name ? item.itemClass : ''" @click="toClick(item)">{{ item.name }}</view>
 				</view>
 			</movable-view>
 		</movable-area>
@@ -29,92 +29,114 @@
 				mock: [
 					{
 						itemClass: 'laoyuchang',
-						name: '老鱼场'
+						name: '',
+						nickName: '老鱼场'
 					},
 					{
 						itemClass: 'canting',
-						name: '餐厅(食堂)'
+						name: '',
+						nickName: '餐厅(食堂)'
 					},
 					{
 						itemClass: 'youchuanmatou1',
-						name: '游船码头'
+						name: '',
+						nickName: '游船码头'
 					},
 					{
 						itemClass: 'youchuanmatou2',
-						name: '游船码头'
+						name: '',
+						nickName: '游船码头'
 					},
 					{
 						itemClass: 'huahai1',
-						name: '花海'
+						name: '',
+						nickName: '花海'
 						
 					},
 					{
 						itemClass: 'huahai2',
-						name: '花海'
+						name: '',
+						nickName: '花海'
 					},
 					{
 						itemClass: 'yebaozhongxin',
-						name: '野保中心-萌宠互动区'
+						name: '',
+						nickName: '野保中心-萌宠互动区'
 					},
 					{
 						itemClass: 'mifenggongfang',
-						name: '蜜蜂工坊'
+						name: '',
+						nickName: '蜜蜂工坊'
 					},
 					{
 						itemClass: 'luyingjidi',
-						name: '露营基地'
+						name: '',
+						nickName: '露营基地'
 					},
 					{
 						itemClass: 'diaoyuqu',
-						name: '钓鱼区'
+						name: '',
+						nickName: '钓鱼区'
 					},
 					{
 						itemClass: 'liaowangtai',
-						name: '瞭望台'
+						name: '',
+						nickName: '瞭望台'
 					},
 					{
 						itemClass: 'wenhualitang',
-						name: '文化礼堂'
+						name: '',
+						nickName: '文化礼堂'
 					},
 					{
 						itemClass: 'shucaicaizhai',
-						name: '蔬菜采摘基地'
+						name: '',
+						nickName: '蔬菜采摘基地'
 					},
 					{
 						itemClass: 'minsu',
-						name: '泾口民宿'
+						name: '',
+						nickName: '泾口民宿'
 					},
 					{
 						itemClass: 'gongfushangdian',
-						name: '共富商店'
+						name: '',
+						nickName: '共富商店'
 					},
 					{
 						itemClass: 'jingkouguqiao',
-						name: '泾口古桥'
+						name: '',
+						nickName: '泾口古桥'
 					},
 					{
 						itemClass: 'wudigumiao',
-						name: '关帝古庙'
+						name: '',
+						nickName: '关帝古庙'
 					},
 					{
 						itemClass: 'cunwei',
-						name: '村委'
+						name: '',
+						nickName: '村委'
 					},
 					{
 						itemClass: 'qixingyizhan',
-						name: '骑行驿站'
+						name: '',
+						nickName: '骑行驿站'
 					},
 					{
 						itemClass: 'hulianwangyiyuan',
-						name: '互联网医院'
+						name: '',
+						nickName: '互联网医院'
 					},
 					{
 						itemClass: 'fuwuzhongxin',
-						name: '服务中心'
+						name: '',
+						nickName: '服务中心'
 					},
 					{
 						itemClass: 'cunrukoupaifang',
-						name: '村入口牌坊'
+						name: '',
+						nickName: '村入口牌坊'
 					}
 				],
 				list: []
@@ -130,10 +152,12 @@
 				mapList().then(res => {
 					const self = this
 					self.list = res.data
-					self.list.forEach((item, index) => {
-						self.mock.forEach((e, i) => {
-							if(item.name == e.name) {
-								item.itemClass = e.itemClass
+					self.mock.forEach((item, index) => {
+						self.list.forEach((e, i) => {
+							if(item.nickName == e.name) {
+								item.name = e.name
+								item.introduce = e.introduce
+								item.pics = e.pics
 							}
 						})
 					})

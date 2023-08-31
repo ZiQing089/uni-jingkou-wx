@@ -1,52 +1,57 @@
 <template>
 	<view class="page-container school">
-		<NavBar :title="'文化学堂'" :use-bg="true" />
-		<view class="hot-nav">
+		<NavBar :title="'文化学堂'" :use-bg="true" :border="true" />
+		<view class="hot-nav" :style="{ top: total }">
 			<view v-for="(item, index) in hotNav" :key="index" :class="item.active ? 'nav-item active' : 'nav-item'" @click="changeHotNav(item, index)">
 				<span>{{ item.title }}</span>
 			</view>
 		</view>
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
-				<view class="header">
-					<view class="title">
-						{{ item.name }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+					<view class="header">
+						<view class="title">
+							{{ item.name }}
+						</view>
+						<view class="enroll">
+							({{ item.signUpCount }}人已报名)
+						</view>
 					</view>
-					<view class="enroll">
-						({{ item.signUpCount }}人已报名)
+					<view class="time">
+						开课时间：{{ item.startTime | formatMin }}
+					</view>
+					<view class="address">
+						课程地点：{{ item.address }}
+					</view>
+					<view class="enroll-time">
+						截止时间：{{ item.signUpEndTime | formatMin }}
+					</view>
+					<view class="people-num">
+						计划人数：{{ item.totalCount }}
+					</view>
+					<view v-if="item.status.description === '报名中'" :class="item.signUp ? 'btn ybm' : 'btn'">
+						{{ item.signUp ? '已报名' : '立即报名' }}
+					</view>
+					<view v-if="item.status.description === '已报满'" :class="item.signUp ? 'btn ybm' : 'btn ybman'">
+						{{ item.signUp ? '已报名' : '立即报名' }}
+					</view>
+					<view v-if="item.status.description === '已结束'" class="nav">
+						查看<icon class="iconfont">&#xe647;</icon>
+					</view>
+					<view v-if="item.status.description === '已结束'" class="status warning">
+						{{ item.status.description }}
+					</view>
+					<view v-else-if="item.status.description === '已报满'" class="status error">
+						{{ item.status.description }}
+					</view>
+					<view v-else class="status">
+						{{ item.status.description }}
 					</view>
 				</view>
-				<view class="time">
-					开课时间：{{ item.startTime | formatMin }}
-				</view>
-				<view class="address">
-					课程地点：{{ item.address }}
-				</view>
-				<view class="enroll-time">
-					截止时间：{{ item.signUpEndTime | formatMin }}
-				</view>
-				<view class="people-num">
-					计划人数：{{ item.totalCount }}
-				</view>
-				<view v-if="item.status.description === '报名中'" :class="item.signUp ? 'btn ybm' : 'btn'">
-					{{ item.signUp ? '已报名' : '立即报名' }}
-				</view>
-				<view v-if="item.status.description === '已报满'" :class="item.signUp ? 'btn ybm' : 'btn ybman'">
-					{{ item.signUp ? '已报名' : '立即报名' }}
-				</view>
-				<view v-if="item.status.description === '已结束'" class="nav">
-					查看<icon class="iconfont">&#xe647;</icon>
-				</view>
-				<view v-if="item.status.description === '已结束'" class="status warning">
-					{{ item.status.description }}
-				</view>
-				<view v-else-if="item.status.description === '已报满'" class="status error">
-					{{ item.status.description }}
-				</view>
-				<view v-else class="status">
-					{{ item.status.description }}
-				</view>
-			</view>
+			</template>
 		</view>
 	</view>
 </template>
@@ -73,11 +78,14 @@
 						type: 'SIGNUP_END'
 					}
 				],
+				total: '',
 				status: 'IN_SIGNUP',
 				list: []
 			}
 		},
 		onShow() {
+			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
+			this.total = top + height + 5 + 'px'
 			this.init()
 		},
 		methods: {
@@ -115,6 +123,7 @@
 	.hot-nav {
 		display: flex;
 		padding: 0 56rpx;
+		position: sticky;
 		height: 86rpx;
 		background-color: #ffffff;
 		margin-bottom: 4rpx;
@@ -152,8 +161,14 @@
 		}
 	}
 	.content {
-		border-top: 4rpx solid #F6F6F6;
 		padding: 32rpx 24rpx 90rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			border-radius: 12rpx;
 			padding: 40rpx 32rpx;

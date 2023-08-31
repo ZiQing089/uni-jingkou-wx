@@ -7,40 +7,50 @@
 			</view>
 		</view>
 		<view v-if="show === 0" class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
-				<view class="title">
-					{{ item.name }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+					<view class="title">
+						{{ item.name }}
+					</view>
+					<view class="time" style="margin-top: 36rpx;">
+						时间：{{ item.time | formatDate }}
+					</view>
+					<view class="address">
+						地址：{{ item.address }}
+					</view>
+					<view class="nav">
+						查看<icon class="iconfont">&#xe647;</icon>
+					</view>
 				</view>
-				<view class="time" style="margin-top: 36rpx;">
-					时间：{{ item.time | formatDate }}
-				</view>
-				<view class="address">
-					地址：{{ item.address }}
-				</view>
-				<view class="nav">
-					查看<icon class="iconfont">&#xe647;</icon>
-				</view>
-			</view>
-			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+				<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
+			</template>
 		</view>
 		<view v-if="show === 1" class="content-member">
-			<view v-for="(item, index) in memberList" :key="index" class="list-item">
-				<view class="title">
-					{{ item.belongTarget }}
-				</view>
-				<view class="img-list">
-					<view v-for="(e, i) in item.pics" :key="i" class="img-item">
-						<view class="img">
-							<van-image width="100%" height="100%" radius="4" fit="cover"
-								:src="e" /> 
-						</view>
-						<view class="name">
-							{{ e.name }}
+			<template v-if="memberList.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in memberList" :key="index" class="list-item">
+					<view class="title">
+						{{ index }}
+					</view>
+					<view class="img-list">
+						<view v-for="(e, i) in item" :key="i" class="img-item">
+							<view class="img">
+								<van-image width="100%" height="100%" radius="4" fit="cover"
+									:src="e.pics[0]" /> 
+							</view>
+							<view class="name">
+								{{ e.name }}
+							</view>
 						</view>
 					</view>
 				</view>
-			</view>
-			<van-divider v-if="isMemberNoMore" contentPosition="center">没有更多了！</van-divider>
+				<van-divider v-if="isMemberNoMore" contentPosition="center">没有更多了！</van-divider>
+			</template>
 		</view>
 	</view>
 </template>
@@ -70,36 +80,25 @@
 				currentPage: 1,
 				pageSize: 10,
 				isNoMore: false,
-				isMemberLoadMore:false,
 				memberCurrentPage: 1,
 				memberPageSize: 10,
-				isMemberNoMore: false,
 				conditions: [],
 				list: [],
-				memberList: []
+				memberList: {}
 			}
 		},
 		onLoad() {
 			// 获取胶囊位置 { top, height, width }
 			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
-			this.total = top + height + 2 + 7+ 'px'
+			this.total = top + height + 5 + 'px'
 			this.getMemberList()
 			this.getList()
 		},
 		onReachBottom() {
-			console.log(this.active)
-			if(this.active === '党建活动') {
-				if(!this.isMemberLoadMore && !this.isMemberNoMore){  //此处判断，上锁，防止重复请求
-					this.isMemberLoadMore = true
-					this.memberCurrentPage += 1  //每次上拉请求新的一页
-					this.getMemberList()
-				}
-			} else {
-				if(!this.isLoadMore && !this.isNoMore){  //此处判断，上锁，防止重复请求
-					this.isLoadMore = true
-					this.currentPage += 1  //每次上拉请求新的一页
-					this.getList()
-				}
+			if(!this.isLoadMore && !this.isNoMore){  //此处判断，上锁，防止重复请求
+				this.isLoadMore = true
+				this.currentPage += 1  //每次上拉请求新的一页
+				this.getList()
 			}
 		},
 		methods: {
@@ -118,13 +117,7 @@
 			// 获取党员列表
 			getMemberList() {
 				getPartyMember({currentPage: this.memberCurrentPage, pageSize: this.memberPageSize, conditions: this.conditions}).then(res => {
-					if(res.success && res.data.list.length !== 0) {
-						this.isMemberLoadMore = false
-						this.memberList = this.memberList.concat(res.data.list)
-						if(res.data.list.length < this.pageSize) {
-							this.isMemberNoMore = true
-						}
-					}
+					this.memberList = res.data
 				}) 
 			},
 			// tab切换
@@ -188,8 +181,14 @@
 		}
 	}
 	.content {
-		border-top: 4rpx solid #F6F6F6;
 		padding: 32rpx 24rpx 90rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			border-radius: 12rpx;
 			padding: 45rpx 32rpx;
@@ -228,7 +227,13 @@
 		}
 	}
 	.content-member {
-		border-top: 4rpx solid #F6F6F6;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.list-item {
 			background: #ffffff;
 			padding: 32rpx 24rpx;

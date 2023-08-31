@@ -2,45 +2,50 @@
 	<view class="page-container my-enroll">
 		<NavBar :title="'我的报名'" :use-bg="true" :border="true" />
 		<view class="content">
-			<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
-				<view class="inside-border">
-					<view class="header">
-						<view class="title">
-							{{ item.name }}
+			<template v-if="list.length === 0">
+				<view class="noData"></view>
+			</template>
+			<template v-else>
+				<view v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+					<view class="inside-border">
+						<view class="header">
+							<view class="title">
+								{{ item.name }}
+							</view>
+							<view class="enroll">
+								({{ item.signUpCount }}人已报名)
+							</view>
 						</view>
-						<view class="enroll">
-							({{ item.signUpCount }}人已报名)
+						<view class="time">
+							开课时间：{{ item.startTime | formatDate }}
 						</view>
-					</view>
-					<view class="time">
-						开课时间：{{ item.startTime | formatDate }}
-					</view>
-					<view class="address">
-						课程地点：{{ item.address }}
-					</view>
-					<view class="enroll-time">
-						截止时间：{{ item.signUpEndTime | formatDate  }}
-					</view>
-					<view class="people-num">
-						接纳人数：{{ item.totalCount }}
-					</view>
-					<view v-if="item.status.description === '已截止'" class="nav">
-						查看<icon class="iconfont">&#xe647;</icon>
-					</view>
-					<view v-if="item.status.description !== '已截止'" class="cancel" @click.native.stop="cancel(item)">
-						取消报名
-					</view>
-					<view v-if="item.status.description === '已截止'" class="status warning">
-						{{ item.status.description }}
-					</view>
-					<view v-else-if="item.status.description === '已报满'" class="status error">
-						{{ item.status.description }}
-					</view>
-					<view v-else class="status">
-						{{ item.status.description }}
+						<view class="address">
+							课程地点：{{ item.address }}
+						</view>
+						<view class="enroll-time">
+							截止时间：{{ item.signUpEndTime | formatDate  }}
+						</view>
+						<view class="people-num">
+							接纳人数：{{ item.totalCount }}
+						</view>
+						<view v-if="item.status.description === '已截止'" class="nav">
+							查看<icon class="iconfont">&#xe647;</icon>
+						</view>
+						<view v-if="item.status.description !== '已截止'" class="cancel" @click.native.stop="cancel(item)">
+							取消报名
+						</view>
+						<view v-if="item.status.description === '已截止'" class="status warning">
+							{{ item.status.description }}
+						</view>
+						<view v-else-if="item.status.description === '已报满'" class="status error">
+							{{ item.status.description }}
+						</view>
+						<view v-else class="status">
+							{{ item.status.description }}
+						</view>
 					</view>
 				</view>
-			</view>
+			</template>
 		</view>
 	</view>
 </template>
@@ -106,8 +111,14 @@
 <style lang="scss" scoped>
 .my-enroll {
 	.content {
-		border-top: 4rpx solid #F6F6F6;
 		padding: 32rpx 24rpx 90rpx;
+		.noData {
+			width: 374rpx;
+			height: 314rpx;
+			background: url('https://files.zz-tech.cn/app-files/images/jingkou/nodatapg.png') no-repeat;
+			background-size: 100% 100%;
+			margin: 0 auto;
+		}
 		.item {
 			border-radius: 12rpx;
 			padding: 40rpx 32rpx;
