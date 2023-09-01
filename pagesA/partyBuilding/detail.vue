@@ -2,7 +2,7 @@
 	<view class="page-container partyBuilding-detail">
 		<NavBar :title="'党建活动'" :border="true" />
 		<view class="title">
-			{{ detail.title }}
+			{{ detail.name }}
 		</view>
 		<view class="info">
 			<view class="time">
@@ -13,7 +13,7 @@
 			</view>
 		</view>
 		<view class="content">
-			{{ detail.content }}
+			{{ detail.description }}
 		</view>
 	</view>
 </template>

@@ -203,15 +203,16 @@ page {
   width: 464rpx;
   height: 24rpx;
 }
-.index .see .see-box.data-v-57280228, .index .see .blow-box.data-v-57280228, .index .see .stroll-box.data-v-57280228, .index .see .live-box.data-v-57280228, .index .blow .see-box.data-v-57280228, .index .blow .blow-box.data-v-57280228, .index .blow .stroll-box.data-v-57280228, .index .blow .live-box.data-v-57280228, .index .stroll .see-box.data-v-57280228, .index .stroll .blow-box.data-v-57280228, .index .stroll .stroll-box.data-v-57280228, .index .stroll .live-box.data-v-57280228, .index .live .see-box.data-v-57280228, .index .live .blow-box.data-v-57280228, .index .live .stroll-box.data-v-57280228, .index .live .live-box.data-v-57280228 {
-  border-radius: 12rpx;
-  height: 746rpx;
+.index .see .see-box.data-v-57280228, .index .blow .see-box.data-v-57280228, .index .stroll .see-box.data-v-57280228, .index .live .see-box.data-v-57280228 {
   background: url("https://files.zz-tech.cn/app-files/images/jingkou/kan.png") no-repeat;
   background-size: 100% 100%;
+}
+.index .see .see-box.data-v-57280228, .index .see .stroll-box.data-v-57280228, .index .see .live-box.data-v-57280228, .index .blow .see-box.data-v-57280228, .index .blow .stroll-box.data-v-57280228, .index .blow .live-box.data-v-57280228, .index .stroll .see-box.data-v-57280228, .index .stroll .stroll-box.data-v-57280228, .index .stroll .live-box.data-v-57280228, .index .live .see-box.data-v-57280228, .index .live .stroll-box.data-v-57280228, .index .live .live-box.data-v-57280228 {
+  border-radius: 12rpx;
   box-sizing: border-box;
   padding: 40rpx 32rpx;
 }
-.index .see .see-box .see-item.data-v-57280228, .index .see .blow-box .see-item.data-v-57280228, .index .see .stroll-box .see-item.data-v-57280228, .index .see .live-box .see-item.data-v-57280228, .index .blow .see-box .see-item.data-v-57280228, .index .blow .blow-box .see-item.data-v-57280228, .index .blow .stroll-box .see-item.data-v-57280228, .index .blow .live-box .see-item.data-v-57280228, .index .stroll .see-box .see-item.data-v-57280228, .index .stroll .blow-box .see-item.data-v-57280228, .index .stroll .stroll-box .see-item.data-v-57280228, .index .stroll .live-box .see-item.data-v-57280228, .index .live .see-box .see-item.data-v-57280228, .index .live .blow-box .see-item.data-v-57280228, .index .live .stroll-box .see-item.data-v-57280228, .index .live .live-box .see-item.data-v-57280228 {
+.index .see .see-box .see-item.data-v-57280228, .index .see .stroll-box .see-item.data-v-57280228, .index .see .live-box .see-item.data-v-57280228, .index .blow .see-box .see-item.data-v-57280228, .index .blow .stroll-box .see-item.data-v-57280228, .index .blow .live-box .see-item.data-v-57280228, .index .stroll .see-box .see-item.data-v-57280228, .index .stroll .stroll-box .see-item.data-v-57280228, .index .stroll .live-box .see-item.data-v-57280228, .index .live .see-box .see-item.data-v-57280228, .index .live .stroll-box .see-item.data-v-57280228, .index .live .live-box .see-item.data-v-57280228 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20rpx;
@@ -219,15 +220,15 @@ page {
   padding-bottom: 20rpx;
   border-bottom: 2rpx solid #F0F0F2;
 }
-.index .see .see-box .see-item .left.data-v-57280228, .index .see .blow-box .see-item .left.data-v-57280228, .index .see .stroll-box .see-item .left.data-v-57280228, .index .see .live-box .see-item .left.data-v-57280228, .index .blow .see-box .see-item .left.data-v-57280228, .index .blow .blow-box .see-item .left.data-v-57280228, .index .blow .stroll-box .see-item .left.data-v-57280228, .index .blow .live-box .see-item .left.data-v-57280228, .index .stroll .see-box .see-item .left.data-v-57280228, .index .stroll .blow-box .see-item .left.data-v-57280228, .index .stroll .stroll-box .see-item .left.data-v-57280228, .index .stroll .live-box .see-item .left.data-v-57280228, .index .live .see-box .see-item .left.data-v-57280228, .index .live .blow-box .see-item .left.data-v-57280228, .index .live .stroll-box .see-item .left.data-v-57280228, .index .live .live-box .see-item .left.data-v-57280228 {
+.index .see .see-box .see-item .left.data-v-57280228, .index .see .stroll-box .see-item .left.data-v-57280228, .index .see .live-box .see-item .left.data-v-57280228, .index .blow .see-box .see-item .left.data-v-57280228, .index .blow .stroll-box .see-item .left.data-v-57280228, .index .blow .live-box .see-item .left.data-v-57280228, .index .stroll .see-box .see-item .left.data-v-57280228, .index .stroll .stroll-box .see-item .left.data-v-57280228, .index .stroll .live-box .see-item .left.data-v-57280228, .index .live .see-box .see-item .left.data-v-57280228, .index .live .stroll-box .see-item .left.data-v-57280228, .index .live .live-box .see-item .left.data-v-57280228 {
   width: 260rpx;
   height: 194rpx;
   margin-right: 22rpx;
 }
-.index .see .see-box .see-item .right.data-v-57280228, .index .see .blow-box .see-item .right.data-v-57280228, .index .see .stroll-box .see-item .right.data-v-57280228, .index .see .live-box .see-item .right.data-v-57280228, .index .blow .see-box .see-item .right.data-v-57280228, .index .blow .blow-box .see-item .right.data-v-57280228, .index .blow .stroll-box .see-item .right.data-v-57280228, .index .blow .live-box .see-item .right.data-v-57280228, .index .stroll .see-box .see-item .right.data-v-57280228, .index .stroll .blow-box .see-item .right.data-v-57280228, .index .stroll .stroll-box .see-item .right.data-v-57280228, .index .stroll .live-box .see-item .right.data-v-57280228, .index .live .see-box .see-item .right.data-v-57280228, .index .live .blow-box .see-item .right.data-v-57280228, .index .live .stroll-box .see-item .right.data-v-57280228, .index .live .live-box .see-item .right.data-v-57280228 {
+.index .see .see-box .see-item .right.data-v-57280228, .index .see .stroll-box .see-item .right.data-v-57280228, .index .see .live-box .see-item .right.data-v-57280228, .index .blow .see-box .see-item .right.data-v-57280228, .index .blow .stroll-box .see-item .right.data-v-57280228, .index .blow .live-box .see-item .right.data-v-57280228, .index .stroll .see-box .see-item .right.data-v-57280228, .index .stroll .stroll-box .see-item .right.data-v-57280228, .index .stroll .live-box .see-item .right.data-v-57280228, .index .live .see-box .see-item .right.data-v-57280228, .index .live .stroll-box .see-item .right.data-v-57280228, .index .live .live-box .see-item .right.data-v-57280228 {
   width: calc(100% - 282rpx);
 }
-.index .see .see-box .see-item .right .title.data-v-57280228, .index .see .blow-box .see-item .right .title.data-v-57280228, .index .see .stroll-box .see-item .right .title.data-v-57280228, .index .see .live-box .see-item .right .title.data-v-57280228, .index .blow .see-box .see-item .right .title.data-v-57280228, .index .blow .blow-box .see-item .right .title.data-v-57280228, .index .blow .stroll-box .see-item .right .title.data-v-57280228, .index .blow .live-box .see-item .right .title.data-v-57280228, .index .stroll .see-box .see-item .right .title.data-v-57280228, .index .stroll .blow-box .see-item .right .title.data-v-57280228, .index .stroll .stroll-box .see-item .right .title.data-v-57280228, .index .stroll .live-box .see-item .right .title.data-v-57280228, .index .live .see-box .see-item .right .title.data-v-57280228, .index .live .blow-box .see-item .right .title.data-v-57280228, .index .live .stroll-box .see-item .right .title.data-v-57280228, .index .live .live-box .see-item .right .title.data-v-57280228 {
+.index .see .see-box .see-item .right .title.data-v-57280228, .index .see .stroll-box .see-item .right .title.data-v-57280228, .index .see .live-box .see-item .right .title.data-v-57280228, .index .blow .see-box .see-item .right .title.data-v-57280228, .index .blow .stroll-box .see-item .right .title.data-v-57280228, .index .blow .live-box .see-item .right .title.data-v-57280228, .index .stroll .see-box .see-item .right .title.data-v-57280228, .index .stroll .stroll-box .see-item .right .title.data-v-57280228, .index .stroll .live-box .see-item .right .title.data-v-57280228, .index .live .see-box .see-item .right .title.data-v-57280228, .index .live .stroll-box .see-item .right .title.data-v-57280228, .index .live .live-box .see-item .right .title.data-v-57280228 {
   font-size: 28rpx;
   margin-bottom: 4rpx;
   font-weight: bold;
@@ -235,7 +236,7 @@ page {
   line-height: 44rpx;
   letter-spacing: 1px;
 }
-.index .see .see-box .see-item .right .text.data-v-57280228, .index .see .blow-box .see-item .right .text.data-v-57280228, .index .see .stroll-box .see-item .right .text.data-v-57280228, .index .see .live-box .see-item .right .text.data-v-57280228, .index .blow .see-box .see-item .right .text.data-v-57280228, .index .blow .blow-box .see-item .right .text.data-v-57280228, .index .blow .stroll-box .see-item .right .text.data-v-57280228, .index .blow .live-box .see-item .right .text.data-v-57280228, .index .stroll .see-box .see-item .right .text.data-v-57280228, .index .stroll .blow-box .see-item .right .text.data-v-57280228, .index .stroll .stroll-box .see-item .right .text.data-v-57280228, .index .stroll .live-box .see-item .right .text.data-v-57280228, .index .live .see-box .see-item .right .text.data-v-57280228, .index .live .blow-box .see-item .right .text.data-v-57280228, .index .live .stroll-box .see-item .right .text.data-v-57280228, .index .live .live-box .see-item .right .text.data-v-57280228 {
+.index .see .see-box .see-item .right .text.data-v-57280228, .index .see .stroll-box .see-item .right .text.data-v-57280228, .index .see .live-box .see-item .right .text.data-v-57280228, .index .blow .see-box .see-item .right .text.data-v-57280228, .index .blow .stroll-box .see-item .right .text.data-v-57280228, .index .blow .live-box .see-item .right .text.data-v-57280228, .index .stroll .see-box .see-item .right .text.data-v-57280228, .index .stroll .stroll-box .see-item .right .text.data-v-57280228, .index .stroll .live-box .see-item .right .text.data-v-57280228, .index .live .see-box .see-item .right .text.data-v-57280228, .index .live .stroll-box .see-item .right .text.data-v-57280228, .index .live .live-box .see-item .right .text.data-v-57280228 {
   font-size: 28rpx;
   color: #666666;
   line-height: 44rpx;
@@ -246,134 +247,171 @@ page {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
-.index .see .see-box .see-item .right .btn.data-v-57280228, .index .see .blow-box .see-item .right .btn.data-v-57280228, .index .see .stroll-box .see-item .right .btn.data-v-57280228, .index .see .live-box .see-item .right .btn.data-v-57280228, .index .blow .see-box .see-item .right .btn.data-v-57280228, .index .blow .blow-box .see-item .right .btn.data-v-57280228, .index .blow .stroll-box .see-item .right .btn.data-v-57280228, .index .blow .live-box .see-item .right .btn.data-v-57280228, .index .stroll .see-box .see-item .right .btn.data-v-57280228, .index .stroll .blow-box .see-item .right .btn.data-v-57280228, .index .stroll .stroll-box .see-item .right .btn.data-v-57280228, .index .stroll .live-box .see-item .right .btn.data-v-57280228, .index .live .see-box .see-item .right .btn.data-v-57280228, .index .live .blow-box .see-item .right .btn.data-v-57280228, .index .live .stroll-box .see-item .right .btn.data-v-57280228, .index .live .live-box .see-item .right .btn.data-v-57280228 {
+.index .see .see-box .see-item .right .btn.data-v-57280228, .index .see .stroll-box .see-item .right .btn.data-v-57280228, .index .see .live-box .see-item .right .btn.data-v-57280228, .index .blow .see-box .see-item .right .btn.data-v-57280228, .index .blow .stroll-box .see-item .right .btn.data-v-57280228, .index .blow .live-box .see-item .right .btn.data-v-57280228, .index .stroll .see-box .see-item .right .btn.data-v-57280228, .index .stroll .stroll-box .see-item .right .btn.data-v-57280228, .index .stroll .live-box .see-item .right .btn.data-v-57280228, .index .live .see-box .see-item .right .btn.data-v-57280228, .index .live .stroll-box .see-item .right .btn.data-v-57280228, .index .live .live-box .see-item .right .btn.data-v-57280228 {
   text-align: right;
   font-size: 24rpx;
   color: #B94333;
   line-height: 36rpx;
 }
-.index .see .see-box .see-item .right .btn .iconfont.data-v-57280228, .index .see .blow-box .see-item .right .btn .iconfont.data-v-57280228, .index .see .stroll-box .see-item .right .btn .iconfont.data-v-57280228, .index .see .live-box .see-item .right .btn .iconfont.data-v-57280228, .index .blow .see-box .see-item .right .btn .iconfont.data-v-57280228, .index .blow .blow-box .see-item .right .btn .iconfont.data-v-57280228, .index .blow .stroll-box .see-item .right .btn .iconfont.data-v-57280228, .index .blow .live-box .see-item .right .btn .iconfont.data-v-57280228, .index .stroll .see-box .see-item .right .btn .iconfont.data-v-57280228, .index .stroll .blow-box .see-item .right .btn .iconfont.data-v-57280228, .index .stroll .stroll-box .see-item .right .btn .iconfont.data-v-57280228, .index .stroll .live-box .see-item .right .btn .iconfont.data-v-57280228, .index .live .see-box .see-item .right .btn .iconfont.data-v-57280228, .index .live .blow-box .see-item .right .btn .iconfont.data-v-57280228, .index .live .stroll-box .see-item .right .btn .iconfont.data-v-57280228, .index .live .live-box .see-item .right .btn .iconfont.data-v-57280228 {
+.index .see .see-box .see-item .right .btn .iconfont.data-v-57280228, .index .see .stroll-box .see-item .right .btn .iconfont.data-v-57280228, .index .see .live-box .see-item .right .btn .iconfont.data-v-57280228, .index .blow .see-box .see-item .right .btn .iconfont.data-v-57280228, .index .blow .stroll-box .see-item .right .btn .iconfont.data-v-57280228, .index .blow .live-box .see-item .right .btn .iconfont.data-v-57280228, .index .stroll .see-box .see-item .right .btn .iconfont.data-v-57280228, .index .stroll .stroll-box .see-item .right .btn .iconfont.data-v-57280228, .index .stroll .live-box .see-item .right .btn .iconfont.data-v-57280228, .index .live .see-box .see-item .right .btn .iconfont.data-v-57280228, .index .live .stroll-box .see-item .right .btn .iconfont.data-v-57280228, .index .live .live-box .see-item .right .btn .iconfont.data-v-57280228 {
   font-size: 20rpx;
   margin-left: 12rpx;
 }
-.index .see .see-box .see-item.data-v-57280228:nth-child(3n), .index .see .blow-box .see-item.data-v-57280228:nth-child(3n), .index .see .stroll-box .see-item.data-v-57280228:nth-child(3n), .index .see .live-box .see-item.data-v-57280228:nth-child(3n), .index .blow .see-box .see-item.data-v-57280228:nth-child(3n), .index .blow .blow-box .see-item.data-v-57280228:nth-child(3n), .index .blow .stroll-box .see-item.data-v-57280228:nth-child(3n), .index .blow .live-box .see-item.data-v-57280228:nth-child(3n), .index .stroll .see-box .see-item.data-v-57280228:nth-child(3n), .index .stroll .blow-box .see-item.data-v-57280228:nth-child(3n), .index .stroll .stroll-box .see-item.data-v-57280228:nth-child(3n), .index .stroll .live-box .see-item.data-v-57280228:nth-child(3n), .index .live .see-box .see-item.data-v-57280228:nth-child(3n), .index .live .blow-box .see-item.data-v-57280228:nth-child(3n), .index .live .stroll-box .see-item.data-v-57280228:nth-child(3n), .index .live .live-box .see-item.data-v-57280228:nth-child(3n) {
+.index .see .see-box .see-item.data-v-57280228:nth-child(3n), .index .see .stroll-box .see-item.data-v-57280228:nth-child(3n), .index .see .live-box .see-item.data-v-57280228:nth-child(3n), .index .blow .see-box .see-item.data-v-57280228:nth-child(3n), .index .blow .stroll-box .see-item.data-v-57280228:nth-child(3n), .index .blow .live-box .see-item.data-v-57280228:nth-child(3n), .index .stroll .see-box .see-item.data-v-57280228:nth-child(3n), .index .stroll .stroll-box .see-item.data-v-57280228:nth-child(3n), .index .stroll .live-box .see-item.data-v-57280228:nth-child(3n), .index .live .see-box .see-item.data-v-57280228:nth-child(3n), .index .live .stroll-box .see-item.data-v-57280228:nth-child(3n), .index .live .live-box .see-item.data-v-57280228:nth-child(3n) {
   border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
 }
-.index .see .see-box .blow-item .blow-img.data-v-57280228, .index .see .blow-box .blow-item .blow-img.data-v-57280228, .index .see .stroll-box .blow-item .blow-img.data-v-57280228, .index .see .live-box .blow-item .blow-img.data-v-57280228, .index .blow .see-box .blow-item .blow-img.data-v-57280228, .index .blow .blow-box .blow-item .blow-img.data-v-57280228, .index .blow .stroll-box .blow-item .blow-img.data-v-57280228, .index .blow .live-box .blow-item .blow-img.data-v-57280228, .index .stroll .see-box .blow-item .blow-img.data-v-57280228, .index .stroll .blow-box .blow-item .blow-img.data-v-57280228, .index .stroll .stroll-box .blow-item .blow-img.data-v-57280228, .index .stroll .live-box .blow-item .blow-img.data-v-57280228, .index .live .see-box .blow-item .blow-img.data-v-57280228, .index .live .blow-box .blow-item .blow-img.data-v-57280228, .index .live .stroll-box .blow-item .blow-img.data-v-57280228, .index .live .live-box .blow-item .blow-img.data-v-57280228 {
+.index .see .see-box .live-item .live-img.data-v-57280228, .index .see .stroll-box .live-item .live-img.data-v-57280228, .index .see .live-box .live-item .live-img.data-v-57280228, .index .blow .see-box .live-item .live-img.data-v-57280228, .index .blow .stroll-box .live-item .live-img.data-v-57280228, .index .blow .live-box .live-item .live-img.data-v-57280228, .index .stroll .see-box .live-item .live-img.data-v-57280228, .index .stroll .stroll-box .live-item .live-img.data-v-57280228, .index .stroll .live-box .live-item .live-img.data-v-57280228, .index .live .see-box .live-item .live-img.data-v-57280228, .index .live .stroll-box .live-item .live-img.data-v-57280228, .index .live .live-box .live-item .live-img.data-v-57280228 {
   height: 358rpx;
   background: #DCDCDC;
   border-radius: 8rpx;
 }
-.index .see .see-box .blow-item .blow-info.data-v-57280228, .index .see .blow-box .blow-item .blow-info.data-v-57280228, .index .see .stroll-box .blow-item .blow-info.data-v-57280228, .index .see .live-box .blow-item .blow-info.data-v-57280228, .index .blow .see-box .blow-item .blow-info.data-v-57280228, .index .blow .blow-box .blow-item .blow-info.data-v-57280228, .index .blow .stroll-box .blow-item .blow-info.data-v-57280228, .index .blow .live-box .blow-item .blow-info.data-v-57280228, .index .stroll .see-box .blow-item .blow-info.data-v-57280228, .index .stroll .blow-box .blow-item .blow-info.data-v-57280228, .index .stroll .stroll-box .blow-item .blow-info.data-v-57280228, .index .stroll .live-box .blow-item .blow-info.data-v-57280228, .index .live .see-box .blow-item .blow-info.data-v-57280228, .index .live .blow-box .blow-item .blow-info.data-v-57280228, .index .live .stroll-box .blow-item .blow-info.data-v-57280228, .index .live .live-box .blow-item .blow-info.data-v-57280228 {
-  margin: 24rpx 0 12rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.index .see .see-box .stroll-item.data-v-57280228, .index .see .stroll-box .stroll-item.data-v-57280228, .index .see .live-box .stroll-item.data-v-57280228, .index .blow .see-box .stroll-item.data-v-57280228, .index .blow .stroll-box .stroll-item.data-v-57280228, .index .blow .live-box .stroll-item.data-v-57280228, .index .stroll .see-box .stroll-item.data-v-57280228, .index .stroll .stroll-box .stroll-item.data-v-57280228, .index .stroll .live-box .stroll-item.data-v-57280228, .index .live .see-box .stroll-item.data-v-57280228, .index .live .stroll-box .stroll-item.data-v-57280228, .index .live .live-box .stroll-item.data-v-57280228 {
+  padding: 40rpx 32rpx 32rpx;
+  height: 562rpx;
+  box-sizing: border-box;
+  margin-bottom: 24rpx;
+  background: url("https://files.zz-tech.cn/app-files/images/jingkou/guang.png") no-repeat;
+  background-size: 100% 100%;
 }
-.index .see .see-box .blow-item .blow-info .title.data-v-57280228, .index .see .blow-box .blow-item .blow-info .title.data-v-57280228, .index .see .stroll-box .blow-item .blow-info .title.data-v-57280228, .index .see .live-box .blow-item .blow-info .title.data-v-57280228, .index .blow .see-box .blow-item .blow-info .title.data-v-57280228, .index .blow .blow-box .blow-item .blow-info .title.data-v-57280228, .index .blow .stroll-box .blow-item .blow-info .title.data-v-57280228, .index .blow .live-box .blow-item .blow-info .title.data-v-57280228, .index .stroll .see-box .blow-item .blow-info .title.data-v-57280228, .index .stroll .blow-box .blow-item .blow-info .title.data-v-57280228, .index .stroll .stroll-box .blow-item .blow-info .title.data-v-57280228, .index .stroll .live-box .blow-item .blow-info .title.data-v-57280228, .index .live .see-box .blow-item .blow-info .title.data-v-57280228, .index .live .blow-box .blow-item .blow-info .title.data-v-57280228, .index .live .stroll-box .blow-item .blow-info .title.data-v-57280228, .index .live .live-box .blow-item .blow-info .title.data-v-57280228 {
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #000000;
-  line-height: 44rpx;
-  letter-spacing: 1px;
-}
-.index .see .see-box .blow-item .blow-info .like-num.data-v-57280228, .index .see .blow-box .blow-item .blow-info .like-num.data-v-57280228, .index .see .stroll-box .blow-item .blow-info .like-num.data-v-57280228, .index .see .live-box .blow-item .blow-info .like-num.data-v-57280228, .index .blow .see-box .blow-item .blow-info .like-num.data-v-57280228, .index .blow .blow-box .blow-item .blow-info .like-num.data-v-57280228, .index .blow .stroll-box .blow-item .blow-info .like-num.data-v-57280228, .index .blow .live-box .blow-item .blow-info .like-num.data-v-57280228, .index .stroll .see-box .blow-item .blow-info .like-num.data-v-57280228, .index .stroll .blow-box .blow-item .blow-info .like-num.data-v-57280228, .index .stroll .stroll-box .blow-item .blow-info .like-num.data-v-57280228, .index .stroll .live-box .blow-item .blow-info .like-num.data-v-57280228, .index .live .see-box .blow-item .blow-info .like-num.data-v-57280228, .index .live .blow-box .blow-item .blow-info .like-num.data-v-57280228, .index .live .stroll-box .blow-item .blow-info .like-num.data-v-57280228, .index .live .live-box .blow-item .blow-info .like-num.data-v-57280228 {
-  display: flex;
-  font-size: 24rpx;
-  color: #666666;
-  line-height: 36rpx;
-  letter-spacing: 1px;
-}
-.index .see .see-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .see .blow-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .see .stroll-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .see .live-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .blow .see-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .blow .blow-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .blow .stroll-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .blow .live-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .stroll .see-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .stroll .blow-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .stroll .stroll-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .stroll .live-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .live .see-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .live .blow-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .live .stroll-box .blow-item .blow-info .like-num .iconfont.data-v-57280228, .index .live .live-box .blow-item .blow-info .like-num .iconfont.data-v-57280228 {
-  display: flex;
-  align-items: center;
-  font-size: 32rpx;
-  margin-right: 12rpx;
-}
-.index .see .see-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .see .blow-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .see .stroll-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .see .live-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .blow .see-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .blow .blow-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .blow .stroll-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .blow .live-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .stroll .see-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .stroll .blow-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .stroll .stroll-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .stroll .live-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .live .see-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .live .blow-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .live .stroll-box .blow-item .blow-info .like-num .islike.data-v-57280228, .index .live .live-box .blow-item .blow-info .like-num .islike.data-v-57280228 {
-  color: #F4474B;
-}
-.index .see .see-box .blow-item .blow-text.data-v-57280228, .index .see .blow-box .blow-item .blow-text.data-v-57280228, .index .see .stroll-box .blow-item .blow-text.data-v-57280228, .index .see .live-box .blow-item .blow-text.data-v-57280228, .index .blow .see-box .blow-item .blow-text.data-v-57280228, .index .blow .blow-box .blow-item .blow-text.data-v-57280228, .index .blow .stroll-box .blow-item .blow-text.data-v-57280228, .index .blow .live-box .blow-item .blow-text.data-v-57280228, .index .stroll .see-box .blow-item .blow-text.data-v-57280228, .index .stroll .blow-box .blow-item .blow-text.data-v-57280228, .index .stroll .stroll-box .blow-item .blow-text.data-v-57280228, .index .stroll .live-box .blow-item .blow-text.data-v-57280228, .index .live .see-box .blow-item .blow-text.data-v-57280228, .index .live .blow-box .blow-item .blow-text.data-v-57280228, .index .live .stroll-box .blow-item .blow-text.data-v-57280228, .index .live .live-box .blow-item .blow-text.data-v-57280228 {
-  font-size: 28rpx;
-  color: #666666;
-  line-height: 44rpx;
-  letter-spacing: 1px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-.index .see .see-box .live-item .live-img.data-v-57280228, .index .see .blow-box .live-item .live-img.data-v-57280228, .index .see .stroll-box .live-item .live-img.data-v-57280228, .index .see .live-box .live-item .live-img.data-v-57280228, .index .blow .see-box .live-item .live-img.data-v-57280228, .index .blow .blow-box .live-item .live-img.data-v-57280228, .index .blow .stroll-box .live-item .live-img.data-v-57280228, .index .blow .live-box .live-item .live-img.data-v-57280228, .index .stroll .see-box .live-item .live-img.data-v-57280228, .index .stroll .blow-box .live-item .live-img.data-v-57280228, .index .stroll .stroll-box .live-item .live-img.data-v-57280228, .index .stroll .live-box .live-item .live-img.data-v-57280228, .index .live .see-box .live-item .live-img.data-v-57280228, .index .live .blow-box .live-item .live-img.data-v-57280228, .index .live .stroll-box .live-item .live-img.data-v-57280228, .index .live .live-box .live-item .live-img.data-v-57280228 {
-  height: 358rpx;
-  background: #DCDCDC;
-  border-radius: 8rpx;
-}
-.index .see .see-box .stroll-item .name.data-v-57280228, .index .see .blow-box .stroll-item .name.data-v-57280228, .index .see .stroll-box .stroll-item .name.data-v-57280228, .index .see .live-box .stroll-item .name.data-v-57280228, .index .blow .see-box .stroll-item .name.data-v-57280228, .index .blow .blow-box .stroll-item .name.data-v-57280228, .index .blow .stroll-box .stroll-item .name.data-v-57280228, .index .blow .live-box .stroll-item .name.data-v-57280228, .index .stroll .see-box .stroll-item .name.data-v-57280228, .index .stroll .blow-box .stroll-item .name.data-v-57280228, .index .stroll .stroll-box .stroll-item .name.data-v-57280228, .index .stroll .live-box .stroll-item .name.data-v-57280228, .index .live .see-box .stroll-item .name.data-v-57280228, .index .live .blow-box .stroll-item .name.data-v-57280228, .index .live .stroll-box .stroll-item .name.data-v-57280228, .index .live .live-box .stroll-item .name.data-v-57280228 {
+.index .see .see-box .stroll-item .name.data-v-57280228, .index .see .stroll-box .stroll-item .name.data-v-57280228, .index .see .live-box .stroll-item .name.data-v-57280228, .index .blow .see-box .stroll-item .name.data-v-57280228, .index .blow .stroll-box .stroll-item .name.data-v-57280228, .index .blow .live-box .stroll-item .name.data-v-57280228, .index .stroll .see-box .stroll-item .name.data-v-57280228, .index .stroll .stroll-box .stroll-item .name.data-v-57280228, .index .stroll .live-box .stroll-item .name.data-v-57280228, .index .live .see-box .stroll-item .name.data-v-57280228, .index .live .stroll-box .stroll-item .name.data-v-57280228, .index .live .live-box .stroll-item .name.data-v-57280228 {
   font-size: 28rpx;
   color: #000000;
   line-height: 40rpx;
   letter-spacing: 1px;
   margin-bottom: 24rpx;
 }
-.index .see .see-box .stroll-item .stroll-img.data-v-57280228, .index .see .blow-box .stroll-item .stroll-img.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-img.data-v-57280228, .index .see .live-box .stroll-item .stroll-img.data-v-57280228, .index .blow .see-box .stroll-item .stroll-img.data-v-57280228, .index .blow .blow-box .stroll-item .stroll-img.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-img.data-v-57280228, .index .blow .live-box .stroll-item .stroll-img.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-img.data-v-57280228, .index .stroll .blow-box .stroll-item .stroll-img.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-img.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-img.data-v-57280228, .index .live .see-box .stroll-item .stroll-img.data-v-57280228, .index .live .blow-box .stroll-item .stroll-img.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-img.data-v-57280228, .index .live .live-box .stroll-item .stroll-img.data-v-57280228 {
+.index .see .see-box .stroll-item .stroll-img.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-img.data-v-57280228, .index .see .live-box .stroll-item .stroll-img.data-v-57280228, .index .blow .see-box .stroll-item .stroll-img.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-img.data-v-57280228, .index .blow .live-box .stroll-item .stroll-img.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-img.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-img.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-img.data-v-57280228, .index .live .see-box .stroll-item .stroll-img.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-img.data-v-57280228, .index .live .live-box .stroll-item .stroll-img.data-v-57280228 {
   height: 358rpx;
   background: #DCDCDC;
   border-radius: 8rpx;
   margin-top: 24rpx;
 }
-.index .see .see-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .see .blow-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .see .live-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .blow .see-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .blow .blow-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .blow .live-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .stroll .blow-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .live .see-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .live .blow-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .live .live-box .stroll-item .stroll-img .swiper.data-v-57280228 {
+.index .see .see-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .see .live-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .blow .see-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .blow .live-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .live .see-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-img .swiper.data-v-57280228, .index .live .live-box .stroll-item .stroll-img .swiper.data-v-57280228 {
   height: 100%;
   -webkit-transform: translateY(0);
   border-radius: 12rpx;
   overflow: hidden;
 }
-.index .see .see-box .stroll-item .stroll-info.data-v-57280228, .index .see .blow-box .stroll-item .stroll-info.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info.data-v-57280228, .index .see .live-box .stroll-item .stroll-info.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info.data-v-57280228, .index .blow .blow-box .stroll-item .stroll-info.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info.data-v-57280228, .index .stroll .blow-box .stroll-item .stroll-info.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info.data-v-57280228, .index .live .see-box .stroll-item .stroll-info.data-v-57280228, .index .live .blow-box .stroll-item .stroll-info.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info.data-v-57280228, .index .live .live-box .stroll-item .stroll-info.data-v-57280228 {
+.index .see .see-box .stroll-item .stroll-info.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info.data-v-57280228, .index .see .live-box .stroll-item .stroll-info.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info.data-v-57280228, .index .live .see-box .stroll-item .stroll-info.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info.data-v-57280228, .index .live .live-box .stroll-item .stroll-info.data-v-57280228 {
   margin-top: 32rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.index .see .see-box .stroll-item .stroll-info .left.data-v-57280228, .index .see .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .see .blow-box .stroll-item .stroll-info .left.data-v-57280228, .index .see .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .left.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .left.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .left.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .blow-box .stroll-item .stroll-info .left.data-v-57280228, .index .blow .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .left.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .left.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .left.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .blow-box .stroll-item .stroll-info .left.data-v-57280228, .index .stroll .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .left.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .left.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .left.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .blow-box .stroll-item .stroll-info .left.data-v-57280228, .index .live .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .left.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .left.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .share-btn.data-v-57280228 {
+.index .see .see-box .stroll-item .stroll-info .left.data-v-57280228, .index .see .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .left.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .left.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .left.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .left.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .left.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .left.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .left.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .left.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .left.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .left.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .left.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .share-btn.data-v-57280228 {
   display: flex;
   font-size: 24rpx;
   color: #666666;
   line-height: 36rpx;
   letter-spacing: 1px;
 }
-.index .see .see-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .see .see-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .see .blow-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .see .blow-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .blow .blow-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .blow .blow-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .stroll .blow-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .stroll .blow-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .live .blow-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .live .blow-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228 {
+.index .see .see-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .see .see-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .left .iconfont.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .share-btn .iconfont.data-v-57280228 {
   display: flex;
   align-items: center;
   font-size: 32rpx;
   margin-right: 12rpx;
 }
-.index .see .see-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .see .see-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .see .blow-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .see .blow-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .blow .blow-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .blow .blow-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .stroll .blow-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .stroll .blow-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .live .blow-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .live .blow-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228 {
+.index .see .see-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .see .see-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .left .islike.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .share-btn .islike.data-v-57280228 {
   color: #F4474B;
 }
-.index .see .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .see .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .share-btn.data-v-57280228 {
+.index .see .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .see .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .see .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .blow .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .stroll .live-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .see-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228, .index .live .live-box .stroll-item .stroll-info .share-btn.data-v-57280228 {
   border: none;
   background: none;
   padding: 0;
   margin: 0;
 }
-.index .see .see-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .see .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .see .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .see .live-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .blow .see-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .blow .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .blow .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .blow .live-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .stroll .see-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .stroll .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .stroll .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .stroll .live-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .live .see-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .live .blow-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .live .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .live .live-box .stroll-item .stroll-info .share-btn.data-v-57280228::after {
+.index .see .see-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .see .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .see .live-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .blow .see-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .blow .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .blow .live-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .stroll .see-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .stroll .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .stroll .live-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .live .see-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .live .stroll-box .stroll-item .stroll-info .share-btn.data-v-57280228::after, .index .live .live-box .stroll-item .stroll-info .share-btn.data-v-57280228::after {
   border: 0;
 }
-.index .see .blow-box.data-v-57280228, .index .blow .blow-box.data-v-57280228, .index .stroll .blow-box.data-v-57280228, .index .live .blow-box.data-v-57280228 {
-  height: 612rpx;
-  background: url("https://files.zz-tech.cn/app-files/images/jingkou/pin.png") no-repeat;
-  background-size: 100% 100%;
-}
 .index .see .stroll-box.data-v-57280228, .index .blow .stroll-box.data-v-57280228, .index .stroll .stroll-box.data-v-57280228, .index .live .stroll-box.data-v-57280228 {
-  height: 568rpx;
-  background: url("https://files.zz-tech.cn/app-files/images/jingkou/guang.png") no-repeat;
-  background-size: 100% 100%;
+  padding: 0;
 }
 .index .see .live-box.data-v-57280228, .index .blow .live-box.data-v-57280228, .index .stroll .live-box.data-v-57280228, .index .live .live-box.data-v-57280228 {
   height: 445rpx;
   background: url("https://files.zz-tech.cn/app-files/images/jingkou/zhu.png") no-repeat;
   background-size: 100% 100%;
+}
+.index .blow.data-v-57280228 {
+  padding-bottom: 24rpx;
+  padding-top: 32rpx;
+  margin-bottom: 4rpx;
+}
+.index .blow .main-title.data-v-57280228 {
+  margin-bottom: 0;
+}
+.index .blow-box.data-v-57280228 {
+  padding: 0 12rpx 60rpx;
+}
+.index .blow-box .blow-item.data-v-57280228 {
+  width: 358rpx;
+  margin-top: 12rpx;
+  background: #FFFFFF;
+  border-radius: 12rpx;
+  margin-bottom: 12rpx;
+}
+.index .blow-box .blow-item .img.data-v-57280228 {
+  height: 268rpx;
+}
+.index .blow-box .blow-item .title.data-v-57280228 {
+  height: 40rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+  line-height: 40rpx;
+  letter-spacing: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 20rpx 0 12rpx 18rpx;
+}
+.index .blow-box .blow-item .text.data-v-57280228 {
+  margin: 0 18rpx 20rpx 18rpx;
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 44rpx;
+  letter-spacing: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.index .blow-box .blow-item .like.data-v-57280228 {
+  margin: 0 18rpx;
+  height: 62rpx;
+  line-height: 62rpx;
+  box-sizing: border-box;
+  border-top: 2rpx solid #F6F6F6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.index .blow-box .blow-item .like .left.data-v-57280228 {
+  display: flex;
+  font-size: 24rpx;
+  color: #666666;
+  letter-spacing: 1px;
+}
+.index .blow-box .blow-item .like .left .iconfont.data-v-57280228 {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+.index .blow-box .blow-item .like .left .islike.data-v-57280228 {
+  color: #F4474B;
+}
+.index .blow-box .blow-item .like .right.data-v-57280228 {
+  display: flex;
+  align-items: center;
+}
+.index .blow-box .blow-item .like .right .iconfont.data-v-57280228 {
+  font-size: 20rpx;
+  color: #B94333;
+}
+.index .blow-box .blow-item:first-child .img.data-v-57280228 {
+  height: 202rpx;
 }
 

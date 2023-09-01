@@ -213,10 +213,10 @@ var _default = {
       height = _wx$getMenuButtonBoun.height,
       width = _wx$getMenuButtonBoun.width;
     this.total = top + height + 5 + 'px';
+    this.initTwo();
   },
   onLoad: function onLoad() {
     this.initOne();
-    this.initTwo();
   },
   methods: {
     // 热门切换

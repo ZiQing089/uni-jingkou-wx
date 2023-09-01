@@ -29,6 +29,7 @@
   padding: 0 56rpx;
   position: -webkit-sticky;
   position: sticky;
+  z-index: 99;
   height: 86rpx;
   background-color: #ffffff;
   margin-bottom: 4rpx;

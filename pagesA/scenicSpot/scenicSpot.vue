@@ -145,7 +145,7 @@ page {
 					span {
 						font-size: 24rpx;
 						color: #666666;
-						letter-spacing: 4px;
+						letter-spacing: 1px;
 					}
 					.img-icon {
 						width: 32rpx;

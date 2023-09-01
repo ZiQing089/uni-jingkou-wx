@@ -106,9 +106,8 @@ var render = function () {
   var _c = _vm._self._c || _h
   var l0 = _vm.messageList.slice(0, 2)
   var l1 = _vm.seeList.slice(0, 3)
-  var l2 = _vm.blowList.slice(0, 1)
-  var l3 = _vm.liveList.slice(0, 1)
-  var l4 = _vm.strollList.slice(0, 1)
+  var l2 = _vm.liveList.slice(0, 1)
+  var l3 = _vm.strollList.slice(0, 3)
   if (!_vm._isMounted) {
     _vm.e0 = function ($event, item) {
       var _temp = arguments[arguments.length - 1].currentTarget.dataset,
@@ -123,29 +122,13 @@ var render = function () {
         item = _temp4.item
       var _temp3, _temp4
       $event.stopPropagation()
-      return _vm.addlike(item)
+      return _vm.addtingyuanlike(item)
     }
     _vm.e2 = function ($event, item) {
       var _temp5 = arguments[arguments.length - 1].currentTarget.dataset,
         _temp6 = _temp5.eventParams || _temp5["event-params"],
         item = _temp6.item
       var _temp5, _temp6
-      $event.stopPropagation()
-      return _vm.addlike(item)
-    }
-    _vm.e3 = function ($event, item) {
-      var _temp7 = arguments[arguments.length - 1].currentTarget.dataset,
-        _temp8 = _temp7.eventParams || _temp7["event-params"],
-        item = _temp8.item
-      var _temp7, _temp8
-      $event.stopPropagation()
-      return _vm.addtingyuanlike(item)
-    }
-    _vm.e4 = function ($event, item) {
-      var _temp9 = arguments[arguments.length - 1].currentTarget.dataset,
-        _temp10 = _temp9.eventParams || _temp9["event-params"],
-        item = _temp10.item
-      var _temp9, _temp10
       $event.stopPropagation()
       return _vm.addtingyuanlike(item)
     }
@@ -158,7 +141,6 @@ var render = function () {
         l1: l1,
         l2: l2,
         l3: l3,
-        l4: l4,
       },
     }
   )
@@ -207,6 +189,13 @@ var _index = __webpack_require__(/*! @/api/index.js */ 49);
 var _beautifulYard = __webpack_require__(/*! @/api/beautifulYard.js */ 50);
 var _message = __webpack_require__(/*! @/api/message.js */ 51);
 var _jingkou = __webpack_require__(/*! @/api/jingkou.js */ 52);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -534,10 +523,22 @@ var _default = {
         title: '乡村治理',
         path: '/pages/village/village',
         bg: '../../static/img/index/nav7.png'
+      }],
+      preImg: [{
+        url: 'https://files.zz-tech.cn/app-files/images/jingkou/mapditu.jpg'
+      }, {
+        url: 'https://files.zz-tech.cn/app-files/images/jingkou/mapluxian.gif'
+      }, {
+        url: 'https://files.zz-tech.cn/app-files/images/jingkou/mapyanzi.gif'
+      }, {
+        url: 'https://files.zz-tech.cn/app-files/images/jingkou/mapyun.gif'
       }]
     };
   },
-  onLoad: function onLoad() {},
+  onLoad: function onLoad() {
+    var self = this;
+    self.preLoadImg();
+  },
   onShow: function onShow() {
     var self = this;
     uni.authorize({
@@ -575,6 +576,17 @@ var _default = {
     }
   },
   methods: {
+    preLoadImg: function preLoadImg() {
+      var self = this;
+      self.preImg.forEach(function (item, index) {
+        uni.getImageInfo({
+          src: item.url,
+          success: function success(res) {
+            item.url = res.path;
+          }
+        });
+      });
+    },
     initAll: function initAll() {
       this.showOne();
       this.showThree();
@@ -613,7 +625,11 @@ var _default = {
       (0, _beautifulYard.getShowlist)({
         currentPage: 1,
         pageSize: 10,
-        conditions: []
+        conditions: [{
+          "column": "status",
+          "mode": "eq",
+          "value": 'PASS'
+        }]
       }).then(function (res) {
         _this4.strollList = res.data.list;
       });
@@ -684,7 +700,7 @@ var _default = {
     navTo: function navTo(item) {
       if (this.token) {
         uni.navigateTo({
-          url: "".concat(item.path, "?title=").concat(item.title)
+          url: "".concat(item.path, "?title=").concat(item.title, "&preImg=").concat(encodeURIComponent(JSON.stringify(this.preImg)))
         });
       } else {
         uni.navigateTo({

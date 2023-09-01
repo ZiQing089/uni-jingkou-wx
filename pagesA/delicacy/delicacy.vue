@@ -128,10 +128,10 @@
 		onShow() {
 			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
 			this.total = top + height + 5 + 'px'
+			this.initTwo()
 		},
 		onLoad() {
 			this.initOne()
-			this.initTwo()
 		},
 		methods: {
 			// 热门切换
@@ -216,6 +216,7 @@ page {
 		padding: 0 56rpx;
 		position: sticky;
 		height: 86rpx;
+		z-index: 99;
 		background-color: #ffffff;
 		margin-bottom: 4rpx;
 		align-items: center;

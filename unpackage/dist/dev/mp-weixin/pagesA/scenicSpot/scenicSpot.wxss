@@ -90,7 +90,7 @@ page {
 .scenic-spot .content .item .like .left ._span.data-v-9753726a {
   font-size: 24rpx;
   color: #666666;
-  letter-spacing: 4px;
+  letter-spacing: 1px;
 }
 .scenic-spot .content .item .like .left .img-icon.data-v-9753726a {
   width: 32rpx;

@@ -32,13 +32,13 @@
 					<view class="people-num">
 						计划人数：{{ item.totalCount }}
 					</view>
-					<view v-if="item.status.description === '报名中'" :class="item.signUp ? 'btn ybm' : 'btn'">
+					<view v-if="item.status.description === '报名中' && rule === 'VILLAGER'" :class="item.signUp ? 'btn ybm' : 'btn'">
 						{{ item.signUp ? '已报名' : '立即报名' }}
 					</view>
-					<view v-if="item.status.description === '已报满'" :class="item.signUp ? 'btn ybm' : 'btn ybman'">
+					<view v-else-if="item.status.description === '已报满' && rule === 'VILLAGER'" :class="item.signUp ? 'btn ybm' : 'btn ybman'">
 						{{ item.signUp ? '已报名' : '立即报名' }}
 					</view>
-					<view v-if="item.status.description === '已结束'" class="nav">
+					<view v-else class="nav">
 						查看<icon class="iconfont">&#xe647;</icon>
 					</view>
 					<view v-if="item.status.description === '已结束'" class="status warning">
@@ -59,6 +59,7 @@
 <script>
 	import NavBar from "@/components/NavBar.vue"
 	import { getSchoolList } from "@/api/promote.js"
+	import { userInfo } from '@/api/login.js'
 	export default {
 		components: {
 			NavBar
@@ -79,6 +80,7 @@
 					}
 				],
 				total: '',
+				rule: '',
 				status: 'IN_SIGNUP',
 				list: []
 			}
@@ -87,8 +89,24 @@
 			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
 			this.total = top + height + 5 + 'px'
 			this.init()
+			this.getUserInfo()
 		},
 		methods: {
+			// 获取用户信息
+			getUserInfo() {
+				const self = this
+				userInfo().then(res => {
+					if(res.success) {
+						this.rule = res.data.userType.key
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
+				})
+			},
 			// 初始化页面
 			init() {
 				uni.showLoading({
@@ -124,6 +142,7 @@
 		display: flex;
 		padding: 0 56rpx;
 		position: sticky;
+		z-index: 99;
 		height: 86rpx;
 		background-color: #ffffff;
 		margin-bottom: 4rpx;

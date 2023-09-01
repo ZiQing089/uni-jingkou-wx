@@ -4,10 +4,10 @@
 		<movable-area scale-area class="movable-area">
 			<movable-view :x="x" :y="0" direction="all" scale="true" scale-min="1" scale-max="4" :scale-value="scale" class="movable-view" @change="onChange" @scale="onScale">
 				<view style="width: 100vh;height: 100vh; position: relative; z-index: 12;">
-					<image style="width: 100%; height: 100%;" src="https://files.zz-tech.cn/app-files/images/jingkou/mapditu.jpg" mode="scaleToFill"></image>
-					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mapyanzi.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 6;" mode="scaleToFill"></image>
-					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mapyun.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 9;" mode="scaleToFill"></image>
-					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mapluxian.gif"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 3;" mode="scaleToFill"></image>
+					<image style="width: 100%; height: 100%;" :src="preImg[0].url" mode="scaleToFill"></image>
+					<image :src="preImg[2].url"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 6;" mode="scaleToFill"></image>
+					<image :src="preImg[3].url"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 9;" mode="scaleToFill"></image>
+					<image :src="preImg[1].url"  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 3;" mode="scaleToFill"></image>
 					<view v-for="(item, index) in mock" :key="index" :class="item.name ? item.itemClass : ''" @click="toClick(item)">{{ item.name }}</view>
 				</view>
 			</movable-view>
@@ -139,13 +139,19 @@
 						nickName: '村入口牌坊'
 					}
 				],
-				list: []
+				list: [],
+				preImg: []
 			}
 		},
 		onShow() {
 			let getWindowInfo = uni.getWindowInfo()
 			this.x = -getWindowInfo.windowHeight/2/2
 			this.init()
+		},
+		onLoad(option) {
+			const self = this
+			self.preImg = JSON.parse(decodeURIComponent(option.preImg))
+			console.log(self.preImg)
 		},
 		methods: {
 			init() {

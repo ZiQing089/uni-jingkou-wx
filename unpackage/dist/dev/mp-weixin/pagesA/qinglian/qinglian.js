@@ -261,6 +261,9 @@ var _default = {
     // 跳转
     toDetail: function toDetail(item) {
       if (item.type === 'PDF') {
+        uni.showLoading({
+          title: '加载中'
+        });
         uni.downloadFile({
           url: item.files[0],
           success: function success(res) {
@@ -269,6 +272,7 @@ var _default = {
               filePath: filePath,
               showMenu: true,
               success: function success(res) {
+                uni.hideLoading();
                 console.log('打开文档成功');
               }
             });

@@ -244,13 +244,19 @@ var _default = {
         name: '',
         nickName: '村入口牌坊'
       }],
-      list: []
+      list: [],
+      preImg: []
     };
   },
   onShow: function onShow() {
     var getWindowInfo = uni.getWindowInfo();
     this.x = -getWindowInfo.windowHeight / 2 / 2;
     this.init();
+  },
+  onLoad: function onLoad(option) {
+    var self = this;
+    self.preImg = JSON.parse(decodeURIComponent(option.preImg));
+    console.log(self.preImg);
   },
   methods: {
     init: function init() {

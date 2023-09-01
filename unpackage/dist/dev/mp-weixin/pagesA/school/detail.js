@@ -160,6 +160,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/vant/dist/toast/toast */ 80));
 var _promote = __webpack_require__(/*! @/api/promote.js */ 236);
+var _login = __webpack_require__(/*! @/api/login.js */ 37);
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
     return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 459));
@@ -171,13 +172,31 @@ var _default = {
   },
   data: function data() {
     return {
-      detail: {}
+      detail: {},
+      rule: ''
     };
   },
   onLoad: function onLoad(option) {
     this.detail = JSON.parse(decodeURIComponent(option.data));
+    this.getUserInfo();
   },
   methods: {
+    // 获取用户信息
+    getUserInfo: function getUserInfo() {
+      var _this = this;
+      var self = this;
+      (0, _login.userInfo)().then(function (res) {
+        if (res.success) {
+          _this.rule = res.data.userType.key;
+        } else {
+          uni.showToast({
+            title: res.message,
+            icon: 'error',
+            duration: 2000
+          });
+        }
+      });
+    },
     // 报名
     enroll: function enroll(id) {
       console.log(id);

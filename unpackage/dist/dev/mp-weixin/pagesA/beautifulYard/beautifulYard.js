@@ -268,7 +268,11 @@ var _default = {
         pageSize: this.pageSize,
         conditions: this.conditions
       }).then(function (res) {
+        uni.showLoading({
+          title: '加载中'
+        });
         if (res.success && res.data.list.length !== 0) {
+          uni.hideLoading();
           _this2.isLoadMore = false;
           _this2.list = _this2.list.concat(res.data.list);
           if (res.data.list.length < _this2.pageSize) {
@@ -285,7 +289,11 @@ var _default = {
         pageSize: this.showPageSize,
         conditions: this.showconditions
       }).then(function (res) {
+        uni.showLoading({
+          title: '加载中'
+        });
         if (res.success && res.data.list.length !== 0) {
+          uni.hideLoading();
           _this3.isShowLoadMore = false;
           _this3.showList = _this3.showList.concat(res.data.list);
           if (res.data.list.length < _this3.pageSize) {

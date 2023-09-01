@@ -39,6 +39,7 @@ page {
   position: -webkit-sticky;
   position: sticky;
   height: 86rpx;
+  z-index: 99;
   background-color: #ffffff;
   margin-bottom: 4rpx;
   align-items: center;

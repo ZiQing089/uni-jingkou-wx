@@ -37,7 +37,7 @@
 							户主：{{ item.houseHolder }}
 						</view>
 						<view v-if="item.status.description === '已驳回'" class="reject">
-							驳回原因：{{ item.reject }}
+							驳回原因：{{ item.refuseReason }}
 						</view>
 						<view v-if="item.status.description === '待审核'" class="cancel" @click.native.stop="cancelShow(item)">
 							取消

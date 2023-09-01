@@ -49,7 +49,7 @@
 			<van-toast id="van-toast" />
 		</template>
 		<template v-if="showSuccess">
-			<NavBar :title="'村名认证'" :border="true" />
+			<NavBar :title="'村民认证'" :border="true" />
 			<view class="img"></view>
 			<view class="tips">
 				身份已认证
@@ -67,7 +67,7 @@
 			</view>
 		</template>
 		<template v-if="showError">
-			<NavBar :title="'村名认证'" :border="true" />
+			<NavBar :title="'村民认证'" :border="true" />
 			<view class="error-img"></view>
 			<view class="error-tips">
 				认证未通过，请重新认证

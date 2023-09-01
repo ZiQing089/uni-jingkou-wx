@@ -169,7 +169,11 @@
 			// 获取整出来列表
 			getList() {
 				getremediationList({currentPage: this.currentPage, pageSize: this.pageSize, conditions: this.conditions}).then(res => {
+					uni.showLoading({
+						title: '加载中'
+					})
 					if(res.success && res.data.list.length !== 0) {
+						uni.hideLoading()
 						this.isLoadMore = false
 						this.list = this.list.concat(res.data.list)
 						if(res.data.list.length < this.pageSize) {
@@ -181,7 +185,11 @@
 			// 获取秀出来列表
 			getShowList() {
 				getShowlist({currentPage: this.showCurrentPage, pageSize: this.showPageSize, conditions: this.showconditions}).then(res => {
+					uni.showLoading({
+						title: '加载中'
+					})
 					if(res.success && res.data.list.length !== 0) {
+						uni.hideLoading()
 						this.isShowLoadMore = false
 						this.showList = this.showList.concat(res.data.list)
 						if(res.data.list.length < this.pageSize) {

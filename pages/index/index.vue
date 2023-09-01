@@ -148,39 +148,6 @@
 				<image src="https://files.zz-tech.cn/app-files/images/jingkou/seemore.png" class="more-icon" mode="scaleToFill"></image>
 			</view>
 		</view>
-		<view class="blow">
-			<view class="main-title">
-				<view class="left">
-					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mainIcon.png" class="img-icon" mode="scaleToFill"></image>
-					<span>品一品</span>
-				</view>
-				<view class="right">特色美食</view>
-			</view>
-			<view class="blow-box">
-				<view  v-for="(item, index) in blowList.slice(0, 1)" :key="index" class="blow-item">
-					<view class="blow-img">
-						<van-image width="100%" height="100%" radius="4" fit="cover"
-							:src="item.pics[0]" />
-					</view>
-					<view class="blow-info">
-						<view class="title">
-							{{ item.name }}
-						</view>
-						<view class="like-num">
-							<icon v-if="item.like" class="iconfont islike" @click.native.stop="addlike(item)">&#xe65b;</icon>
-							<icon v-else class="iconfont" @click.native.stop="addlike(item)">&#xe659;</icon>
-							{{ item.likeCount }}
-						</view>
-					</view>
-					<view class="blow-text">
-						{{ item.introduce }}
-					</view>
-				</view>
-			</view>
-			<view class="more" @click="seeMore('/pagesA/delicacy/delicacy')">
-				<image src="https://files.zz-tech.cn/app-files/images/jingkou/seemore.png" class="more-icon" mode="scaleToFill"></image>
-			</view>
-		</view>
 		<view class="live">
 			<view class="main-title">
 				<view class="left">
@@ -210,7 +177,7 @@
 				<view class="right">美丽庭院</view>
 			</view>
 			<view class="stroll-box">
-				<view v-for="(item, index) in strollList.slice(0, 1)" :key="index" class="stroll-item">
+				<view v-for="(item, index) in strollList.slice(0, 3)" :key="index" class="stroll-item">
 					<view class="name">
 						户主：{{ item.houseHolder }}
 					</view>
@@ -238,6 +205,46 @@
 			<view class="more" @click="seeMore('/pagesA/beautifulYard/beautifulYard')">
 				<image src="https://files.zz-tech.cn/app-files/images/jingkou/seemore.png" class="more-icon" mode="scaleToFill"></image>
 			</view>
+		</view>
+		<view class="blow">
+			<view class="main-title">
+				<view class="left">
+					<image src="https://files.zz-tech.cn/app-files/images/jingkou/mainIcon.png" class="img-icon" mode="scaleToFill"></image>
+					<span>品一品</span>
+				</view>
+				<view class="right">特色美食</view>
+			</view>
+		</view>
+		<view class="blow-box">
+			<grid-view :cross-axis-gap="6" :main-axis-gap="6" type="masonry">
+				<view v-for="(item, index) in blowList" :key="index" class="blow-item" @click="toDetail(item)">
+					<view class="img">
+						<van-image
+						  width="100%"
+						  height="100%"
+						  fit="cover"
+						  radius="12rpx 12rpx 0 0"
+						  :src="item.pics[0]"
+						/>
+					</view>
+					<view class="title">
+						{{ item.name }}
+					</view>
+					<view class="text">
+						{{ item.introduce }}
+					</view>
+					<view class="like">
+						<view class="left">
+							<icon v-if="item.like" class="iconfont islike" @click.native.stop="addlike(item)">&#xe65b;</icon>
+							<icon v-else class="iconfont" @click.native.stop="addlike(item)">&#xe659;</icon>
+							<span>{{ item.likeCount }}</span>
+						</view>
+						<view class="right">
+							<icon class="iconfont">&#xe647;</icon>
+						</view>
+					</view>
+				</view>
+			</grid-view>
 		</view>
 		<van-tabbar :active="active" inactive-color="#7C7C7C" :placeholder="true" active-color="#B94333" @change="tabbarChange">
 		 <van-tabbar-item>
@@ -304,47 +311,63 @@
 					{
 						title: '泾口游',
 						path: '/pages/jingkou/jingkou',
-						bg: '../../static/img/index/nav0.png',
+						bg: '../../static/img/index/nav0.png'
 					},
 					{
 						title: '周边服务',
 						path: '/pagesA/periphery/periphery',
-						bg: '../../static/img/index/nav1.png',
+						bg: '../../static/img/index/nav1.png'
 					},
 					{
 						title: '旅游地图',
 						path: '/pagesA/map/map',
-						bg: '../../static/img/index/nav2.png',
+						bg: '../../static/img/index/nav2.png'
 					},
 					{
 						title: '美丽庭院',
 						path: '/pagesA/beautifulYard/beautifulYard',
-						bg: '../../static/img/index/nav3.png',
+						bg: '../../static/img/index/nav3.png'
 					},
 					{
 						title: '便民服务',
 						path: '/pages/convenient/convenient',
-						bg: '../../static/img/index/nav4.png',
+						bg: '../../static/img/index/nav4.png'
 					},
 					{
 						title: '文化振兴',
 						path: '/pages/promote/promote',
-						bg: '../../static/img/index/nav5.png',
+						bg: '../../static/img/index/nav5.png'
 					},
 					{
 						title: '健康中心',
 						path: '/pages/healthCenter/healthCenter',
-						bg: '../../static/img/index/nav6.png',
+						bg: '../../static/img/index/nav6.png'
 					},
 					{
 						title: '乡村治理',
 						path: '/pages/village/village',
-						bg: '../../static/img/index/nav7.png',
+						bg: '../../static/img/index/nav7.png'
+					}
+				],
+				preImg: [
+					{
+						url: 'https://files.zz-tech.cn/app-files/images/jingkou/mapditu.jpg'
+					},
+					{
+						url: 'https://files.zz-tech.cn/app-files/images/jingkou/mapluxian.gif'
+					},
+					{
+						url: 'https://files.zz-tech.cn/app-files/images/jingkou/mapyanzi.gif'
+					},
+					{
+						url: 'https://files.zz-tech.cn/app-files/images/jingkou/mapyun.gif'
 					}
 				]
 			}
 		},
 		onLoad() {
+			const self = this
+			self.preLoadImg()
 		},
 		onShow() {
 			const self = this
@@ -380,6 +403,17 @@
 			}
 		},
 		methods: {
+			preLoadImg() {
+				const self = this
+				self.preImg.forEach((item, index) => {
+					uni.getImageInfo({
+						src: item.url,
+						success(res) {
+							item.url = res.path
+						}
+					})
+				})
+			},
 			initAll() {
 				this.showOne()
 				this.showThree()
@@ -407,7 +441,11 @@
 			},
 			// 逛一逛
 			showFour() {
-				getShowlist({ currentPage: 1, pageSize: 10, conditions: [] }).then(res => {
+				getShowlist({ currentPage: 1, pageSize: 10, conditions: [{
+					"column": "status",
+					"mode": "eq",
+					"value": 'PASS'
+				}]}).then(res => {
 					this.strollList = res.data.list
 				})
 			},
@@ -473,7 +511,7 @@
 			navTo(item) {
 				if (this.token) {
 					uni.navigateTo({
-						url: `${item.path}?title=${item.title}`
+						url: `${item.path}?title=${item.title}&preImg=${encodeURIComponent(JSON.stringify(this.preImg))}`
 					})
 				} else {
 					uni.navigateTo({
@@ -715,11 +753,12 @@ page {
 				height: 24rpx;
 			}
 		}
-		.see-box, .blow-box, .stroll-box, .live-box {
-			border-radius: 12rpx;
-			height: 746rpx;
+		.see-box {
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/kan.png') no-repeat;
 			background-size: 100% 100%;
+		}
+		.see-box, .stroll-box, .live-box {
+			border-radius: 12rpx;
 			box-sizing: border-box;
 			padding: 40rpx 32rpx;
 			.see-item {
@@ -772,53 +811,6 @@ page {
 				margin-bottom: 0;
 				padding-bottom: 0;
 			}
-			.blow-item {
-				.blow-img {
-					height: 358rpx;
-					background: #DCDCDC;
-					border-radius: 8rpx;
-				}
-				.blow-info {
-					margin: 24rpx 0 12rpx;
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-					.title {
-						font-size: 28rpx;
-						font-weight: bold;
-						color: #000000;
-						line-height: 44rpx;
-						letter-spacing: 1px;
-					}
-					.like-num {
-						display: flex;
-						font-size: 24rpx;
-						color: #666666;
-						line-height: 36rpx;
-						letter-spacing: 1px;
-						.iconfont {
-							display: flex;
-							align-items: center;
-							font-size: 32rpx;
-							margin-right: 12rpx;
-						}
-						.islike {
-							color: #F4474B;
-						}
-					}
-				}
-				.blow-text {
-					font-size: 28rpx;
-					color: #666666;
-					line-height: 44rpx;
-					letter-spacing: 1px;
-					overflow: hidden;
-					text-overflow: ellipsis;
-					display: -webkit-box;
-					-webkit-box-orient: vertical;
-					-webkit-line-clamp: 2;
-				}
-			}
 			.live-item {
 				.live-img {
 					height: 358rpx;
@@ -827,6 +819,12 @@ page {
 				}
 			}
 			.stroll-item {
+				padding: 40rpx 32rpx 32rpx;
+				height: 562rpx;
+				box-sizing: border-box;
+				margin-bottom: 24rpx;
+				background: url('https://files.zz-tech.cn/app-files/images/jingkou/guang.png') no-repeat;
+				background-size: 100% 100%;
 				.name {
 					font-size: 28rpx;
 					color: #000000;
@@ -879,20 +877,96 @@ page {
 				}
 			}
 		}
-		.blow-box {
-			height: 612rpx;
-			background: url('https://files.zz-tech.cn/app-files/images/jingkou/pin.png') no-repeat;
-			background-size: 100% 100%;
-		}
 		.stroll-box {
-			height: 568rpx;
-			background: url('https://files.zz-tech.cn/app-files/images/jingkou/guang.png') no-repeat;
-			background-size: 100% 100%;
+			padding: 0;
 		}
 		.live-box {
 			height: 445rpx;
 			background: url('https://files.zz-tech.cn/app-files/images/jingkou/zhu.png') no-repeat;
 			background-size: 100% 100%;
+		}
+	}
+	.blow {
+		padding-bottom: 24rpx;
+		padding-top: 32rpx;
+		margin-bottom: 4rpx;
+		.main-title {
+			margin-bottom: 0;
+		}
+	}
+	.blow-box {
+		padding: 0 12rpx 60rpx;
+		.blow-item {
+			width: 358rpx;
+			margin-top: 12rpx;
+			background: #FFFFFF;
+			border-radius: 12rpx;
+			margin-bottom: 12rpx;
+			.img {
+				height: 268rpx;
+			}
+			.title {
+				height: 40rpx;
+				font-size: 28rpx;
+				font-weight: bold;
+				color: #333333;
+				line-height: 40rpx;
+				letter-spacing: 1px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				margin: 20rpx 0 12rpx 18rpx;
+			}
+			.text {
+				margin: 0 18rpx 20rpx 18rpx;
+				font-size: 28rpx;
+				color: #666666;
+				line-height: 44rpx;
+				letter-spacing: 1px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+			}
+			.like {
+				margin: 0 18rpx;
+				height: 62rpx;
+				line-height: 62rpx;
+				box-sizing: border-box;
+				border-top: 2rpx solid #F6F6F6;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.left {
+					display: flex;
+					font-size: 24rpx;
+					color: #666666;
+					letter-spacing: 1px;
+					.iconfont {
+						display: flex;
+						align-items: center;
+						font-size: 32rpx;
+						margin-right: 12rpx;
+					}
+					.islike {
+						color: #F4474B;
+					}
+				}
+				.right {
+					display: flex;
+					align-items: center;
+					.iconfont {
+						font-size: 20rpx;
+						color: #B94333;
+					}
+				}
+			}
+		}
+		.blow-item:first-child {
+			.img {
+				height: 202rpx;
+			}
 		}
 	}
 }

@@ -27,7 +27,7 @@
 		<view class="bottom">
 			{{ detail.introduce }}
 		</view>
-		<view class="btn-box">
+		<view v-if="rule === 'VILLAGER'" class="btn-box">
 			<view v-if="detail.status.description === '报名中'" :class="detail.signUp ? 'btn-border enroll' : 'btn-border'" @click="!detail.signUp && enroll(detail.id)">
 				<view :class="detail.signUp ? 'btn enroll' : 'btn'">
 					{{ detail.signUp ? '已报名' : '立即报名' }}
@@ -52,19 +52,37 @@
 	import NavBar from "@/components/NavBar.vue"
 	import Toast from '@/wxcomponents/vant/dist/toast/toast'
 	import { signUp } from '@/api/promote.js'
+	import { userInfo } from '@/api/login.js'
 	export default {
 		components: {
 			NavBar
 		},
 		data() {
 			return {
-				detail: {}
+				detail: {},
+				rule: ''
 			}
 		},
 		onLoad(option) {
 			this.detail = JSON.parse(decodeURIComponent(option.data))
+			this.getUserInfo()
 		},
 		methods: {
+			// 获取用户信息
+			getUserInfo() {
+				const self = this
+				userInfo().then(res => {
+					if(res.success) {
+						this.rule = res.data.userType.key
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'error',
+							duration: 2000
+						})
+					}
+				})
+			},
 			// 报名
 			enroll(id) {
 				console.log(id)
