@@ -135,6 +135,29 @@ var render = function () {
       f2: f2,
     }
   })
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event, item) {
+      var _temp = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp2 = _temp.eventParams || _temp["event-params"],
+        item = _temp2.item
+      var _temp, _temp2
+      _vm.disable ? _vm.toDetail(item) : ""
+    }
+    _vm.e1 = function ($event, item) {
+      var _temp3 = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp4 = _temp3.eventParams || _temp3["event-params"],
+        item = _temp4.item
+      var _temp3, _temp4
+      _vm.disable ? _vm.toDetail(item) : ""
+    }
+    _vm.e2 = function ($event, item) {
+      var _temp5 = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp6 = _temp5.eventParams || _temp5["event-params"],
+        item = _temp6.item
+      var _temp5, _temp6
+      _vm.disable ? _vm.toDetail(item) : ""
+    }
+  }
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -212,6 +235,7 @@ var _default = {
       pageSize: 500,
       isNoMore: false,
       total: '',
+      disable: true,
       conditions: [],
       list: []
     };
@@ -260,10 +284,12 @@ var _default = {
     },
     // 跳转
     toDetail: function toDetail(item) {
+      var self = this;
       if (item.type === 'PDF') {
         uni.showLoading({
           title: '加载中'
         });
+        self.disable = false;
         uni.downloadFile({
           url: item.files[0],
           success: function success(res) {
@@ -273,6 +299,7 @@ var _default = {
               showMenu: true,
               success: function success(res) {
                 uni.hideLoading();
+                self.disable = true;
                 console.log('打开文档成功');
               }
             });
@@ -286,7 +313,7 @@ var _default = {
           console.log(res);
         });
         uni.navigateTo({
-          url: "/pagesA/qinglian/detail?title=".concat(this.active, "&data=").concat(encodeURIComponent(JSON.stringify(item)))
+          url: "/pagesA/qinglian/detail?title=".concat(self.active, "&data=").concat(encodeURIComponent(JSON.stringify(item)))
         });
       }
     }

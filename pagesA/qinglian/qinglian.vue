@@ -7,7 +7,7 @@
 			</view>
 		</view>
 		<view class="content">
-			<view v-if="item.publicType.key === 'ECONOMY' && active === '三资公开'" v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+			<view v-if="item.publicType.key === 'ECONOMY' && active === '三资公开'" v-for="(item, index) in list" :key="index" class="item" @click="disable ? toDetail(item) : ''">
 				<view class="header">
 					<view class="title">
 						{{ item.title }}
@@ -24,7 +24,7 @@
 					查看<icon class="iconfont">&#xe647;</icon>
 				</view>
 			</view>
-			<view v-if="item.publicType.key === 'VILLAGE' && active === '村务公开'" v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+			<view v-if="item.publicType.key === 'VILLAGE' && active === '村务公开'" v-for="(item, index) in list" :key="index" class="item" @click="disable ? toDetail(item) : ''">
 				<view class="header">
 					<view class="title">
 						{{ item.title }}
@@ -41,7 +41,7 @@
 					查看<icon class="iconfont">&#xe647;</icon>
 				</view>
 			</view>
-			<view v-if="item.publicType.key === 'PARTY' && active === '党务公开'" v-for="(item, index) in list" :key="index" class="item" @click="toDetail(item)">
+			<view v-if="item.publicType.key === 'PARTY' && active === '党务公开'" v-for="(item, index) in list" :key="index" class="item" @click="disable ? toDetail(item) : ''">
 				<view class="header">
 					<view class="title">
 						{{ item.title }}
@@ -91,6 +91,7 @@
 				pageSize: 500,
 				isNoMore: false,
 				total: '',
+				disable: true,
 				conditions: [],
 				list: []
 			}
@@ -131,10 +132,12 @@
 			},
 			// 跳转
 			toDetail(item) {
+				const self = this
 				if(item.type === 'PDF') {
 					uni.showLoading({
 						title: '加载中'
 					})
+					self.disable = false
 					uni.downloadFile({
 					      url: item.files[0],
 					      success: function (res) {
@@ -144,6 +147,7 @@
 					          showMenu: true,
 					          success: function (res) {
 								uni.hideLoading()
+								self.disable = true
 					            console.log('打开文档成功');
 					         }
 						  })
@@ -157,7 +161,7 @@
 						console.log(res)
 					})
 					uni.navigateTo({
-						url: `/pagesA/qinglian/detail?title=${this.active}&data=${encodeURIComponent(JSON.stringify(item))}`
+						url: `/pagesA/qinglian/detail?title=${self.active}&data=${encodeURIComponent(JSON.stringify(item))}`
 					})
 				}
 			}
