@@ -7,7 +7,7 @@
 			</view>
 		</view>
 		<view v-if="show === 0" class="show-content">
-			<template v-if="showList.length === 0">
+			<template v-if="noDataShowList.length === 0">
 				<view class="noData"></view>
 			</template>
 			<template v-else>
@@ -33,14 +33,14 @@
 						</button>
 					</view>
 				</view>
-				<van-divider v-if="isShowNoMore" contentPosition="center">没有更多了！</van-divider>
 			</template>
+			<van-divider v-if="showIsNoMore" contentPosition="center">没有更多了！</van-divider>
 			<view v-if="rule === 'VILLAGER'" class="add" @click="addShow">
 				<van-icon name="plus" color="white" size="40px" />
 			</view>
 		</view>
 		<view v-if="show === 1" class="content">
-			<template v-if="list.length === 0">
+			<template v-if="noDataList.length === 0">
 				<view class="noData"></view>
 			</template>
 			<template v-else>
@@ -69,8 +69,8 @@
 						</view>
 					</view>
 				</view>
-				<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
 			</template>
+			<van-divider v-if="isNoMore" contentPosition="center">没有更多了！</van-divider>
 			<view v-if="rule === 'VILLAGER'" class="add" @click="addNet">
 				<van-icon name="plus" color="white" size="40px" />
 			</view>
@@ -93,62 +93,61 @@
 				hotNav: [
 					{
 						title: '秀出来',
-						active: true
+						active: true,
+						currentPage: 1,
+						pageSize: 10,
+						isLoadMore: false,
+						isNoMore: false,
+						conditions: [{
+							"column": "status",
+							"mode": "eq",
+							"value": 'PASS'
+						}]
 					},
 					{
 						title: '整出来',
-						active: false
+						active: false,
+						currentPage: 1,
+						pageSize: 10,
+						isLoadMore: false,
+						isNoMore: false,
+						conditions: [{
+							"column": "status",
+							"mode": "in",
+							"value": ['WAITING', 'DONE']
+						}]
 					}
 				],
 				active: '秀出来',
-				isLoadMore:false,
-				currentPage: 1,
-				pageSize: 10,
 				total: 0,
 				isNoMore: false,
-				isShowLoadMore:false,
-				showCurrentPage: 1,
-				showPageSize: 10,
-				isShowNoMore: false,
-				showconditions: [{
-					"column": "status",
-					"mode": "eq",
-					"value": 'PASS'
-				}],
-				conditions: [{
-					"column": "status",
-					"mode": "in",
-					"value": ['WAITING', 'DONE']
-				}],
+				showIsNoMore: false,
 				showList: [],
-				list: []
+				list: [],
+				noDataShowList: [],
+				noDataList: []
 			}
 		},
 		onShow() {
-			// 获取胶囊位置 { top, height, width }
 			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
 			this.total = top + height + 5 + 'px'
-			this.list = []
-			this.showList = []
 			this.getUserInfo()
-			this.getShowList()
-			this.getList()
+			// this.getShowList()
+			// this.getList()
+		},
+		onLoad() {
+			const self = this
+			self.hotNav.forEach((item, index) => {
+				if(item.title === '秀出来') {
+					this.getShowList(item)
+				} else {
+					this.getList(item)
+				}
+			})
 		},
 		onReachBottom() {
-			console.log(this.active)
-			if(this.active === '秀出来') {
-				if(!this.isShowLoadMore && !this.isShowNoMore){  //此处判断，上锁，防止重复请求
-					this.isShowLoadMore = true
-					this.showCurrentPage += 1  //每次上拉请求新的一页
-					this.getShowList()
-				}
-			} else {
-				if(!this.isLoadMore && !this.isNoMore){  //此处判断，上锁，防止重复请求
-					this.isLoadMore = true
-					this.currentPage += 1  //每次上拉请求新的一页
-					this.getList()
-				}
-			}
+			console.log(1)
+			this.restData(this.active)
 		},
 		methods: {
 			// 获取用户信息
@@ -166,35 +165,64 @@
 					}
 				})
 			},
+			restData(active) {
+				const self = this
+				self.hotNav.forEach((item, index) => {
+					if(active === '秀出来') {
+						console.log(2)
+						if(!item.isLoadMore && !item.isNoMore){  //此处判断，上锁，防止重复请求
+							console.log(3)
+							item.isLoadMore = true
+							item.currentPage += 1  //每次上拉请求新的一页
+							this.getShowList(item)
+						}
+					} else {
+						if(!item.isLoadMore && !item.isNoMore){  //此处判断，上锁，防止重复请求
+							item.isLoadMore = true
+							item.currentPage += 1  //每次上拉请求新的一页
+							this.getList(item)
+						}
+					}
+				})
+			},
 			// 获取整出来列表
-			getList() {
-				getremediationList({currentPage: this.currentPage, pageSize: this.pageSize, conditions: this.conditions}).then(res => {
-					uni.showLoading({
-						title: '加载中'
-					})
+			getList(item) {
+				uni.showLoading({
+					title: '加载中'
+				})
+				getremediationList({currentPage: item.currentPage, pageSize: item.pageSize, conditions: item.conditions}).then(res => {
 					if(res.success && res.data.list.length !== 0) {
 						uni.hideLoading()
-						this.isLoadMore = false
+						item.isLoadMore = false
+						this.noDataList = res.data.list
 						this.list = this.list.concat(res.data.list)
 						if(res.data.list.length < this.pageSize) {
-							this.isNoMore = true
+							item.isNoMore = true
+							this.isNoMore = item.isNoMore
 						} 
-					} 
+					} else {
+						uni.hideLoading()
+					}
 				})
 			},
 			// 获取秀出来列表
-			getShowList() {
-				getShowlist({currentPage: this.showCurrentPage, pageSize: this.showPageSize, conditions: this.showconditions}).then(res => {
-					uni.showLoading({
-						title: '加载中'
-					})
+			getShowList(item) {
+				uni.showLoading({
+					title: '加载中'
+				})
+				getShowlist({currentPage: item.currentPage, pageSize: item.pageSize, conditions: item.conditions}).then(res => {
 					if(res.success && res.data.list.length !== 0) {
 						uni.hideLoading()
-						this.isShowLoadMore = false
+						item.isLoadMore = false
+						this.noDataShowList = res.data.list
 						this.showList = this.showList.concat(res.data.list)
-						if(res.data.list.length < this.pageSize) {
-							this.isShowNoMore = true
+						console.log(res.data.list.length, item.pageSize)
+						if(res.data.list.length < item.pageSize) {
+							item.isNoMore = true
+							this.showIsNoMore = item.isNoMore
 						}
+					} else {
+						uni.hideLoading()
 					}
 				}) 
 			},
@@ -206,16 +234,6 @@
 				})
 				e.active = !e.active
 				this.active = e.title
-				this.currentPage = 1
-				this.showCurrentPage = 1
-				this.list = []
-				this.showList = []
-				this.isShowLoadMore = false
-				this.isLoadMore = false
-				this.isNoMore = false
-				this.isShowNoMore = false
-				this.getShowList()
-				this.getList()
 			},
 			addNet() {
 				uni.navigateTo({

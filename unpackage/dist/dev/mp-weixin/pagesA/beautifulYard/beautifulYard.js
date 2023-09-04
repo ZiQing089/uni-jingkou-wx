@@ -104,8 +104,8 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var g0 = _vm.show === 0 ? _vm.showList.length : null
-  var g1 = _vm.show === 1 ? _vm.list.length : null
+  var g0 = _vm.show === 0 ? _vm.noDataShowList.length : null
+  var g1 = _vm.show === 1 ? _vm.noDataList.length : null
   var l0 =
     _vm.show === 1 && !(g1 === 0)
       ? _vm.__map(_vm.list, function (item, index) {
@@ -183,74 +183,72 @@ var _default = {
       rule: '',
       hotNav: [{
         title: '秀出来',
-        active: true
+        active: true,
+        currentPage: 1,
+        pageSize: 10,
+        isLoadMore: false,
+        isNoMore: false,
+        conditions: [{
+          "column": "status",
+          "mode": "eq",
+          "value": 'PASS'
+        }]
       }, {
         title: '整出来',
-        active: false
+        active: false,
+        currentPage: 1,
+        pageSize: 10,
+        isLoadMore: false,
+        isNoMore: false,
+        conditions: [{
+          "column": "status",
+          "mode": "in",
+          "value": ['WAITING', 'DONE']
+        }]
       }],
       active: '秀出来',
-      isLoadMore: false,
-      currentPage: 1,
-      pageSize: 10,
       total: 0,
       isNoMore: false,
-      isShowLoadMore: false,
-      showCurrentPage: 1,
-      showPageSize: 10,
-      isShowNoMore: false,
-      showconditions: [{
-        "column": "status",
-        "mode": "eq",
-        "value": 'PASS'
-      }],
-      conditions: [{
-        "column": "status",
-        "mode": "in",
-        "value": ['WAITING', 'DONE']
-      }],
+      showIsNoMore: false,
       showList: [],
-      list: []
+      list: [],
+      noDataShowList: [],
+      noDataList: []
     };
   },
   onShow: function onShow() {
-    // 获取胶囊位置 { top, height, width }
     var _wx$getMenuButtonBoun = wx.getMenuButtonBoundingClientRect(),
       top = _wx$getMenuButtonBoun.top,
       height = _wx$getMenuButtonBoun.height,
       width = _wx$getMenuButtonBoun.width;
     this.total = top + height + 5 + 'px';
-    this.list = [];
-    this.showList = [];
     this.getUserInfo();
-    this.getShowList();
-    this.getList();
+    // this.getShowList()
+    // this.getList()
+  },
+  onLoad: function onLoad() {
+    var _this = this;
+    var self = this;
+    self.hotNav.forEach(function (item, index) {
+      if (item.title === '秀出来') {
+        _this.getShowList(item);
+      } else {
+        _this.getList(item);
+      }
+    });
   },
   onReachBottom: function onReachBottom() {
-    console.log(this.active);
-    if (this.active === '秀出来') {
-      if (!this.isShowLoadMore && !this.isShowNoMore) {
-        //此处判断，上锁，防止重复请求
-        this.isShowLoadMore = true;
-        this.showCurrentPage += 1; //每次上拉请求新的一页
-        this.getShowList();
-      }
-    } else {
-      if (!this.isLoadMore && !this.isNoMore) {
-        //此处判断，上锁，防止重复请求
-        this.isLoadMore = true;
-        this.currentPage += 1; //每次上拉请求新的一页
-        this.getList();
-      }
-    }
+    console.log(1);
+    this.restData(this.active);
   },
   methods: {
     // 获取用户信息
     getUserInfo: function getUserInfo() {
-      var _this = this;
+      var _this2 = this;
       var self = this;
       (0, _login.userInfo)().then(function (res) {
         if (res.success) {
-          _this.rule = res.data.userType.key;
+          _this2.rule = res.data.userType.key;
         } else {
           uni.showToast({
             title: res.message,
@@ -260,45 +258,77 @@ var _default = {
         }
       });
     },
-    // 获取整出来列表
-    getList: function getList() {
-      var _this2 = this;
-      (0, _beautifulYard.getremediationList)({
-        currentPage: this.currentPage,
-        pageSize: this.pageSize,
-        conditions: this.conditions
-      }).then(function (res) {
-        uni.showLoading({
-          title: '加载中'
-        });
-        if (res.success && res.data.list.length !== 0) {
-          uni.hideLoading();
-          _this2.isLoadMore = false;
-          _this2.list = _this2.list.concat(res.data.list);
-          if (res.data.list.length < _this2.pageSize) {
-            _this2.isNoMore = true;
+    restData: function restData(active) {
+      var _this3 = this;
+      var self = this;
+      self.hotNav.forEach(function (item, index) {
+        if (active === '秀出来') {
+          console.log(2);
+          if (!item.isLoadMore && !item.isNoMore) {
+            //此处判断，上锁，防止重复请求
+            console.log(3);
+            item.isLoadMore = true;
+            item.currentPage += 1; //每次上拉请求新的一页
+            _this3.getShowList(item);
+          }
+        } else {
+          if (!item.isLoadMore && !item.isNoMore) {
+            //此处判断，上锁，防止重复请求
+            item.isLoadMore = true;
+            item.currentPage += 1; //每次上拉请求新的一页
+            _this3.getList(item);
           }
         }
       });
     },
-    // 获取秀出来列表
-    getShowList: function getShowList() {
-      var _this3 = this;
-      (0, _beautifulYard.getShowlist)({
-        currentPage: this.showCurrentPage,
-        pageSize: this.showPageSize,
-        conditions: this.showconditions
+    // 获取整出来列表
+    getList: function getList(item) {
+      var _this4 = this;
+      uni.showLoading({
+        title: '加载中'
+      });
+      (0, _beautifulYard.getremediationList)({
+        currentPage: item.currentPage,
+        pageSize: item.pageSize,
+        conditions: item.conditions
       }).then(function (res) {
-        uni.showLoading({
-          title: '加载中'
-        });
         if (res.success && res.data.list.length !== 0) {
           uni.hideLoading();
-          _this3.isShowLoadMore = false;
-          _this3.showList = _this3.showList.concat(res.data.list);
-          if (res.data.list.length < _this3.pageSize) {
-            _this3.isShowNoMore = true;
+          item.isLoadMore = false;
+          _this4.noDataList = res.data.list;
+          _this4.list = _this4.list.concat(res.data.list);
+          if (res.data.list.length < _this4.pageSize) {
+            item.isNoMore = true;
+            _this4.isNoMore = item.isNoMore;
           }
+        } else {
+          uni.hideLoading();
+        }
+      });
+    },
+    // 获取秀出来列表
+    getShowList: function getShowList(item) {
+      var _this5 = this;
+      uni.showLoading({
+        title: '加载中'
+      });
+      (0, _beautifulYard.getShowlist)({
+        currentPage: item.currentPage,
+        pageSize: item.pageSize,
+        conditions: item.conditions
+      }).then(function (res) {
+        if (res.success && res.data.list.length !== 0) {
+          uni.hideLoading();
+          item.isLoadMore = false;
+          _this5.noDataShowList = res.data.list;
+          _this5.showList = _this5.showList.concat(res.data.list);
+          console.log(res.data.list.length, item.pageSize);
+          if (res.data.list.length < item.pageSize) {
+            item.isNoMore = true;
+            _this5.showIsNoMore = item.isNoMore;
+          }
+        } else {
+          uni.hideLoading();
         }
       });
     },
@@ -310,16 +340,6 @@ var _default = {
       });
       e.active = !e.active;
       this.active = e.title;
-      this.currentPage = 1;
-      this.showCurrentPage = 1;
-      this.list = [];
-      this.showList = [];
-      this.isShowLoadMore = false;
-      this.isLoadMore = false;
-      this.isNoMore = false;
-      this.isShowNoMore = false;
-      this.getShowList();
-      this.getList();
     },
     addNet: function addNet() {
       uni.navigateTo({
