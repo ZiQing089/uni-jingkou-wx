@@ -226,6 +226,16 @@ var _auth = __webpack_require__(/*! @/utils/auth.js */ 40);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
@@ -237,7 +247,10 @@ var _default = {
   },
   onShow: function onShow() {
     this.token = (0, _auth.getToken)();
-    this.getUserInfo();
+    console.log(this.token);
+    if (this.token) {
+      this.getUserInfo();
+    }
   },
   methods: {
     tabbarChange: function tabbarChange(event) {
@@ -297,6 +310,11 @@ var _default = {
           case '2':
             uni.navigateTo({
               url: '/pagesA/myUpload/myUpload'
+            });
+            break;
+          case '3':
+            uni.navigateTo({
+              url: '/pagesA/setUp/setUp'
             });
             break;
           default:

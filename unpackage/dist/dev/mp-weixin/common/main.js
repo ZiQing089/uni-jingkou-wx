@@ -8,7 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(wx, createApp) {
+/* WEBPACK VAR INJECTION */(function(wx, createApp, uni) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
@@ -35,7 +35,19 @@ _vue.default.filter("formatMin", function (date) {
   date = new Date(Number(date));
   return "".concat(date.getFullYear(), "-").concat(date.getMonth() + 1, "-").concat(date.getDate(), " ").concat(date.getHours(), ":").concat(date.getMinutes());
 });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["createApp"]))
+_vue.default.prototype.$restDataList = function (updataList, listData) {
+  uni.$once(updataList, function (data) {
+    if (data && data.id) {
+      listData.forEach(function (e) {
+        console.log(e, '全局');
+        if (e.id === data.id) {
+          Object.assign(e, data);
+        }
+      });
+    }
+  });
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["createApp"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 
@@ -103,7 +115,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -118,9 +130,24 @@ var _default = {
   },
   onHide: function onHide() {
     console.log('App Hide');
+  },
+  methods: {
+    restUpDataList: function restUpDataList(listData) {
+      uni.$once('updataList', function (data) {
+        if (data && data.id) {
+          listData.forEach(function (e) {
+            console.log(e, '全局');
+            if (e.id === data.id) {
+              Object.assign(e, data);
+            }
+          });
+        }
+      });
+    }
   }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

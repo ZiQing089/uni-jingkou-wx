@@ -118,6 +118,14 @@
 			"root": "pagesA",
 			"pages": [
 				{
+				    "path" : "setUp/setUp",
+				    "style": {
+				    	"navigationStyle": "custom",
+				    	"usingComponents": {}
+				    }
+				    
+				},
+				{
 				    "path" : "map/map",
 				    "style": {
 				    	"navigationStyle": "custom",

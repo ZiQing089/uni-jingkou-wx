@@ -11229,7 +11229,7 @@ uni.addInterceptor({
 
 /***/ }),
 
-/***/ 466:
+/***/ 476:
 /*!****************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/nav-bar/index.js ***!
   \****************************************************************************************/
@@ -11239,8 +11239,8 @@ uni.addInterceptor({
 "use strict";
 /* WEBPACK VAR INJECTION */(function(wx) {
 
-var _component = __webpack_require__(/*! ../common/component */ 467);
-var _utils = __webpack_require__(/*! ../common/utils */ 469);
+var _component = __webpack_require__(/*! ../common/component */ 477);
+var _utils = __webpack_require__(/*! ../common/utils */ 479);
 (0, _component.VantComponent)({
   classes: ['title-class'],
   props: {
@@ -11312,7 +11312,7 @@ var _utils = __webpack_require__(/*! ../common/utils */ 469);
 
 /***/ }),
 
-/***/ 467:
+/***/ 477:
 /*!*******************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/common/component.js ***!
   \*******************************************************************************************/
@@ -11326,7 +11326,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.VantComponent = VantComponent;
-var _basic = __webpack_require__(/*! ../mixins/basic */ 468);
+var _basic = __webpack_require__(/*! ../mixins/basic */ 478);
 function mapKeys(source, target, map) {
   Object.keys(map).forEach(function (key) {
     if (source[key]) {
@@ -11374,7 +11374,7 @@ function VantComponent(vantOptions) {
 
 /***/ }),
 
-/***/ 468:
+/***/ 478:
 /*!***************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/mixins/basic.js ***!
   \***************************************************************************************/
@@ -11406,7 +11406,7 @@ exports.basic = basic;
 
 /***/ }),
 
-/***/ 469:
+/***/ 479:
 /*!***************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/common/utils.js ***!
   \***************************************************************************************/
@@ -11442,7 +11442,7 @@ exports.range = range;
 exports.requestAnimationFrame = requestAnimationFrame;
 exports.toPromise = toPromise;
 var _validator = __webpack_require__(/*! ./validator */ 81);
-var _version = __webpack_require__(/*! ./version */ 470);
+var _version = __webpack_require__(/*! ./version */ 480);
 function range(num, min, max) {
   return Math.min(Math.max(num, min), max);
 }
@@ -11515,7 +11515,7 @@ function getCurrentPage() {
 
 /***/ }),
 
-/***/ 470:
+/***/ 480:
 /*!*****************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/common/version.js ***!
   \*****************************************************************************************/
@@ -11598,7 +11598,7 @@ function canIUseGetUserProfile() {
 
 /***/ }),
 
-/***/ 471:
+/***/ 481:
 /*!*************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/icon/index.js ***!
   \*************************************************************************************/
@@ -11608,7 +11608,7 @@ function canIUseGetUserProfile() {
 "use strict";
 
 
-var _component = __webpack_require__(/*! ../common/component */ 467);
+var _component = __webpack_require__(/*! ../common/component */ 477);
 (0, _component.VantComponent)({
   props: {
     dot: Boolean,
@@ -11631,7 +11631,7 @@ var _component = __webpack_require__(/*! ../common/component */ 467);
 
 /***/ }),
 
-/***/ 472:
+/***/ 482:
 /*!***************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/sticky/index.js ***!
   \***************************************************************************************/
@@ -11643,10 +11643,10 @@ var _component = __webpack_require__(/*! ../common/component */ 467);
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
-var _utils = __webpack_require__(/*! ../common/utils */ 469);
-var _component = __webpack_require__(/*! ../common/component */ 467);
+var _utils = __webpack_require__(/*! ../common/utils */ 479);
+var _component = __webpack_require__(/*! ../common/component */ 477);
 var _validator = __webpack_require__(/*! ../common/validator */ 81);
-var _pageScroll = __webpack_require__(/*! ../mixins/page-scroll */ 473);
+var _pageScroll = __webpack_require__(/*! ../mixins/page-scroll */ 483);
 var ROOT_ELEMENT = '.van-sticky';
 (0, _component.VantComponent)({
   props: {
@@ -11779,7 +11779,7 @@ var ROOT_ELEMENT = '.van-sticky';
 
 /***/ }),
 
-/***/ 473:
+/***/ 483:
 /*!*********************************************************************************************!*\
   !*** /Users/agenthou/work/uni-ddzk-jingkou-wx/wxcomponents/vant/dist/mixins/page-scroll.js ***!
   \*********************************************************************************************/
@@ -11794,7 +11794,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.pageScrollMixin = pageScrollMixin;
 var _validator = __webpack_require__(/*! ../common/validator */ 81);
-var _utils = __webpack_require__(/*! ../common/utils */ 469);
+var _utils = __webpack_require__(/*! ../common/utils */ 479);
 function onPageScroll(event) {
   var _getCurrentPage = (0, _utils.getCurrentPage)(),
     _getCurrentPage$vanPa = _getCurrentPage.vanPageScroller,

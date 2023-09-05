@@ -4,7 +4,7 @@
 			:z-index="99"
 			:border="border"
 			:custom-style="useTransparent && 'background-color: transparent;' || useBg && 'background-color: #ffffff; background-image: url(https://files.zz-tech.cn/app-files/images/jingkou/navbg.png); background-repeat: no-repeat; background-size: 100% 100%;'">
-			<view v-if="showEmit" slot="left" :class="isWhite ? 'isWhite' : ''" style="display: flex; align-items: center;" @click="clickLeft">
+			<view v-if="showEmit" slot="left" :class="isWhite ? 'isWhite' : ''" style="display: flex; align-items: center;" @click="back">
 				<slot name="default">
 					<van-icon name="arrow-left" size="28rpx" /><span :class="isWhite ? 'back isWhite' : 'back'">返回</span>
 				</slot>
@@ -58,12 +58,16 @@ export default {
 		showEmit: { // 是否显示回退箭头 
 			type: Boolean,
 			default: true
+		},
+		upData: {
+			type: Object,
+			default: () => {}
 		}
 	},
 	methods: {
 		clickLeft(e) {
 			console.log(111)
-			this.back()
+			// this.back()
 		},
 		// 返回上一页
 		back() {
@@ -71,11 +75,13 @@ export default {
 				uni.navigateBack({
 					delta: 1
 				})
+				uni.$emit('updataList', this.upData)
 			} else {
 				uni.redirectTo({
 					url: '/pages/index/index'
 				})
 			}
+
 		}
 	}
 }

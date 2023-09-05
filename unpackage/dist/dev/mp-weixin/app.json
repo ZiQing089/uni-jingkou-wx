@@ -17,6 +17,7 @@
     {
       "root": "pagesA",
       "pages": [
+        "setUp/setUp",
         "map/map",
         "map/detail",
         "record/record",

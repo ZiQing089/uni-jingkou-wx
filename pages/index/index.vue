@@ -217,7 +217,7 @@
 		</view>
 		<view class="blow-box">
 			<grid-view :cross-axis-gap="6" :main-axis-gap="6" type="masonry">
-				<view v-for="(item, index) in blowList" :key="index" class="blow-item" @click="toDetail(item)">
+				<view v-for="(item, index) in blowList" :key="index" class="blow-item" @click="toDelicacyDetail(item)">
 					<view class="img">
 						<van-image
 						  width="100%"
@@ -478,6 +478,7 @@
 			// 获取用户信息
 			getUserInfo() {
 				const self = this
+				console.log('我调用了')
 				self.$store.dispatch('user/userInfo', {}).then(res => {})
 			},
 			// 更多跳转
@@ -536,6 +537,18 @@
 				if(this.token) {
 					uni.navigateTo({
 						url: `/pagesA/scenicSpot/detail?data=${encodeURIComponent(JSON.stringify(item))}`
+					})
+				} else {
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
+				}
+			},
+			// 去美食详情页
+			toDelicacyDetail(item) {
+				if(this.token) {
+					uni.navigateTo({
+						url: `/pagesA/delicacy/detail?data=${encodeURIComponent(JSON.stringify(item))}`
 					})
 				} else {
 					uni.navigateTo({

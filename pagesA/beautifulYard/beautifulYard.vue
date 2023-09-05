@@ -146,8 +146,7 @@
 			})
 		},
 		onReachBottom() {
-			console.log(1)
-			this.restData(this.active)
+			this.restData(this.active, this.getShowList, this.getList)
 		},
 		methods: {
 			// 获取用户信息
@@ -165,22 +164,20 @@
 					}
 				})
 			},
-			restData(active) {
+			restData(active, fnc1, fnc2) {
 				const self = this
 				self.hotNav.forEach((item, index) => {
 					if(active === '秀出来') {
-						console.log(2)
 						if(!item.isLoadMore && !item.isNoMore){  //此处判断，上锁，防止重复请求
-							console.log(3)
 							item.isLoadMore = true
 							item.currentPage += 1  //每次上拉请求新的一页
-							this.getShowList(item)
+							fnc1(item)
 						}
 					} else {
 						if(!item.isLoadMore && !item.isNoMore){  //此处判断，上锁，防止重复请求
 							item.isLoadMore = true
 							item.currentPage += 1  //每次上拉请求新的一页
-							this.getList(item)
+							fnc2(item)
 						}
 					}
 				})

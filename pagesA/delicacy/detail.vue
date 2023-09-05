@@ -1,6 +1,6 @@
 <template>
 	<view class="page-container delicacy-detail">
-		<NavBar :title="'特产介绍'" :border="true" />
+		<NavBar :title="'特产介绍'" :border="true" :up-data="detail" />
 		<view class="content">
 			<view class="img">
 				<van-image

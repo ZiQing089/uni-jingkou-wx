@@ -126,12 +126,23 @@
 			}
 		},
 		onShow() {
+			const self = this
 			const { top, height, width } = wx.getMenuButtonBoundingClientRect();
-			this.total = top + height + 5 + 'px'
-			this.initTwo()
+			self.total = top + height + 5 + 'px'
+			// self.$restDataList('updataList', self.toneList)
+			uni.$once('updataList', data => {
+				if (data && data.id) {
+					self.toneList.forEach(e => {
+						if (e.id === data.id) {
+							Object.assign(e, data);
+						}
+					})
+				}
+			})
 		},
 		onLoad() {
 			this.initOne()
+			this.initTwo()
 		},
 		methods: {
 			// 热门切换
@@ -176,7 +187,6 @@
 				addlike({ id: item.id }).then(res => {
 					uni.hideLoading()
 					this.initTwo()
-					console.log(res)
 				}) 
 			},
 			// 联系电话

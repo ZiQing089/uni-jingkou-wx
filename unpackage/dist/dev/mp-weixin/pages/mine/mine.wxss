@@ -29,7 +29,7 @@
   box-sizing: border-box;
   background: url("https://files.zz-tech.cn/app-files/images/jingkou/mine-bg.png") no-repeat;
   background-size: 100% 100%;
-  padding: 180rpx 32rpx 0 40rpx;
+  padding: 180rpx 40rpx 0 40rpx;
 }
 .mine .mine-header .mine-detail.data-v-dcbcfe34 {
   display: flex;
@@ -71,7 +71,7 @@
   line-height: 36rpx;
 }
 .mine .content.data-v-dcbcfe34 {
-  padding: 0 32rpx 0 40rpx;
+  padding: 0 40rpx 0 40rpx;
 }
 .mine .content .item.data-v-dcbcfe34 {
   margin-bottom: 12rpx;

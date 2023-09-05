@@ -12,10 +12,13 @@
 						  :src="userInfo.iconUrl"
 						/>
 					</view>
-					<view class="name">
+					<view v-if="token" class="name">
 						{{ userInfo.name ? userInfo.name : userInfo.nickname }}
 					</view>
-					<view class="type">
+					<view v-else class="name">
+						请登录
+					</view>
+					<view v-if="token" class="type">
 						{{ userInfo.userType.description }}
 					</view>
 				</view>
@@ -43,6 +46,13 @@
 				<view class="label">
 					<image src="~@/static/img/mine/upload.png" class="icon" mode="scaleToFill"></image>
 					<span>我的上传</span>
+				</view>
+				<van-icon name="arrow" color="#D7D7D7" />
+			</view>
+			<view class="item" @click="navTo('3')">
+				<view class="label">
+					<image src="~@/static/img/mine/setUp.png" class="icon" mode="scaleToFill"></image>
+					<span>设置</span>
 				</view>
 				<van-icon name="arrow" color="#D7D7D7" />
 			</view>
@@ -95,7 +105,10 @@
 		},
 		onShow() {
 			this.token = getToken()
-			this.getUserInfo()
+			console.log(this.token)
+			if(this.token) {
+				this.getUserInfo()
+			}
 		},
 		methods: {
 			tabbarChange(event) {
@@ -156,6 +169,11 @@
 								url: '/pagesA/myUpload/myUpload'
 							})
 							break;
+						case '3':
+							uni.navigateTo({
+								url: '/pagesA/setUp/setUp'
+							})
+							break;
 						default:
 							break;
 					}
@@ -176,7 +194,7 @@
 		box-sizing: border-box;
 		background: url('https://files.zz-tech.cn/app-files/images/jingkou/mine-bg.png') no-repeat;
 		background-size: 100% 100%;
-		padding: 180rpx 32rpx 0 40rpx;
+		padding: 180rpx 40rpx 0 40rpx;
 		.mine-detail {
 			display: flex;
 			justify-content: space-between;
@@ -218,7 +236,7 @@
 		}
 	}
 	.content {
-		padding: 0 32rpx 0 40rpx;
+		padding: 0 40rpx 0 40rpx;
 		.item {
 			margin-bottom: 12rpx;
 			height: 116rpx;

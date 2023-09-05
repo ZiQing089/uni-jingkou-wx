@@ -33,3 +33,16 @@ Vue.filter("formatMin", (date) => {
 	date = new Date(Number(date))
 	return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
 })
+
+Vue.prototype.$restDataList = function(updataList, listData) {
+	uni.$once(updataList, data => {
+		if (data && data.id) {
+			listData.forEach(e => {
+				console.log(e, '全局')
+				if (e.id === data.id) {
+					Object.assign(e, data);
+				}
+			})
+		}
+	})
+}

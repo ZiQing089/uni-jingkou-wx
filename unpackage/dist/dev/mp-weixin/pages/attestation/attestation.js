@@ -149,7 +149,7 @@ var _toast = _interopRequireDefault(__webpack_require__(/*! @/wxcomponents/vant/
 var _attestation = __webpack_require__(/*! @/api/attestation.js */ 82);
 var NavBar = function NavBar() {
   __webpack_require__.e(/*! require.ensure | components/NavBar */ "components/NavBar").then((function () {
-    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 459));
+    return resolve(__webpack_require__(/*! @/components/NavBar.vue */ 469));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {

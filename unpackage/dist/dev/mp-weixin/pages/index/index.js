@@ -667,6 +667,7 @@ var _default = {
     // 获取用户信息
     getUserInfo: function getUserInfo() {
       var self = this;
+      console.log('我调用了');
       self.$store.dispatch('user/userInfo', {}).then(function (res) {});
     },
     // 更多跳转
@@ -725,6 +726,18 @@ var _default = {
       if (this.token) {
         uni.navigateTo({
           url: "/pagesA/scenicSpot/detail?data=".concat(encodeURIComponent(JSON.stringify(item)))
+        });
+      } else {
+        uni.navigateTo({
+          url: '/pages/login/login'
+        });
+      }
+    },
+    // 去美食详情页
+    toDelicacyDetail: function toDelicacyDetail(item) {
+      if (this.token) {
+        uni.navigateTo({
+          url: "/pagesA/delicacy/detail?data=".concat(encodeURIComponent(JSON.stringify(item)))
         });
       } else {
         uni.navigateTo({
